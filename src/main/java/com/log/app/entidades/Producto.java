@@ -26,6 +26,7 @@ public class Producto implements Serializable {
 	private Long codProv;
 	private String proveedor;
 
+	
 	private String familia;
 
 	private String subfamilia;
