@@ -3,6 +3,7 @@ package com.log.app.entidades;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +18,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class TipoUsuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long IdTipoUsuario;
+    @Column(name = "id_tipo_usuario", nullable = false, unique = true)
+    private Long idTipoUsuario;
 
     private String nombre;
 
@@ -32,4 +34,31 @@ public class TipoUsuario {
     public TipoUsuario() {
     }
 
+    public Long getIdTipoUsuario() {
+        return idTipoUsuario;
+    }
+
+    public void setIdTipoUsuario(Long idTipoUsuario) {
+        idTipoUsuario = idTipoUsuario;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+   
+
+    
 }
