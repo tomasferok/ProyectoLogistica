@@ -20,7 +20,7 @@ public class TipoUsuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tipo_usuario", nullable = false, unique = true)
     private Long idTipoUsuario;
-
+    @Column(name = "nombre", nullable = false, unique = true)
     private String nombre;
 
     @OneToMany(mappedBy = "tipoUsuario", fetch = javax.persistence.FetchType.EAGER)

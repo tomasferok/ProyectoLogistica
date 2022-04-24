@@ -10,7 +10,10 @@ import com.log.app.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,8 +26,8 @@ public class UsuarioController {
     private TipoUsuarioService tipoUsuarioService;
 
     @GetMapping(value = "/login")
-    public String login() {
-
+    public String login(Model model) {
+        model.addAttribute("usuario", new Usuario());
         return "login";
     }
 
@@ -34,22 +37,23 @@ public class UsuarioController {
     }
 
     @GetMapping(value = "/registro")
-    public String registro() {
-        userService.createUser(new Usuario(
-                "nombre",
-                "apellido",
-                "admin",
-                "admin",
-                true,
-                tipoUsuarioService.findById(1l)
-
-        ));
+    public String registro(Model model) {
+        model.addAttribute("usuario", new Usuario());
         return "registro";
     }
 
-    @PostMapping("/registro/")
-    public String registrarse() {
+    @PostMapping("/registro")
+    public String registrarse(@ModelAttribute Usuario usuario) {
+        TipoUsuario tipoUsuario;
+        try {
+            tipoUsuario = tipoUsuarioService.findById(1l);
+        } catch (Exception e) {
+            tipoUsuario = tipoUsuarioService.createTipoUsuario(new TipoUsuario("admin"));
 
+        }
+        usuario.setTipoUsuario(tipoUsuario);
+        usuario.setActive(true);
+        userService.createUser(usuario);
         return "login";
     }
 

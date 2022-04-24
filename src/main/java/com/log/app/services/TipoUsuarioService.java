@@ -17,13 +17,19 @@ public class TipoUsuarioService {
 
     public TipoUsuario findById(Long id) {
         TipoUsuario tipoUsuario = tipoUsuarioDao.findById(id).get();
-        
+
         return tipoUsuario;
     }
+
     public List<TipoUsuario> findAll() {
         List<TipoUsuario> tipoUsuarios = tipoUsuarioDao.findAll();
-        
+
         return tipoUsuarios;
+    }
+
+    public TipoUsuario createTipoUsuario(TipoUsuario tipoUsuario) {
+        TipoUsuario nuevoTipoUsuario = tipoUsuarioDao.save(tipoUsuario);
+        return nuevoTipoUsuario;
     }
 
 }
