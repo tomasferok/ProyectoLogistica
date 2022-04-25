@@ -2,6 +2,8 @@ package com.log.app.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.log.app.daos.IUsuarioDao;
 import com.log.app.entidades.TipoUsuario;
 import com.log.app.entidades.Usuario;
@@ -32,8 +34,17 @@ public class UsuarioController {
     }
 
     @PostMapping(value = "/login")
-    public String logearse() {
-        return "login";
+    public String logearse(@ModelAttribute Usuario usuario, Model model) {
+
+        try {
+            userService.authenticateUsuario(usuario.getEmail(), usuario.getPassword());
+            return "homepage";
+
+        } catch (Exception e) {
+            model.addAttribute("exeption", e.getMessage());
+            return "login";
+        }
+
     }
 
     @GetMapping(value = "/registro")

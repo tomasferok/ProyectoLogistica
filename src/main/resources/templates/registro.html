@@ -1,17 +1,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creat Usuario</title>
-</head>
+<include href="fragments/base.html">
 
 <body>
 
     <form th:action="@{/registro}" th:method="POST" th:object="${usuario}">
         <div class="container">
-            <h1>Register</h1>
+            <h1>Registrarse</h1>
             <p>Please fill in this form to create an account.</p>
             <hr>
 
