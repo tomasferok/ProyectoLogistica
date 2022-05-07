@@ -10,7 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -22,7 +23,7 @@ public class Producto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idProd;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "tipoProd_id")
 	private List<TipoProducto> tipoProductos;
 
@@ -73,4 +74,7 @@ public class Producto implements Serializable {
 		this.cantidadReservada = cantidadReservada;
 	}
 
+	public void addTipoProducto(TipoProducto tipoProd) {
+		this.tipoProductos.add(tipoProd);
+	}
 }
