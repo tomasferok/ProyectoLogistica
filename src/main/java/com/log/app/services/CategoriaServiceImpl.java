@@ -24,8 +24,8 @@ public class CategoriaServiceImpl implements ICategoriaService {
 
 	@Override
 	@Transactional
-	public void save(Categoria categoria) {
-		categoriaDao.save(categoria);
+	public Categoria save(Categoria categoria) {
+		return categoriaDao.save(categoria);
 		
 	}
 

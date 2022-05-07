@@ -24,8 +24,9 @@ public class SubCategoriaServiceImpl implements ISubCategoriaService {
 
 	@Override
 	@Transactional
-	public void save(SubCategoria subCat) {
-		subCategoDao.save(subCat);
+	public SubCategoria save(SubCategoria subCat) {
+		
+		return subCategoDao.save(subCat);
 	}
 
 	@Override

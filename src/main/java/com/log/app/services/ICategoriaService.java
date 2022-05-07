@@ -10,7 +10,7 @@ public interface ICategoriaService {
 
 	public List<Categoria> findAll();
 
-	public void save(Categoria categoria);
+	public Categoria save(Categoria categoria);
 	
 	public Categoria findOne(Long idCat);
 	

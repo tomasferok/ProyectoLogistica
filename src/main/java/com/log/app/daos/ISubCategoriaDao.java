@@ -6,4 +6,5 @@ import com.log.app.entidades.SubCategoria;
 
 public interface ISubCategoriaDao extends CrudRepository<SubCategoria, Long> {
 
+	
 }

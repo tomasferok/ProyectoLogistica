@@ -10,7 +10,7 @@ public interface ISubCategoriaService {
 
 	public List<SubCategoria> findAll();
 
-	public void save(SubCategoria subCat);
+	public SubCategoria save(SubCategoria subCat);
 	
 	public SubCategoria findOne(Long idSubCat);
 	

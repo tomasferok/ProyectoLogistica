@@ -1,11 +1,16 @@
 package com.log.app.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -16,22 +21,15 @@ public class Producto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idProd;
-
-	private String descripcion;
-
-	private String unidad;
-
-	private float neto;
-
-	private Long codProv;
-	private String proveedor;
-
 	
-	private String familia;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "tipoProd_id")
+	private List<TipoProducto> tipoProductos;
 
-	private String subfamilia;
+	private double cantidadDisponible;
 
-	private Long CBunidad;
+	private double cantidadReservada;
+
 
 	private static final long serialVersionUID = 1L;
 
@@ -43,72 +41,36 @@ public class Producto implements Serializable {
 		this.idProd = idProd;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
-	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public String getUnidad() {
-		return unidad;
-	}
-
-	public void setUnidad(String unidad) {
-		this.unidad = unidad;
-	}
-
-	public float getNeto() {
-		return neto;
-	}
-
-	public void setNeto(float neto) {
-		this.neto = neto;
-	}
-
-	public Long getCodProv() {
-		return codProv;
-	}
-
-	public void setCodProv(Long codProv) {
-		this.codProv = codProv;
-	}
-
-	public String getProveedor() {
-		return proveedor;
-	}
-
-	public void setProveedor(String proveedor) {
-		this.proveedor = proveedor;
-	}
-
-	public String getFamilia() {
-		return familia;
-	}
-
-	public void setFamilia(String familia) {
-		this.familia = familia;
-	}
-
-	public String getSubfamilia() {
-		return subfamilia;
-	}
-
-	public void setSubfamilia(String subfamilia) {
-		this.subfamilia = subfamilia;
-	}
-
-	public Long getCBunidad() {
-		return CBunidad;
-	}
-
-	public void setCBunidad(Long cBunidad) {
-		CBunidad = cBunidad;
-	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	
+
+	public List<TipoProducto> getTipoProductos() {
+		return tipoProductos;
+	}
+
+	public void setTipoProductos(List<TipoProducto> tipoProductos) {
+		this.tipoProductos = tipoProductos;
+	}
+
+	public double getCantidadDisponible() {
+		return cantidadDisponible;
+	}
+
+	public void setCantidadDisponible(double cantidadDisponible) {
+		this.cantidadDisponible = cantidadDisponible;
+	}
+
+	public double getCantidadReservada() {
+		return cantidadReservada;
+	}
+
+	public void setCantidadReservada(double cantidadReservada) {
+		this.cantidadReservada = cantidadReservada;
 	}
 
 }

@@ -1,6 +1,6 @@
 package com.log.app.daos;
 
-import java.util.List;
+
 
 import org.springframework.data.repository.CrudRepository;
 

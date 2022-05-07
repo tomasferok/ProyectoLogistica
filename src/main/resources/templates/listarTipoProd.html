@@ -20,7 +20,7 @@
 				<li class="nav-item active"><a class="nav-link" href="#">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" th:href="@{/listarCat}">Categoria</a>
+				<li class="nav-item"><a class="nav-link" th:href="@{/listarTipoProd}">TipoProducto</a>
 				</li>
 			</ul>
 		</div>
@@ -31,28 +31,40 @@
 			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
 			th:text="${titulo}"></h1>
 		<p>
-			<a th:href="@{/formCat}" class="btn btn-success btn-xs">crear
-				categoria</a>
+			<a th:href="@{/formProv}" class="btn btn-success btn-xs">crear
+				tipoProducto</a>
 		</p>
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>id</th>
+					<th>idTipoProd</th>
+					<th>codigoDeBarras</th>
 					<th>nombre</th>
+					<th>categoria</th>
+					<th>subCategoria</th>
+					<th>descripcion</th>
+					<th>precio</th>
+					<th>neto</th>
 					
 					<th>editar</th>
 					<th>eliminar</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="categoria: ${categorias}">
-					<td th:text="${categoria.idCat}"></td>
-					<td th:text="${categoria.nombre}"></td>
+				<tr th:each="tipoProd: ${tipoProductos}">
+					<td th:text="${tipoProd.idTipoProd}"></td>
+					<td th:text="${tipoProd.codigoDeBarras}"></td>
+					<td th:text="${tipoProd.nombre}"></td>
+					<td th:text="${tipoProd.categoria}"></td>
+					<td th:text="${tipoProd.subCat}"></td>
+					<td th:text="${tipoProd.descripcion}"></td>
+					<td th:text="${tipoProd.precio}"></td>
+					<td th:text="${tipoProd.neto}"></td>
 					
 					<td><a class="btn btn-primary btn-xs"
-						th:href="@{/formCat/} + ${categoria.idCat}" th:text="'editar'"></a></td>
+						th:href="@{/formTipoProd/} + ${tipoProd.idTipoProd}" th:text="'editar'"></a></td>
 					<td><a class="btn btn-danger btn-xs"
-						th:href="@{/eliminarCat/} + ${categoria.idCat}" th:text="'eliminar'"
+						th:href="@{/eliminarTipoProd/} + ${tipoProd.idTipoProd}" th:text="'eliminar'"
 						onclick="return confirm('Estás seguro que quieres eliminar?');"></a></td>
 				</tr>
 			</tbody>
