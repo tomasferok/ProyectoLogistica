@@ -1,8 +1,5 @@
 package com.log.app.entidades;
 
-<<<<<<< HEAD
-public class EstadoRecepcion {
-=======
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -37,6 +34,5 @@ public class EstadoRecepcion {
     private EstadoRecepcion estadoAnterior;
 
     
->>>>>>> 22f3221eb35d198dc4d47b338cc0a1282e0d0a02
 
 }

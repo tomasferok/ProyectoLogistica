@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.log.app.entidades.Categoria;
 import com.log.app.services.ICategoriaService;
@@ -34,7 +35,8 @@ public class CategoriaRestController {
 
 	@GetMapping("/categoria{idCat}")
 	public Categoria show(@PathVariable Long idCat) {
-
+		
+		
 		return categoriaService.findOne(idCat);
 	}
 
@@ -45,9 +47,20 @@ public class CategoriaRestController {
 		
 }
 	@PutMapping("/categoria/{idCat}")
-	public Categoria update(@RequestBody Categoria categoria, @PathVariable Long idCat) {
+	public Categoria update(@RequestBody Categoria categoria, @PathVariable Long idCat, RedirectAttributes flash) {
 		Categoria categoriaActual= categoriaService.findOne(idCat);
 		
+		
+		if (idCat > 0) {
+			categoria = categoriaService.findOne(idCat);
+			if (categoria == null) {
+				flash.addFlashAttribute("error", "El ID e la categoria no existe en la BBDD!");
+				
+			}
+		} else {
+			flash.addFlashAttribute("error", "El ID de la categoria no puede ser cero!");
+			
+		}
 		categoriaActual.setNombre(categoria.getNombre());
 		
 		return categoriaService.save(categoriaActual);
@@ -58,8 +71,3 @@ public class CategoriaRestController {
 		categoriaService.delete(idCat);
 	}
 }
-	
-	
-
-	
-
