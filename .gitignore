@@ -35,3 +35,4 @@ build/
 
 ###others
 src/main/resources/application.properties
+.m2/

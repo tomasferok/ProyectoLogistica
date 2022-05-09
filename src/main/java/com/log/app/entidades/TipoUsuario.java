@@ -23,9 +23,7 @@ public class TipoUsuario {
     @Column(name = "nombre", nullable = false, unique = true)
     private String nombre;
 
-    @OneToMany(mappedBy = "tipoUsuario", fetch = javax.persistence.FetchType.EAGER)
-    @JsonManagedReference
-    private List<Usuario> usuarios = new ArrayList<Usuario>();
+
 
     public TipoUsuario(String nombre) {
         this.nombre = nombre;
@@ -50,13 +48,7 @@ public class TipoUsuario {
         this.nombre = nombre;
     }
 
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
+   
 
    
 
