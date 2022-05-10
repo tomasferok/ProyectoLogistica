@@ -1,7 +1,7 @@
 package com.log.app.entidades;
 
 import java.io.Serializable;
-import java.util.List;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -23,9 +23,9 @@ public class Producto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idProd;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "tipoProd_id")
-	private List<TipoProducto> tipoProductos;
+	private TipoProducto tipoProducto;
 
 	private double cantidadDisponible;
 
@@ -50,13 +50,7 @@ public class Producto implements Serializable {
 
 	
 
-	public List<TipoProducto> getTipoProductos() {
-		return tipoProductos;
-	}
 
-	public void setTipoProductos(List<TipoProducto> tipoProductos) {
-		this.tipoProductos = tipoProductos;
-	}
 
 	public double getCantidadDisponible() {
 		return cantidadDisponible;
@@ -74,7 +68,5 @@ public class Producto implements Serializable {
 		this.cantidadReservada = cantidadReservada;
 	}
 
-	public void addTipoProducto(TipoProducto tipoProd) {
-		this.tipoProductos.add(tipoProd);
-	}
+	
 }
