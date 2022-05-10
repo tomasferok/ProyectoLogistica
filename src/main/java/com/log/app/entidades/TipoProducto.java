@@ -1,8 +1,7 @@
 package com.log.app.entidades;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,37 +27,34 @@ public class TipoProducto implements Serializable {
 	private Long idTipoProd;
 	private int codigoDeBarras;
 	private String nombre;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoria_id")
-	private List<Categoria> categorias;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Categoria categoria;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "subCategoria_id")
-	private List<SubCategoria> subCats;
+	private SubCategoria subCat;
 	private String descripcion;
 	private double precio;
 	private double neto;
 	
 	
 
-	public TipoProducto() {
-		this.categorias = new ArrayList<Categoria>();
-		this.subCats = new ArrayList<SubCategoria>();
+
+
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public List<Categoria> getCategorias() {
-		return categorias;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
-	public void setCategorias(List<Categoria> categorias) {
-		this.categorias = categorias;
+	public SubCategoria getSubCat() {
+		return subCat;
 	}
 
-	public List<SubCategoria> getSubCats() {
-		return subCats;
-	}
-
-	public void setSubCats(List<SubCategoria> subCats) {
-		this.subCats = subCats;
+	public void setSubCat(SubCategoria subCat) {
+		this.subCat = subCat;
 	}
 
 	public String getDescripcion() {
@@ -108,13 +104,7 @@ public class TipoProducto implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-public void addCategorias(Categoria categoria) {
-	this.categorias.add(categoria);
-}
 
-public void addSubCats(SubCategoria subCat) {
-	this.subCats.add(subCat);
-}
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
