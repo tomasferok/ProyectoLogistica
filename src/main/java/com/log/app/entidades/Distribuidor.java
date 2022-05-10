@@ -20,7 +20,7 @@ public class Distribuidor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idDistribu;
 	
-	private String veichulo;
+	private String vehiculo;
 	
 	private String matricula;
 	
@@ -34,12 +34,14 @@ public class Distribuidor implements Serializable {
 		this.idDistribu = idDistribu;
 	}
 
-	public String getVeichulo() {
-		return veichulo;
+	
+
+	public String getVehiculo() {
+		return vehiculo;
 	}
 
-	public void setVeichulo(String veichulo) {
-		this.veichulo = veichulo;
+	public void setVehiculo(String vehiculo) {
+		this.vehiculo = vehiculo;
 	}
 
 	public String getMatricula() {
