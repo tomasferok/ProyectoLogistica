@@ -27,7 +27,7 @@ public class UsuarioController {
     @Autowired
     private TipoUsuarioService tipoUsuarioService;
 
-    @GetMapping(value = "/login")
+    @GetMapping(value = "/")
     public String login(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "login";

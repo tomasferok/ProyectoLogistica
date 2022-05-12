@@ -27,7 +27,7 @@
 		<h1 th:text="${titulo}"
 			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"></h1>
 
-		<div th:object="${categoria}" th:remove="tag">
+		<div th:object="${categoria}"  th:remove="tag">
 			<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
 				<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
 			</ul>
