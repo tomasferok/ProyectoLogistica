@@ -110,4 +110,24 @@ public class TipoProducto implements Serializable {
 		return serialVersionUID;
 	}
 
+public TipoProducto(){
+
+}
+	public TipoProducto(int codigoDeBarras, String nombre, Categoria categoria, SubCategoria subCat,
+			String descripcion, double precio, double neto) {
+		this.codigoDeBarras = codigoDeBarras;
+		this.nombre = nombre;
+		this.categoria = categoria;
+		this.subCat = subCat;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.neto = neto;
+	}
+	
+@Override
+public String toString() {
+	return this.nombre;
+}
+	
+
 }

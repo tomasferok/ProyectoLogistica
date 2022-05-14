@@ -68,5 +68,12 @@ public class Producto implements Serializable {
 		this.cantidadReservada = cantidadReservada;
 	}
 
+	public Producto(TipoProducto tipoProducto, double cantidadDisponible, double cantidadReservada) {
+		this.tipoProducto = tipoProducto;
+		this.cantidadDisponible = cantidadDisponible;
+		this.cantidadReservada = cantidadReservada;
+	}
+	
+
 	
 }

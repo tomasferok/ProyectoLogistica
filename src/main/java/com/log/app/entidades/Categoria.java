@@ -42,7 +42,15 @@ public class Categoria implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public Categoria(String nombre) {
+		
+		this.nombre = nombre;
+	}
 	
+	public Categoria() {
+
+	}
 	
 	
 }
