@@ -1,6 +1,7 @@
 package com.log.app.controllers;
 
 import com.log.app.entidades.Usuario;
+import com.log.app.services.TipoUsuarioService;
 import com.log.app.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioRestController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private TipoUsuarioService tipoUserService;
+
+    @CrossOrigin
 
     @PostMapping("/register")
-    public Usuario registrarse(@RequestBody Usuario usuario) {
-        return userService.createUser(usuario);
+    public Usuario registrarse(String email, String password, String nombre, String apellido) {
+        
+        return userService.createUser(email, password, nombre, apellido);
     }
 
     @CrossOrigin
     @PostMapping("/login")
     public Usuario logearse(String email, String password) {
-        return userService.authenticateUsuario(email, password);
+        Usuario usuario = userService.authenticateUsuario(email, password);
+        return usuario;
     }
 }

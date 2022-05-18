@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RecepcionController {
@@ -34,8 +36,15 @@ public class RecepcionController {
         return "crearRecepcion";
     }
 
+    @PostMapping(value = "/agregarProducto")
+    public String agregarProducto(Model model, @ModelAttribute Producto producto) {
+        model.addAttribute("recepcion", new Recepcion());
+        return "crearRecepcion";
+    }
+
     @PostMapping(value = "/crearRecepcion")
-    public String confirmarCreacionRecepcion(Model model) {
+    public String confirmarCreacionRecepcion(
+            Model model) {
         model.addAttribute("recepcion", new Recepcion());
         return "crearRecepcion";
     }
