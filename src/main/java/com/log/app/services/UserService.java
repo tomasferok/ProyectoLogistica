@@ -28,6 +28,9 @@ public class UserService {
         // TODO: encriptar password
         return userRepository.save(user);
     }
+    public Usuario createUser(Usuario user){
+        return userRepository.save(user);
+    }
 
     public Usuario authenticateUsuario(String email, String password) {
         Usuario usuario;

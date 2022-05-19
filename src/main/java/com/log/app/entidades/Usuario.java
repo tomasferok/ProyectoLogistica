@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "usuarios")
@@ -16,6 +17,7 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private String email;
+    @Size(min = 6)
     private String password;
     private Boolean active;
 
