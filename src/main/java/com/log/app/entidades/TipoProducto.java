@@ -2,7 +2,6 @@ package com.log.app.entidades;
 
 import java.io.Serializable;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,10 +35,6 @@ public class TipoProducto implements Serializable {
 	private String descripcion;
 	private double precio;
 	private double neto;
-	
-	
-
-
 
 	public Categoria getCategoria() {
 		return categoria;
@@ -105,14 +100,14 @@ public class TipoProducto implements Serializable {
 		this.nombre = nombre;
 	}
 
-	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-public TipoProducto(){
+	public TipoProducto() {
 
-}
+	}
+
 	public TipoProducto(int codigoDeBarras, String nombre, Categoria categoria, SubCategoria subCat,
 			String descripcion, double precio, double neto) {
 		this.codigoDeBarras = codigoDeBarras;
@@ -123,11 +118,22 @@ public TipoProducto(){
 		this.precio = precio;
 		this.neto = neto;
 	}
-	
-@Override
-public String toString() {
-	return this.nombre;
-}
-	
+
+	public TipoProducto (Long idTipoProd, int codigoDeBarras, String nombre, Categoria categoria, SubCategoria subCat,
+			String descripcion, double precio, double neto) {
+		this.idTipoProd = idTipoProd;
+		this.codigoDeBarras = codigoDeBarras;
+		this.nombre = nombre;
+		this.categoria = categoria;
+		this.subCat = subCat;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.neto = neto;
+	}
+
+	@Override
+	public String toString() {
+		return this.nombre;
+	}
 
 }
