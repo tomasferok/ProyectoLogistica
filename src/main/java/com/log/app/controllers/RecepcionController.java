@@ -10,7 +10,6 @@ import com.log.app.entidades.Recepcion;
 import com.log.app.entidades.TipoProducto;
 import com.log.app.services.RecepcionService;
 
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
