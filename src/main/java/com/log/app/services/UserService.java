@@ -2,7 +2,10 @@ package com.log.app.services;
 
 import com.log.app.daos.IUsuarioDao;
 import com.log.app.entidades.Usuario;
+import com.log.app.exepciones.EmailYaExisteExeption;
+import com.log.app.exepciones.LoginRequestIncorrectaExeption;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +20,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Usuario createUser(String email, String password, String nombre, String apellido) {
+    public Usuario createUser(String email, String password, String nombre, String apellido)
+            throws EmailYaExisteExeption {
+        if (userRepository.findByEmail(email) != null) {
+            throw new EmailYaExisteExeption("El email ya existe");
+        }
+
         Usuario user = new Usuario();
         user.setEmail(email);
         user.setPassword(password);
@@ -27,26 +35,22 @@ public class UserService {
         user.setTipoUsuario(tipoUserService.findAll().get(0));
         // TODO: encriptar password
         return userRepository.save(user);
+
     }
-    public Usuario createUser(Usuario user){
+
+    public Usuario createUser(Usuario user) {
         return userRepository.save(user);
     }
 
-    public Usuario authenticateUsuario(String email, String password) {
+    public Usuario authenticateUsuario(String email, String password) throws LoginRequestIncorrectaExeption {
         Usuario usuario;
 
-        try {
-
-            // TODO: desencriptar password
-            usuario = userRepository.findByEmailAndPassword(email, password);
-            if (usuario == null) {
-                throw new Exception("Usuario o contraseña incorrectos");
-            }
-
-        } catch (Exception e) {
-            // TODO: handle exception
-            throw new RuntimeException("Usuario no encontrado");
+        // TODO: desencriptar password
+        usuario = userRepository.findByEmailAndPassword(email, password);
+        if (usuario == null) {
+            throw new LoginRequestIncorrectaExeption("Email o contraseña incorrecta");
         }
+        System.out.println(usuario);
         return usuario;
     }
 

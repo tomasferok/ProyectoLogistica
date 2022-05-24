@@ -1,5 +1,6 @@
 package com.log.app.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,21 +15,26 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
+    @Column(nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private String apellido;
+    @Column(unique = true, nullable = false)
     private String email;
     @Size(min = 6)
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private Boolean active;
 
     @ManyToOne
     private TipoUsuario tipoUsuario;
 
-
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String email, String password, Boolean active, TipoUsuario tipoUsuario) {
+    public Usuario(String nombre, String apellido, String email, String password, Boolean active,
+            TipoUsuario tipoUsuario) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -93,5 +99,4 @@ public class Usuario {
         this.tipoUsuario = tipoUsuario;
     }
 
-    
 }
