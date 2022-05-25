@@ -32,6 +32,7 @@ public class UserService {
         user.setNombre(nombre);
         user.setApellido(apellido);
         user.setActive(true);
+        //TODO: setear el tipo de usuario
         user.setTipoUsuario(tipoUserService.findAll().get(0));
         // TODO: encriptar password
         return userRepository.save(user);

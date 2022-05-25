@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.log.app.Constants;
 import com.log.app.entidades.Proveedor;
 import com.log.app.services.IProveedorService;
 

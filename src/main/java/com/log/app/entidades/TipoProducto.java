@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tipo_productos")
 public class TipoProducto implements Serializable {
@@ -26,15 +28,31 @@ public class TipoProducto implements Serializable {
 	private Long idTipoProd;
 	private int codigoDeBarras;
 	private String nombre;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne( cascade = CascadeType.ALL )
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne( cascade = CascadeType.ALL)
 	@JoinColumn(name = "subCategoria_id")
 	private SubCategoria subCat;
 	private String descripcion;
 	private double precio;
 	private double neto;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	
+	@JoinColumn(name = "idProv")
+	private Proveedor provedor;
+
+
+
+	
+	public Proveedor getProvedor() {
+		return provedor;
+	}
+
+	public void setProvedor(Proveedor provedor) {
+		this.provedor = provedor;
+	}
 
 	public Categoria getCategoria() {
 		return categoria;
@@ -109,7 +127,7 @@ public class TipoProducto implements Serializable {
 	}
 
 	public TipoProducto(int codigoDeBarras, String nombre, Categoria categoria, SubCategoria subCat,
-			String descripcion, double precio, double neto) {
+			String descripcion, double precio, double neto, Proveedor provedor) {
 		this.codigoDeBarras = codigoDeBarras;
 		this.nombre = nombre;
 		this.categoria = categoria;
@@ -117,10 +135,11 @@ public class TipoProducto implements Serializable {
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.neto = neto;
+		this.provedor = provedor;
 	}
 
 	public TipoProducto (Long idTipoProd, int codigoDeBarras, String nombre, Categoria categoria, SubCategoria subCat,
-			String descripcion, double precio, double neto) {
+			String descripcion, double precio, double neto, Proveedor provedor) {
 		this.idTipoProd = idTipoProd;
 		this.codigoDeBarras = codigoDeBarras;
 		this.nombre = nombre;
@@ -129,6 +148,7 @@ public class TipoProducto implements Serializable {
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.neto = neto;
+		this.provedor = provedor;
 	}
 
 	@Override

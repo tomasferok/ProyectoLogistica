@@ -30,10 +30,18 @@ public class TipoProductoServiceImpl implements ITipoProductoService {
 		// TODO Auto-generated method stub
 		return productoService.findById(idTipoProd).orElse(null);
 	}
+	
+
 
 	@Override
 	public void delete(Long idTipoProd) {
 		productoService.deleteById(idTipoProd);
+	}
+
+	@Override
+	public List<TipoProducto> findByProvedor_IdProv(Long idProv) {
+		// TODO Auto-generated method stub
+		return productoService.findByProvedor_IdProv(idProv);
 	}
 
 }

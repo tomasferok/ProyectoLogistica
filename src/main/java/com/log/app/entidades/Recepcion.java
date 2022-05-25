@@ -22,7 +22,7 @@ public class Recepcion {
     @Column(name = "fecha_recepcion")
     private String fechaRecepcion;
     @ManyToOne
-    private Provedor provedor;
+    private Proveedor provedor;
     @OneToMany
     private List<RecepcionProducto> productos;
 

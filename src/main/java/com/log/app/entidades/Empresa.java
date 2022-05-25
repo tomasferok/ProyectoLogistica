@@ -15,16 +15,16 @@ public class Empresa implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idPasillo;
+	private Long idEmpresa;
 	private String nomEmpresa;
 	private String contacto;
 	private int documento;
 	private String email;
-	public Long getIdPasillo() {
-		return idPasillo;
+	public Long getIdEmpresa() {
+		return idEmpresa;
 	}
-	public void setIdPasillo(Long idPasillo) {
-		this.idPasillo = idPasillo;
+	public void setIdEmpresa(Long idEmpresa) {
+		this.idEmpresa = idEmpresa;
 	}
 	public String getNomEmpresa() {
 		return nomEmpresa;

@@ -13,4 +13,7 @@ public interface ITipoProductoService {
 	public TipoProducto findOne(Long idTipoProd);
 	
 	public void delete(Long idTipoProd);
+
+
+	public List<TipoProducto> findByProvedor_IdProv(Long idProv);
 }
