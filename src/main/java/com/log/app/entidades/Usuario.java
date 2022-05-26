@@ -2,6 +2,8 @@ package com.log.app.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,8 +28,7 @@ public class Usuario {
     private String password;
     @Column(nullable = false)
     private Boolean active;
-
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
 
     public Usuario() {

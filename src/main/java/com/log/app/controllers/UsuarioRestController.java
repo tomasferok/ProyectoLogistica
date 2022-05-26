@@ -7,7 +7,6 @@ import com.log.app.entidades.Usuario;
 import com.log.app.exepciones.EmailYaExisteExeption;
 import com.log.app.exepciones.LoginRequestIncorrectaExeption;
 import com.log.app.helpers.LoginRequest;
-import com.log.app.services.TipoUsuarioService;
 import com.log.app.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioRestController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private TipoUsuarioService tipoUserService;
+    // @Autowired
+    // private TipoUsuarioService tipoUserService;
 
     @CrossOrigin
 

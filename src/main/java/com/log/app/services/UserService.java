@@ -1,6 +1,7 @@
 package com.log.app.services;
 
 import com.log.app.daos.IUsuarioDao;
+import com.log.app.entidades.TipoUsuario;
 import com.log.app.entidades.Usuario;
 import com.log.app.exepciones.EmailYaExisteExeption;
 import com.log.app.exepciones.LoginRequestIncorrectaExeption;
@@ -13,8 +14,6 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private IUsuarioDao userRepository;
 
-    @Autowired
-    private TipoUsuarioService tipoUserService;
 
     public UserService(IUsuarioDao userRepository) {
         this.userRepository = userRepository;
@@ -33,7 +32,7 @@ public class UserService {
         user.setApellido(apellido);
         user.setActive(true);
         //TODO: setear el tipo de usuario
-        user.setTipoUsuario(tipoUserService.findAll().get(0));
+        user.setTipoUsuario(TipoUsuario.ADMIN);
         // TODO: encriptar password
         return userRepository.save(user);
 

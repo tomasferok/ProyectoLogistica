@@ -36,6 +36,7 @@ public class EstadoPedido implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Usuario usuarios;
 	
+	
 	private EstadoPedido estadosPedidosAnteriores;
 
 	

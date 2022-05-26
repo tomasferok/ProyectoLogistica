@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class RecepcionService {
     IRecepcionDao recepcionDao;
 
-    public void createRecepcion(Recepcion recepcion) {
-        recepcionDao.save(recepcion);
+    public Recepcion save(Recepcion recepcion) {
+       return  recepcionDao.save(recepcion);
     }
 }
