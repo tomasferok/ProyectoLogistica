@@ -15,8 +15,14 @@ public class UserService {
     private IUsuarioDao userRepository;
 
 
+
     public UserService(IUsuarioDao userRepository) {
         this.userRepository = userRepository;
+    }
+
+
+    public Usuario findById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     public Usuario createUser(String email, String password, String nombre, String apellido)
@@ -52,6 +58,10 @@ public class UserService {
         }
         System.out.println(usuario);
         return usuario;
+    }
+
+    public Usuario findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
 }

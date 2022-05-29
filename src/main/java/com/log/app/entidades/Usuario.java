@@ -11,11 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
     private Long idUsuario;
     @Column(nullable = false)
     private String nombre;
@@ -34,8 +37,20 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String email, String password, Boolean active,
+    // public Usuario(String nombre, String apellido, String email, String password, Boolean active,
+    //         TipoUsuario tipoUsuario) {
+    //     this.nombre = nombre;
+    //     this.apellido = apellido;
+    //     this.email = email;
+    //     this.password = password;
+    //     this.active = active;
+    //     this.tipoUsuario = tipoUsuario;
+    // }
+    
+    public Usuario(Long idUsuario, String nombre, String apellido, String email, String password, Boolean active,
             TipoUsuario tipoUsuario) {
+        this.idUsuario = idUsuario;
+
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -43,13 +58,12 @@ public class Usuario {
         this.active = active;
         this.tipoUsuario = tipoUsuario;
     }
-
     public Long getIdUsuario() {
         return idUsuario;
     }
 
     public void setIdUsuario(Long idUsuario) {
-        idUsuario = idUsuario;
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
