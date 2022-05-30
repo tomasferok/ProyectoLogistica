@@ -26,13 +26,6 @@ public class RecepcionService {
 
 
     public Recepcion save(Recepcion recepcion) {
-        // for (RecepcionProducto recepcionProducto : recepcion.getProductos()) {
-        //     recepcionProducto.setRecepcion(recepcion);
-        // }
-        // for (EstadoRecepcion estadoRecepcion : recepcion.getEstadoRecepcion()) {
-        //     estadoRecepcion.setRecepcion(recepcion);
-        // }
-
 
         System.out.println("RecepcionService.save()");
 
