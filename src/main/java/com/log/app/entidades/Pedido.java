@@ -35,71 +35,89 @@ public class Pedido implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private EstadoPedido estadoPedido;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Producto> productos;
-	
-	
+	private List<PedidoProducto> productos;
+
 	public Pedido() {
-		this.productos = new ArrayList<Producto>();
+		this.productos = new ArrayList<PedidoProducto>();
 	}
+
 	public Long getIdPedido() {
 		return idPedido;
 	}
+
 	public void setIdPedido(Long idPedido) {
 		this.idPedido = idPedido;
 	}
+
 	public Cliente getCliente() {
 		return cliente;
 	}
+
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+
 	public String getDireccion() {
 		return direccion;
 	}
+
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+
 	public double getTotal() {
 		return total;
 	}
+
 	public void setTotal(double total) {
 		this.total = total;
 	}
+
 	public double getDuracionEstimada() {
 		return duracionEstimada;
 	}
+
 	public void setDuracionEstimada(double duracionEstimada) {
 		this.duracionEstimada = duracionEstimada;
 	}
+
 	public double getDuracionFinal() {
 		return duracionFinal;
 	}
+
 	public void setDuracionFinal(double duracionFinal) {
 		this.duracionFinal = duracionFinal;
 	}
+
 	public Distribuidor getDistribuidor() {
 		return distribuidor;
 	}
+
 	public void setDistribuidor(Distribuidor distribuidor) {
 		this.distribuidor = distribuidor;
 	}
+
 	public EstadoPedido getEstadoPedido() {
 		return estadoPedido;
 	}
+
 	public void setEstadoPedido(EstadoPedido estadoPedido) {
 		this.estadoPedido = estadoPedido;
 	}
-	public List<Producto> getProductos() {
+
+	public List<PedidoProducto> getProductos() {
 		return productos;
 	}
-	public void setProductos(List<Producto> productos) {
+
+	public void setProductos(List<PedidoProducto> productos) {
 		this.productos = productos;
 	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public void add(Producto producto) {
+	public void add(PedidoProducto producto) {
 		productos.add(producto);
 	}
 }

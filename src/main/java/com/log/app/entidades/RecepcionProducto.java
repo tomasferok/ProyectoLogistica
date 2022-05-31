@@ -17,11 +17,6 @@ public class RecepcionProducto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRecepcionProducto;
 
-    // @ManyToOne()
-    // @JoinColumn(nullable = false)
-    // @JsonIgnore
-    // private Recepcion recepcion;
-
     @ManyToOne()
     @JoinColumn(nullable = false)
 
