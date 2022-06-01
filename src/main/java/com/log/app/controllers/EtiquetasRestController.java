@@ -8,7 +8,9 @@ import com.log.app.services.EtiquetaService;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +28,13 @@ public class EtiquetasRestController {
     EtiquetaService etiquetaService;
 
     @GetMapping("/etiquetas")
-    public String crearEtiquetas() throws IOException {
-        etiquetaService.crearInvoice();
-        return "ok";
+    public ResponseEntity<Resource> crearEtiquetas() throws IOException {
+     ByteArrayOutputStream  pdfResult =   etiquetaService.crearInvoice();
+        return ResponseEntity.ok()
+             .contentType(MediaType.parseMediaType("application/pdf"))
+             .header(HttpHeaders.CONTENT_DISPOSITION,
+                     "attachment; filename=\"" + "etiquetas.pdf" + "\"")	
+                            
+             .body(new ByteArrayResource(pdfResult.toByteArray()));
     }
 }

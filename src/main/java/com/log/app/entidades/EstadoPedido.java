@@ -28,12 +28,12 @@ public class EstadoPedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstadoPedido;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Pedido> pedidos;
+	// @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	// private Pedido pedidos;
 	
 	private Date fechaPedido;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Usuario usuarios;
 	
 	
@@ -41,7 +41,6 @@ public class EstadoPedido implements Serializable {
 
 	
 	public EstadoPedido() {
-		this.pedidos= new ArrayList<Pedido>();
 	}
 
 	public Long getIdEstadoPedido() {
@@ -52,13 +51,13 @@ public class EstadoPedido implements Serializable {
 		this.idEstadoPedido = idEstadoPedido;
 	}
 
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
+	// public Pedido getPedidos() {
+	// 	return pedidos;
+	// }
 
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
+	// public void setPedidos(Pedido pedidos) {
+	// 	this.pedidos = pedidos;
+	// }
 
 	public Date getFechaPedido() {
 		return fechaPedido;
@@ -88,9 +87,7 @@ public class EstadoPedido implements Serializable {
 		return serialVersionUID;
 	}
 	
-	public void add(Pedido pedido) {
-		this.pedidos.add(pedido);
-	}
+
 	
     
 }

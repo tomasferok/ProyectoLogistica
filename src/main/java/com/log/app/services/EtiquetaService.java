@@ -23,7 +23,7 @@ public class EtiquetaService {
 
     }
 
-    public PDDocument crearInvoice() throws IOException {
+    public ByteArrayOutputStream crearInvoice() throws IOException {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
 
         PDDocument MyPDF = new PDDocument();
@@ -42,7 +42,8 @@ public class EtiquetaService {
         cs.close();
         MyPDF.save(output);
         MyPDF.close();
-        return MyPDF;
+        
+        return output;
     }
 
 }
