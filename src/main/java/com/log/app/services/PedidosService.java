@@ -15,8 +15,17 @@ public class PedidosService implements IPedidosService {
     @Override
     public Pedido save(Pedido pedido) {
 
+        try {
 
         return pedidosDao.save(pedido);
+        }catch(
+
+    Exception e)
+    {
+        // TODO: handle exceptio
+        System.out.println(e.getMessage());
+        return null;
+    }
     }
 
     public Iterable<Pedido> findAll() {

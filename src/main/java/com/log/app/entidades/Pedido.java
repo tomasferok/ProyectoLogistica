@@ -2,6 +2,7 @@ package com.log.app.entidades;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,7 +25,7 @@ public class Pedido implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPedido;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Cliente cliente;
 	private String direccion;
 	private double total;
@@ -32,10 +33,24 @@ public class Pedido implements Serializable {
 	private double duracionFinal;
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Distribuidor distribuidor;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private EstadoPedido estadoPedido;
+
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<PedidoProducto> productos;
+
+	private List<EstadoPedido> estadoPedido;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<PedidoProducto> productos;	
+	private Date fechaPedido;
+
+
+
+
+	public Date getFechaPedido() {
+		return fechaPedido;
+	}
+
+	public void setFechaPedido(Date fechaPedido) {
+		this.fechaPedido = fechaPedido;
+	}
 
 	public Pedido() {
 		this.productos = new ArrayList<PedidoProducto>();
@@ -97,11 +112,11 @@ public class Pedido implements Serializable {
 		this.distribuidor = distribuidor;
 	}
 
-	public EstadoPedido getEstadoPedido() {
+	public List<EstadoPedido> getEstadoPedido() {
 		return estadoPedido;
 	}
 
-	public void setEstadoPedido(EstadoPedido estadoPedido) {
+	public void setEstadoPedido(List<EstadoPedido> estadoPedido) {
 		this.estadoPedido = estadoPedido;
 	}
 
@@ -120,4 +135,22 @@ public class Pedido implements Serializable {
 	public void add(PedidoProducto producto) {
 		productos.add(producto);
 	}
+
+	public Pedido(Long idPedido, Cliente cliente, String direccion, double total, double duracionEstimada,
+			double duracionFinal, Distribuidor distribuidor, 
+			List<EstadoPedido> estadoPedido, List<PedidoProducto> productos,
+			Date fechaPedido) {
+		this.idPedido = idPedido;
+		this.cliente = cliente;
+		this.direccion = direccion;
+		this.total = total;
+		this.duracionEstimada = duracionEstimada;
+		this.duracionFinal = duracionFinal;
+		this.distribuidor = distribuidor;
+		this.estadoPedido = estadoPedido;
+		this.productos = productos;
+		this.fechaPedido = fechaPedido;
+	}
+
+	
 }

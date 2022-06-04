@@ -37,11 +37,11 @@ public class EstadoRecepcion {
 
     @Column(name = "fecha_estado")
     private Date fecha;
-    @OneToOne
-    private EstadoRecepcion estadoAnterior;
-    public Long getIdEstadoRecepcion() {
-        return idEstadoRecepcion;
-    }
+    // @OneToOne
+    // private EstadoRecepcion estadoAnterior;
+    // public Long getIdEstadoRecepcion() {
+    //     return idEstadoRecepcion;
+    // }
     public void setIdEstadoRecepcion(Long idEstadoRecepcion) {
         this.idEstadoRecepcion = idEstadoRecepcion;
     }
@@ -69,20 +69,20 @@ public class EstadoRecepcion {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public EstadoRecepcion getEstadoAnterior() {
-        return estadoAnterior;
-    }
-    public void setEstadoAnterior(EstadoRecepcion estadoAnterior) {
-        this.estadoAnterior = estadoAnterior;
-    }
+    // public EstadoRecepcion getEstadoAnterior() {
+    //     return estadoAnterior;
+    // }
+    // public void setEstadoAnterior(EstadoRecepcion estadoAnterior) {
+    //     this.estadoAnterior = estadoAnterior;
+    // }
     public EstadoRecepcion(Long idEstadoRecepcion, Usuario usuario, TipoEstadoRecepcion tipoEstado,
-            Date fecha, EstadoRecepcion estadoAnterior) {
+            Date fecha) {
         this.idEstadoRecepcion = idEstadoRecepcion;
         // this.recepcion = recepcion;
         this.usuario = usuario;
         this.tipoEstado = tipoEstado;
         this.fecha = fecha;
-        this.estadoAnterior = estadoAnterior;
+        // this.estadoAnterior = estadoAnterior;
     }
 
     public EstadoRecepcion() {

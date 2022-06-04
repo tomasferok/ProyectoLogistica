@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,18 +30,29 @@ public class EstadoPedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstadoPedido;
 	
-	// @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	// private Pedido pedidos;
-	
-	private Date fechaPedido;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Usuario usuarios;
-	
-	
-	private EstadoPedido estadosPedidosAnteriores;
 
 	
+	private Date fecha;
+	
+	@ManyToOne(cascade = CascadeType.MERGE)
+	private Usuario usuario;
+	
+
+
+	@Enumerated(EnumType.STRING)
+
+	private TipoEstadoPedido tipoEstadoPedido;
+
+	
+	
+	public TipoEstadoPedido getTipoEstadoPedido() {
+		return tipoEstadoPedido;
+	}
+
+	public void setTipoEstadoPedido(TipoEstadoPedido tipoEstadoPedido) {
+		this.tipoEstadoPedido = tipoEstadoPedido;
+	}
+
 	public EstadoPedido() {
 	}
 
@@ -51,37 +64,25 @@ public class EstadoPedido implements Serializable {
 		this.idEstadoPedido = idEstadoPedido;
 	}
 
-	// public Pedido getPedidos() {
-	// 	return pedidos;
-	// }
+	
 
-	// public void setPedidos(Pedido pedidos) {
-	// 	this.pedidos = pedidos;
-	// }
-
-	public Date getFechaPedido() {
-		return fechaPedido;
+	public Date getFecha() {
+		return fecha;
 	}
 
-	public void setFechaPedido(Date fechaPedido) {
-		this.fechaPedido = fechaPedido;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
-	public Usuario getUsuarios() {
-		return usuarios;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setUsuarios(Usuario usuarios) {
-		this.usuarios = usuarios;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
-	public EstadoPedido getEstadosPedidosAnteriores() {
-		return estadosPedidosAnteriores;
-	}
-
-	public void setEstadosPedidosAnteriores(EstadoPedido estadosPedidosAnteriores) {
-		this.estadosPedidosAnteriores = estadosPedidosAnteriores;
-	}
+	
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

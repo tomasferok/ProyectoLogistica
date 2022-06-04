@@ -87,6 +87,8 @@ public class Recepcion {
     }
 
     
-
+    public void addEstadoRecepcion(EstadoRecepcion estadoRecepcion) {
+        this.estadoRecepcion.add(estadoRecepcion);
+    }
 
 }

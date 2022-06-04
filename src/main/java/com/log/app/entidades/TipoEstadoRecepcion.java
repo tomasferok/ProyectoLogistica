@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum TipoEstadoRecepcion {
     PENDIENTE("PENDIENTE"),
     RECIBIDO("RECIBIDO"),
+    RECIBIDO_CON_DIFERENCIAS("RECIBIDO_CON_DIFERENCIAS"),
+
     CANCELADO("CANCELADO");
 
     private String tipoEstadoRecepcion;

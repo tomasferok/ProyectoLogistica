@@ -26,6 +26,8 @@ public class PedidosRestController {
     }
 
     @GetMapping("/pedidos")
+    @ResponseStatus(HttpStatus.OK)
+
     public Iterable<Pedido> getPedidos() {
         return pedidosService.findAll();
     }
