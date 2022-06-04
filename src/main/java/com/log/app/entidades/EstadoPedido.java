@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,19 +30,30 @@ public class EstadoPedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstadoPedido;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Pedido> pedidos;
-	
-	private Date fechaPedido;
-	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Usuario usuarios;
-	
-	private EstadoPedido estadosPedidosAnteriores;
 
 	
+	private Date fecha;
+	
+	@ManyToOne(cascade = CascadeType.MERGE)
+	private Usuario usuario;
+	
+
+
+	@Enumerated(EnumType.STRING)
+
+	private TipoEstadoPedido tipoEstadoPedido;
+
+	
+	
+	public TipoEstadoPedido getTipoEstadoPedido() {
+		return tipoEstadoPedido;
+	}
+
+	public void setTipoEstadoPedido(TipoEstadoPedido tipoEstadoPedido) {
+		this.tipoEstadoPedido = tipoEstadoPedido;
+	}
+
 	public EstadoPedido() {
-		this.pedidos= new ArrayList<Pedido>();
 	}
 
 	public Long getIdEstadoPedido() {
@@ -51,45 +64,31 @@ public class EstadoPedido implements Serializable {
 		this.idEstadoPedido = idEstadoPedido;
 	}
 
-	public List<Pedido> getPedidos() {
-		return pedidos;
+	
+
+	public Date getFecha() {
+		return fecha;
 	}
 
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
-	public Date getFechaPedido() {
-		return fechaPedido;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setFechaPedido(Date fechaPedido) {
-		this.fechaPedido = fechaPedido;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
-	public Usuario getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(Usuario usuarios) {
-		this.usuarios = usuarios;
-	}
-
-	public EstadoPedido getEstadosPedidosAnteriores() {
-		return estadosPedidosAnteriores;
-	}
-
-	public void setEstadosPedidosAnteriores(EstadoPedido estadosPedidosAnteriores) {
-		this.estadosPedidosAnteriores = estadosPedidosAnteriores;
-	}
+	
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	
-	public void add(Pedido pedido) {
-		this.pedidos.add(pedido);
-	}
+
 	
     
 }

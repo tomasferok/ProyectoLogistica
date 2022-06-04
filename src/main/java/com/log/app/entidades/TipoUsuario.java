@@ -1,56 +1,18 @@
 package com.log.app.entidades;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonValue;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+public enum TipoUsuario {
+    ADMIN("ADMIN"), USUARIO("USUARIO");
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+    private String tipoUsuario;
 
-@Entity
-@Table(name = "tipo_usuarios")
-public class TipoUsuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tipo_usuario", nullable = false, unique = true)
-    private Long idTipoUsuario;
-    @Column(name = "nombre", nullable = false, unique = true)
-    private String nombre;
-
-
-
-    public TipoUsuario(String nombre) {
-        this.nombre = nombre;
+    private TipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
-    public TipoUsuario() {
+    @JsonValue
+    public String getTipoUsuario() {
+        return tipoUsuario;
     }
-
-    public Long getIdTipoUsuario() {
-        return idTipoUsuario;
-    }
-
-    public void setIdTipoUsuario(Long idTipoUsuario) {
-        idTipoUsuario = idTipoUsuario;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-   
-
-   
-
-    
 }

@@ -1,19 +1,39 @@
 package com.log.app.entidades;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonValue;
 
+public enum TipoEstadoRecepcion {
+    PENDIENTE("PENDIENTE"),
+    RECIBIDO("RECIBIDO"),
+    RECIBIDO_CON_DIFERENCIAS("RECIBIDO_CON_DIFERENCIAS"),
 
-@Entity
-@Table(name = "tipo_estado_recepcion")
-public class TipoEstadoRecepcion {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEstadoRecepcion;
-    @Column(name = "nombre")
-    private String nombre;
+    CANCELADO("CANCELADO");
+
+    private String tipoEstadoRecepcion;
+
+    private TipoEstadoRecepcion(String tipoEstadoRecepcion) {
+        this.tipoEstadoRecepcion = tipoEstadoRecepcion;
+    }
+
+    @JsonValue
+    public String getTipoEstadoRecepcion() {
+        return tipoEstadoRecepcion;
+    }
 }
+
+// import javax.persistence.Column;
+// import javax.persistence.Entity;
+// import javax.persistence.GeneratedValue;
+// import javax.persistence.GenerationType;
+// import javax.persistence.Id;
+// import javax.persistence.Table;
+
+// @Entity
+// @Table(name = "tipo_estado_recepcion")
+// public class TipoEstadoRecepcion {
+// @Id
+// @GeneratedValue(strategy = GenerationType.IDENTITY)
+// private Long idEstadoRecepcion;
+// @Column(name = "nombre")
+// private String nombre;
+// }

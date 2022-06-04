@@ -1,6 +1,11 @@
 package com.log.app.entidades;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -8,27 +13,46 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "usuarios")
-public class Usuario {
+public class Usuario  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
     private Long idUsuario;
+    @Column(nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private String apellido;
+    @Column(unique = true, nullable = false)
     private String email;
     @Size(min = 6)
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private Boolean active;
-
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
-
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String email, String password, Boolean active, TipoUsuario tipoUsuario) {
+    // public Usuario(String nombre, String apellido, String email, String password, Boolean active,
+    //         TipoUsuario tipoUsuario) {
+    //     this.nombre = nombre;
+    //     this.apellido = apellido;
+    //     this.email = email;
+    //     this.password = password;
+    //     this.active = active;
+    //     this.tipoUsuario = tipoUsuario;
+    // }
+    
+    public Usuario(Long idUsuario, String nombre, String apellido, String email, String password, Boolean active,
+            TipoUsuario tipoUsuario) {
+        this.idUsuario = idUsuario;
+
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -36,13 +60,12 @@ public class Usuario {
         this.active = active;
         this.tipoUsuario = tipoUsuario;
     }
-
     public Long getIdUsuario() {
         return idUsuario;
     }
 
     public void setIdUsuario(Long idUsuario) {
-        idUsuario = idUsuario;
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -93,5 +116,4 @@ public class Usuario {
         this.tipoUsuario = tipoUsuario;
     }
 
-    
 }

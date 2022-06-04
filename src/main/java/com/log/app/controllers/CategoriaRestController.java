@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.log.app.Constants;
 import com.log.app.entidades.Categoria;
 import com.log.app.services.ICategoriaService;
 
@@ -29,7 +30,6 @@ public class CategoriaRestController {
 
 	@GetMapping("/categoria")
 	public List<Categoria> index() {
-
 		return categoriaService.findAll();
 	}
 

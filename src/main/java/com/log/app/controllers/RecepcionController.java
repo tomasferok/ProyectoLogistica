@@ -10,7 +10,6 @@ import com.log.app.entidades.Recepcion;
 import com.log.app.entidades.TipoProducto;
 import com.log.app.services.RecepcionService;
 
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +28,7 @@ public class RecepcionController {
     public String crearRecepcion(Model model) {
 
         // TOOD : traer tipo productos de la base de datos
-        model.addAttribute("productos", Constants.tiposProductos);
 
-        model.addAttribute("estadosProducto", Constants.listaEstadosProducto);
         model.addAttribute("recepcion", new Recepcion());
         return "crearRecepcion";
     }

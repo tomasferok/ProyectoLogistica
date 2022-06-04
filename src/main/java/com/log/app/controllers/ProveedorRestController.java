@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.log.app.Constants;
 import com.log.app.entidades.Proveedor;
 import com.log.app.services.IProveedorService;
 
@@ -42,23 +43,22 @@ public class ProveedorRestController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Proveedor create(@RequestBody Proveedor prov) {
 		return provService.save(prov);
-		
-}
+
+	}
+
 	@PutMapping("/prov/{idProv}")
 	public Proveedor update(@RequestBody Proveedor prov, @PathVariable Long idProv) {
-		Proveedor provActual= provService.findOne(idProv);
-		
+		Proveedor provActual = provService.findOne(idProv);
+
 		provActual.setNombreProv(prov.getNombreProv());
 		provActual.setContacto(prov.getContacto());
 		provActual.setEmail(prov.getEmail());
-	
-		
+
 		return provService.save(provActual);
 	}
-	
+
 	@DeleteMapping("/prov/{idProv}")
 	public void delete(@PathVariable Long idProv) {
 		provService.delete(idProv);
 	}
 }
-

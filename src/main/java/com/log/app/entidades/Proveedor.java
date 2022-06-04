@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "proveedores")
-public class Proveedor implements Serializable{
+public class Proveedor implements Serializable {
 
 	/**
 	 * 
@@ -20,14 +20,24 @@ public class Proveedor implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idProv;
-	
+
 	private String nombreProv;
-	
+
 	private String contacto;
-	
+
 	private String email;
 
+	public Proveedor() {
+
+	}
+
+	public Proveedor(String nombreProv, String contacto, String email) {
 	
+
+		this.nombreProv = nombreProv;
+		this.contacto = contacto;
+		this.email = email;
+	}
 
 	public Long getIdProv() {
 		return idProv;
@@ -64,6 +74,5 @@ public class Proveedor implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
+
 }

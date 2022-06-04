@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import com.log.app.daos.IUsuarioDao;
 import com.log.app.entidades.TipoUsuario;
 import com.log.app.entidades.Usuario;
-import com.log.app.services.TipoUsuarioService;
 import com.log.app.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class UsuarioController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private TipoUsuarioService tipoUsuarioService;
+    // @Autowired
+    // private TipoUsuarioService tipoUsuarioService;
 
     @GetMapping(value = "/")
     public String login(Model model) {
@@ -55,14 +54,8 @@ public class UsuarioController {
 
     @PostMapping("/registro")
     public String registrarse(@ModelAttribute Usuario usuario) {
-        TipoUsuario tipoUsuario;
-        try {
-            tipoUsuario = tipoUsuarioService.findById(1l);
-        } catch (Exception e) {
-            tipoUsuario = tipoUsuarioService.createTipoUsuario(new TipoUsuario("admin"));
 
-        }
-        usuario.setTipoUsuario(tipoUsuario);
+        usuario.setTipoUsuario(TipoUsuario.ADMIN);
         usuario.setActive(true);
         userService.createUser(usuario);
         return "login";
