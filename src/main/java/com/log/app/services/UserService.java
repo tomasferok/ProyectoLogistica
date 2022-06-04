@@ -8,18 +8,28 @@ import com.log.app.exepciones.LoginRequestIncorrectaExeption;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService  {
+public class UserService implements UserDetailsService {
     private IUsuarioDao userRepository;
+
+    
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
 
 
     public UserService(IUsuarioDao userRepository) {
         this.userRepository = userRepository;
     }
-
 
     public Usuario findById(Long id) {
         return userRepository.findById(id).orElse(null);
@@ -33,11 +43,11 @@ public class UserService  {
 
         Usuario user = new Usuario();
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
         user.setNombre(nombre);
         user.setApellido(apellido);
         user.setActive(true);
-        //TODO: setear el tipo de usuario
+        // TODO: setear el tipo de usuario
         user.setTipoUsuario(TipoUsuario.ADMIN);
         // TODO: encriptar password
         return userRepository.save(user);
@@ -64,4 +74,18 @@ public class UserService  {
         return userRepository.findByEmail(email);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println(username);
+        Usuario usuario = userRepository.findByEmail(username);
+
+        UserDetails user = User.withUsername(usuario.getEmail()).password(usuario.getPassword()).authorities(
+                usuario.getTipoUsuario().getTipoUsuario())
+                .build();
+
+        return user;
+    }
+
+    
+   
 }
