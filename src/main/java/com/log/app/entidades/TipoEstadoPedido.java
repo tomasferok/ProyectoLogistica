@@ -1,13 +1,31 @@
 package com.log.app.entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
+public enum TipoEstadoPedido {
+//PENDIENTE, PREPARADO, CONTROLADO, DESPACHADO, ENTREGADO, CANCELADO
+
+    PENDIENTE("PENDIENTE"),
+    PREPARADO("PREPARADO"),
+    CONTROLADO("CONTROLADO"),
+    DESPACHADO("DESPACHADO"),
+    ENTREGADO("ENTREGADO"),
+    CANCELADO("CANCELADO");
 
 
-enum TipoEstadoPedido {
-	PENDIENTE,
-	RECIBIDO,
-	CANCELADO,
-}
+    private String tipoEstadoPedido;
+
+    private TipoEstadoPedido(String tipoEstadoPedido) {
+        this.tipoEstadoPedido = tipoEstadoPedido;
+    }
+
+    @JsonValue
+    public String getTipoEstadoPedido() {
+        return tipoEstadoPedido;
+    }
+    }
+
 
 
 

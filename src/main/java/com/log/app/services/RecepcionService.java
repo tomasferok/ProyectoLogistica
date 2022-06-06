@@ -38,6 +38,8 @@ public class RecepcionService {
         return recepcionDao.findAll();
     }
 
+    
+
     public Recepcion save(Recepcion recepcion) {
 
         try {
@@ -87,5 +89,16 @@ public class RecepcionService {
         recepcion.addEstadoRecepcion(estadoRecepcion);
         return recepcionDao.save(recepcion);
     }
+
+    public long count() {
+        return recepcionDao.count();
+    }
+
+
+    public long countByEstado(TipoEstadoRecepcion estadoRecepcion) {
+        return recepcionDao.countByEstadoRecepcion_TipoEstado(estadoRecepcion);
+    }
+
+
 
 }

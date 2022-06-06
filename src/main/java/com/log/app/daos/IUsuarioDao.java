@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface IUsuarioDao extends CrudRepository<Usuario, Long> {
     Usuario findByEmailAndPassword(String email, String password);
     Usuario findByEmail(String email);
+    void deleteByEmail(String email);
 }

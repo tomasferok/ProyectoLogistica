@@ -36,8 +36,7 @@ public class UsuarioRestController {
     private UserService userService;
     // @Autowired
     // private TipoUsuarioService tipoUserService;
-    @Autowired
-    private AuthenticationManager authenticationManager;
+
     @Autowired
 
     private JwtUtil jwtUtil;
@@ -47,39 +46,36 @@ public class UsuarioRestController {
     @PostMapping("/register")
     public Usuario registrarse(String email, String password, String nombre, String apellido)
             throws EmailYaExisteExeption {
-        Usuario usuario;
 
-        usuario = userService.createUser(email, password, nombre, apellido);
+        Usuario usuario = userService.createUser(email, password, nombre, apellido);
 
         return usuario;
     }
+
+    // @CrossOrigin
+    // @PostMapping("/login")
+    // public Usuario logearse(@RequestBody AuthenticationRequest loginRequest)
+    // throws LoginRequestIncorrectaExeption {
+
+    // Usuario usuario;
+    // usuario = userService.authenticateUsuario(loginRequest.getEmail(),
+    // loginRequest.getPassword());
+
+    // return usuario;
+
+    // }
 
     @CrossOrigin
     @PostMapping("/login")
-    public Usuario logearse(@RequestBody AuthenticationRequest loginRequest) throws LoginRequestIncorrectaExeption {
-
-        Usuario usuario;
-        usuario = userService.authenticateUsuario(loginRequest.getEmail(), loginRequest.getPassword());
-
-        return usuario;
-
-    }
-
-    @CrossOrigin
-    @PostMapping("/loginMovil")
-    public ResponseEntity<AuthenticationResponse> logearseMovil(
+    public ResponseEntity<AuthenticationResponse> logearse(
             @RequestBody AuthenticationRequest loginRequest) throws LoginRequestIncorrectaExeption,
             BadCredentialsException {
         System.out.println(loginRequest);
 
-        authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),
-                        loginRequest.getPassword()));
+        AuthenticationResponse response = userService.authenticateUsuario(loginRequest.getEmail(),
+                loginRequest.getPassword());
 
-        UserDetails userDetals = userService.loadUserByUsername(loginRequest.getEmail());
-        Usuario usuario = userService.findByEmail(loginRequest.getEmail());
-        String jwt = jwtUtil.generateToken(userDetals);
-        return new ResponseEntity<>(new AuthenticationResponse(jwt, usuario.getEmail(), usuario.getIdUsuario()),
+        return new ResponseEntity<>(response,
                 HttpStatus.OK);
 
     }
@@ -88,7 +84,7 @@ public class UsuarioRestController {
     public ResponseEntity<Object> loginExeptionHandler(LoginRequestIncorrectaExeption exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNAUTHORIZED);
     }
-    
+
     @ExceptionHandler({ BadCredentialsException.class })
     public ResponseEntity<Object> badCredentialsExceptonHandler(BadCredentialsException exception) {
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

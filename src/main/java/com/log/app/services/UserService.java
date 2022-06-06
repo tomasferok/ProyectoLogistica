@@ -5,10 +5,14 @@ import com.log.app.entidades.TipoUsuario;
 import com.log.app.entidades.Usuario;
 import com.log.app.exepciones.EmailYaExisteExeption;
 import com.log.app.exepciones.LoginRequestIncorrectaExeption;
+import com.log.app.helpers.AuthenticationResponse;
+import com.log.app.security.JwtUtil;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,16 +20,20 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class UserService implements UserDetailsService {
     private IUsuarioDao userRepository;
 
-    
     @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    JwtUtil jwtUtil;
 
-
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     public UserService(IUsuarioDao userRepository) {
         this.userRepository = userRepository;
@@ -58,16 +66,24 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public Usuario authenticateUsuario(String email, String password) throws LoginRequestIncorrectaExeption {
-        Usuario usuario;
+    public AuthenticationResponse authenticateUsuario(String email, String password)
+            throws LoginRequestIncorrectaExeption {
 
-        // TODO: desencriptar password
-        usuario = userRepository.findByEmailAndPassword(email, password);
+        authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(
+                        email,
+                        password));
+
+        UserDetails userDetals = loadUserByUsername(email);
+        Usuario usuario = findByEmail(email);
+        String jwt = jwtUtil.generateToken(userDetals);
+        System.out.println(usuario);
         if (usuario == null) {
             throw new LoginRequestIncorrectaExeption("Email o contraseña incorrecta");
         }
         System.out.println(usuario);
-        return usuario;
+
+        return new AuthenticationResponse(jwt, usuario.getEmail(), usuario.getIdUsuario());
     }
 
     public Usuario findByEmail(String email) {
@@ -86,6 +102,8 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    
-   
+    public void deleteByEmail(String email) {
+        userRepository.deleteByEmail(email);
+    }
+
 }
