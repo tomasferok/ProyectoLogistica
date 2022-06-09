@@ -18,6 +18,7 @@ import com.log.app.entidades.TipoEstadoRecepcion;
 import com.log.app.entidades.TipoProducto;
 import com.log.app.entidades.Usuario;
 import com.log.app.exepciones.RecepcionConDiferenciasExeption;
+import com.log.app.helpers.CancelarRecepcionRequest;
 import com.log.app.helpers.ControlarRecepcionRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,6 @@ public class RecepcionService {
     public Iterable<Recepcion> findAll() {
         return recepcionDao.findAll();
     }
-
-    
 
     public Recepcion save(Recepcion recepcion) {
 
@@ -94,11 +93,21 @@ public class RecepcionService {
         return recepcionDao.count();
     }
 
+  
 
-    public long countByEstado(TipoEstadoRecepcion estadoRecepcion) {
-        return recepcionDao.countByEstadoRecepcion_TipoEstado(estadoRecepcion);
+    public Recepcion cancelarRecepcion(CancelarRecepcionRequest cancelarRecepcionRequest) {
+        // TODO: AGREGAR MOTIVO EN LA CANCELACION, EL CUAL DEBE VENIR EN EL REQUEST
+
+        Recepcion recepcion = recepcionDao.findById(cancelarRecepcionRequest.getIdRecepcion()).get();
+        TipoEstadoRecepcion tipoEstadoRecepcion = TipoEstadoRecepcion.CANCELADO;
+        Usuario usuario = userService.findById(cancelarRecepcionRequest.getIdUsuario());
+        EstadoRecepcion estadoRecepcion = new EstadoRecepcion(null, usuario, tipoEstadoRecepcion, new Date());
+        recepcion.addEstadoRecepcion(estadoRecepcion);
+        return recepcionDao.save(recepcion);
     }
 
-
+    public Recepcion findById(Long id) {
+        return recepcionDao.findById(id).get();
+    }
 
 }

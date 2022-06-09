@@ -61,4 +61,6 @@ public class ProveedorRestController {
 	public void delete(@PathVariable Long idProv) {
 		provService.delete(idProv);
 	}
+
+	
 }

@@ -5,15 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "pedidos")
@@ -29,8 +21,8 @@ public class Pedido implements Serializable {
 	private Cliente cliente;
 	private String direccion;
 	private double total;
-	private double duracionEstimada;
-	private double duracionFinal;
+	private Date duracionEstimada;
+	private Date duracionFinal;
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Distribuidor distribuidor;
 
@@ -38,11 +30,8 @@ public class Pedido implements Serializable {
 
 	private List<EstadoPedido> estadoPedido;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<PedidoProducto> productos;	
+	private List<PedidoProducto> productos;
 	private Date fechaPedido;
-
-
-
 
 	public Date getFechaPedido() {
 		return fechaPedido;
@@ -88,19 +77,19 @@ public class Pedido implements Serializable {
 		this.total = total;
 	}
 
-	public double getDuracionEstimada() {
+	public Date getDuracionEstimada() {
 		return duracionEstimada;
 	}
 
-	public void setDuracionEstimada(double duracionEstimada) {
+	public void setDuracionEstimada(Date duracionEstimada) {
 		this.duracionEstimada = duracionEstimada;
 	}
 
-	public double getDuracionFinal() {
+	public Date getDuracionFinal() {
 		return duracionFinal;
 	}
 
-	public void setDuracionFinal(double duracionFinal) {
+	public void setDuracionFinal(Date duracionFinal) {
 		this.duracionFinal = duracionFinal;
 	}
 
@@ -132,12 +121,17 @@ public class Pedido implements Serializable {
 		return serialVersionUID;
 	}
 
-	public void add(PedidoProducto producto) {
+	public void addProducto(PedidoProducto producto) {
 		productos.add(producto);
 	}
 
-	public Pedido(Long idPedido, Cliente cliente, String direccion, double total, double duracionEstimada,
-			double duracionFinal, Distribuidor distribuidor, 
+	public void addEstado(EstadoPedido estado) {
+		estadoPedido.add(estado);
+	}
+
+	public Pedido(Long idPedido, Cliente cliente, String direccion, double total,
+			Date duracionEstimada,
+			Date duracionFinal, Distribuidor distribuidor,
 			List<EstadoPedido> estadoPedido, List<PedidoProducto> productos,
 			Date fechaPedido) {
 		this.idPedido = idPedido;
@@ -152,5 +146,4 @@ public class Pedido implements Serializable {
 		this.fechaPedido = fechaPedido;
 	}
 
-	
 }

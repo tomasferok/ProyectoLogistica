@@ -56,4 +56,7 @@ public class ControlarRecepcionRequest {
         this.controlarDiferencias = controlarDiferencias;
     }
 
+    public ControlarRecepcionRequest() {
+    }
+
 }

@@ -14,6 +14,10 @@ public interface ITipoProductoService {
 	
 	public void delete(Long idTipoProd);
 
+	public List<TipoProducto> findByNombre(String nombre);
+
 
 	public List<TipoProducto> findByProvedor_IdProv(Long idProv);
+
+	public TipoProducto findByCodigoDeBarras(Long codigoDeBarras);
 }

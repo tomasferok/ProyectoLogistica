@@ -3,9 +3,13 @@ package com.log.app.controllers;
 import java.util.List;
 import java.util.Map;
 
+import javax.websocket.server.PathParam;
+
 import com.log.app.entidades.Recepcion;
 import com.log.app.entidades.RecepcionProducto;
+import com.log.app.entidades.TipoEstadoRecepcion;
 import com.log.app.exepciones.RecepcionConDiferenciasExeption;
+import com.log.app.helpers.CancelarRecepcionRequest;
 import com.log.app.helpers.ControlarRecepcionRequest;
 import com.log.app.services.RecepcionService;
 
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -52,8 +57,27 @@ public class RecepcionRestController {
 
     }
 
+    @PostMapping("/cancelarRecepcion/")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public Recepcion cancelarRecepcion(
+            @RequestBody CancelarRecepcionRequest cancelarRecepcionRequest) {
+
+        return recepcionService.cancelarRecepcion(cancelarRecepcionRequest);
+
+    }
+
+
+    @GetMapping("/recepcion/{id}")
+    public Recepcion getRecepcion(@PathVariable Long id) {
+        return recepcionService.findById(id);
+    }
+
+
     @ExceptionHandler({ RecepcionConDiferenciasExeption.class })
     public ResponseEntity<Object> loginExeptionHandler(RecepcionConDiferenciasExeption exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+
 }

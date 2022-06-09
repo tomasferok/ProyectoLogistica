@@ -32,7 +32,11 @@ public class TipoProductoServiceImpl implements ITipoProductoService {
 		return tipoProductoDao.findById(idTipoProd).orElse(null);
 	}
 	
-
+	@Override
+	public TipoProducto findByCodigoDeBarras(Long codigoDeBarras) {
+		// TODO Auto-generated method stub
+		return tipoProductoDao.findByCodigoDeBarras(codigoDeBarras);
+	}
 
 	@Override
 	public void delete(Long idTipoProd) {
@@ -43,6 +47,12 @@ public class TipoProductoServiceImpl implements ITipoProductoService {
 	public List<TipoProducto> findByProvedor_IdProv(Long idProv) {
 		// TODO Auto-generated method stub
 		return tipoProductoDao.findByProvedor_IdProv(idProv);
+	}
+
+	@Override
+	public List<TipoProducto> findByNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return tipoProductoDao.findByNombreIgnoreCaseContaining(nombre);
 	}
 
 }
