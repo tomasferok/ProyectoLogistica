@@ -15,4 +15,6 @@ public interface IProveedorService {
 	
 	public void delete(Long idProv);
 
+	public Proveedor findByNombreProvIgnoreCaseContaining(String nombre);
+
 }

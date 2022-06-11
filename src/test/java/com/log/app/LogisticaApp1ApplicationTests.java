@@ -7,8 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class LogisticaApp1ApplicationTests {
 
 	
-	@Test
-	void contextLoads() {
-	}
+	// @Test
+	// void contextLoads() {
+	// }
 
 }

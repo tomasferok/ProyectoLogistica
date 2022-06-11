@@ -6,4 +6,7 @@ import com.log.app.entidades.Proveedor;
 
 public interface IProveedorDao extends CrudRepository<Proveedor, Long>{
 
+    public Proveedor findByNombreProvIgnoreCaseContaining(String nombreProv);
+    
+
 }

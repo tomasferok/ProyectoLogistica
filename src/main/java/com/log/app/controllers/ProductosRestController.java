@@ -30,6 +30,8 @@ public class ProductosRestController {
         return productosService.findAll();
     }
 
+
+
     @GetMapping("/productosDisponibles")
     public Iterable<Producto> getProductosDisponibles() {
         return productosService.findProductosDisponibles();
@@ -39,5 +41,13 @@ public class ProductosRestController {
     public Producto getProducto(@PathVariable Long id) {
         return productosService.findById(id);
     }
+
+
+    @GetMapping("/productos/nombre/{nombre}")
+    public Iterable<Producto> getProductosByNombre(@PathVariable String nombre) {
+        return productosService.findByNombre(nombre);
+    }
+
+    
 
 }

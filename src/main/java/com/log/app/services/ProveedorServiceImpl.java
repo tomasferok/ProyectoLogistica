@@ -13,7 +13,7 @@ public class ProveedorServiceImpl implements IProveedorService {
 
 	@Autowired
 	private IProveedorDao proveedorDao;
-	
+
 	@Override
 	public List<Proveedor> findAll() {
 		// TODO Auto-generated method stub
@@ -23,7 +23,7 @@ public class ProveedorServiceImpl implements IProveedorService {
 	@Override
 	public Proveedor save(Proveedor proveedor) {
 		return proveedorDao.save(proveedor);
-		
+
 	}
 
 	@Override
@@ -36,6 +36,12 @@ public class ProveedorServiceImpl implements IProveedorService {
 	public void delete(Long idProv) {
 
 		proveedorDao.deleteById(idProv);
+	}
+
+	@Override
+	public Proveedor findByNombreProvIgnoreCaseContaining(String nombre) {
+		// TODO Auto-generated method stub
+		return proveedorDao.findByNombreProvIgnoreCaseContaining(nombre);
 	}
 
 }

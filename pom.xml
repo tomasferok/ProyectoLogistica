@@ -7,39 +7,36 @@
 		<version>2.7.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>Logistica-App-1</artifactId>
+	<groupId>com.log</groupId>
+	<artifactId>LogisticaApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Logistica-App-1</name>
+	<name>LogisticaApp</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>8</java.version>
+		<java.version>11</java.version>
 	</properties>
+
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		 <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
-		</dependency>
-		<dependency>
+		</dependency> 
+		 <dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency> 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -53,8 +50,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-			<version>2.6.7</version>
-
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -68,9 +63,6 @@
 			<version>2.0.2-beta</version>
 			<scope>test</scope>
 		</dependency>
-
-
-
 
 
 		<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
@@ -95,25 +87,58 @@
 
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>cloud-gcp</id>
+			 <dependencyManagement>
+				<dependencies>
+					<dependency>
+						<groupId>org.springframework.cloud</groupId>
+						<artifactId>spring-cloud-dependencies</artifactId>
+						<version>2021.0.0</version>
+						<type>pom</type>
+						<scope>import</scope>
+					</dependency>
+				</dependencies>
+			</dependencyManagement> 
+			 <dependencies>
+				<dependency>
+					<groupId>com.google.cloud</groupId>
+					<artifactId>spring-cloud-gcp-starter</artifactId>
+					<version>3.3.0</version>
+				</dependency> 
+			<dependency>
+					<groupId>com.google.cloud</groupId>
+					<artifactId>spring-cloud-gcp-starter-sql-mysql</artifactId>
+					<version>3.3.0</version>
+				</dependency> 
+			 </dependencies> 
+			<build>
+
+				<plugins>
+					<plugin>
+						<groupId>com.google.cloud.tools</groupId>
+						<artifactId>appengine-maven-plugin</artifactId>
+						<version>2.2.0</version>
+						<configuration>
+							<projectId>GCLOUD_CONFIG</projectId>
+							<version>GCLOUD_CONFIG</version>
+						</configuration>
+
+					</plugin>
+				</plugins>
+			</build>
+
+		</profile>
+	</profiles>
 	<build>
-		<pluginManagement>
-
-			<plugins>
-				<plugin>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-maven-plugin</artifactId>
-					<configuration>
-						<systemPropertyVariables>
-							<port>8081</port>
-							<database_url>jdbc:mysql://localhost/db_logistica?serverTimeZone=America/Montevideo</database_url>
-							<database_username>root</database_username>
-							<database_password>root</database_password>
-						</systemPropertyVariables>
-					</configuration>
-				</plugin>
-
-				<!-- jacoco pluging -->
-				<plugin>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!-- jacoco pluging -->
+			<plugin>
 					<groupId>org.jacoco</groupId>
 					<artifactId>jacoco-maven-plugin</artifactId>
 					<version>0.7.7.201606060606</version>
@@ -129,16 +154,18 @@
 
 						</execution>
 					</executions>
-				</plugin>
+				</plugin> 
 
-				<!-- jacoco pluging -->
-				<plugin>
+			<!-- jacoco pluging -->
+			 <plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
 					<version>3.1.2</version>
 					<executions>
 						<execution>
+							
 							<goals>
+
 								<goal>sources</goal>
 								<goal>resolve</goal>
 							</goals>
@@ -147,9 +174,10 @@
 							</configuration>
 						</execution>
 					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+				</plugin> 
+
+
+		</plugins>
 
 	</build>
 

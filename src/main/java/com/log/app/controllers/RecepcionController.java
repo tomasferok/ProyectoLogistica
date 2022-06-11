@@ -3,7 +3,7 @@ package com.log.app.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.log.app.Constants;
+import com.log.app.constants.Constants;
 import com.log.app.entidades.Categoria;
 import com.log.app.entidades.Producto;
 import com.log.app.entidades.Recepcion;

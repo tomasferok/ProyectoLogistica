@@ -1,4 +1,4 @@
-package com.log.app;
+package com.log.app.constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;

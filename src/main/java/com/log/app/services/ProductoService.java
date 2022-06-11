@@ -3,8 +3,11 @@ package com.log.app.services;
 import com.log.app.daos.IProductoDao;
 import com.log.app.entidades.Producto;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 @Service
 public class ProductoService {
 
@@ -61,4 +64,9 @@ public class ProductoService {
         producto.setCantidadReservada(producto.getCantidadReservada() + cantidad);
         productoDao.save(producto);
     }
+
+    public List<Producto> findByNombre(String nombre) {
+        return productoDao.findByTipoProducto_NombreIgnoreCaseContaining(nombre);
+    }
+
 }

@@ -19,6 +19,10 @@ public class JwtUtil {
                 .signWith(io.jsonwebtoken.SignatureAlgorithm.HS512, secretkey).compact();
     }
 
+    public JwtUtil(){
+        
+    }
+
     
    
 
@@ -52,4 +56,6 @@ public class JwtUtil {
         return (email.equals(userDetails.getUsername()) && !isTokenExpired(token));
 
     }
+
+
 }
