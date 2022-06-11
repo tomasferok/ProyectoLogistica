@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Crear Nueva recepcion</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+
+    <div class="container-fluid p-5">
+        <h1>Crear Nueva Recepcion de Mercaderia</h1>
+
+        <div class="col-xs-1-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/recepcion/crear" th:object="${recepcion}" method="POST">
+                        <div class="form-group row">
+                            <div class="form-group m-1">
+                                <label for="producto">Producto</label>
+                                <select class="form-control" id="producto">
+                                        <option th:each="producto : ${productos}" th:value="${producto}"
+                                            th:text="${producto}">
+                                        </option>
+
+                                </select>
+                            </div>
+                            <div class="form-group m-1">
+                                <label for="cantidad">Cantidad</label>
+
+                                <input class="form-control " type="number" placeholder="Cantidad" name="cantidad"
+                                    id="cantidad" /> </div>
+                            <div class="form-group m-1">
+                                <label for="estado">Estado</label>
+                                <select class="form-control" id="estado">
+                                    <option th:each="estado : ${estadosProducto}" th:value="${estado}"
+                                        th:text="${estado}">
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <input class="btn btn-danger m-1 " type="action" value="Agregar">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row"></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row"></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <input class="btn btn-primary" type="submit" value="ACEPTAR">
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
