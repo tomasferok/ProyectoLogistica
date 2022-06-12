@@ -8,8 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "categorias")
+@Data
 public class Categoria implements Serializable{
 	
 	/**
@@ -23,35 +26,6 @@ public class Categoria implements Serializable{
 	
 	private String nombre;
 
-	public Long getIdCat() {
-		return idCat;
-	}
-
-	public void setIdCat(Long idCat) {
-		this.idCat = idCat;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public Categoria(String nombre) {
-		
-		this.nombre = nombre;
-	}
-	
-	public Categoria(String nombre, Long idCat) {
-this.idCat = idCat;
-		this.nombre = nombre;
-	}
 	public Categoria() {
 
 	}

@@ -11,8 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "pedidos_producto")
+@Data
+
 public class PedidoProducto implements Serializable {
 
     @Id
@@ -26,38 +30,4 @@ public class PedidoProducto implements Serializable {
 
     @Column(name = "cantidad")
     Double cantidad;
-
-    public Long getIdPedidoProducto() {
-        return idPedidoProducto;
-    }
-
-    public void setIdPedidoProducto(Long idPedidoProducto) {
-        this.idPedidoProducto = idPedidoProducto;
-    }
-
-    public TipoProducto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(TipoProducto producto) {
-        this.producto = producto;
-    }
-
-    public Double getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Double cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public PedidoProducto(Long idPedidoProducto, TipoProducto producto, Double cantidad) {
-        this.idPedidoProducto = idPedidoProducto;
-        this.producto = producto;
-        this.cantidad = cantidad;
-    }
-
-    public PedidoProducto() {
-    }
-
 }

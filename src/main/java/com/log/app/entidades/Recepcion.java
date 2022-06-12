@@ -17,9 +17,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.Data;
+
 
 @Entity
 @Table(name = "recepciones")
+@Data
+
 public class Recepcion {
 
     @Id
@@ -36,59 +40,6 @@ public class Recepcion {
     @OneToMany(cascade = CascadeType.ALL)
     private List<EstadoRecepcion> estadoRecepcion;
 
-    public Recepcion() {
-    }
-
-    public Recepcion(Date fechaRecepcion, Proveedor provedor, List<RecepcionProducto> productos, List<EstadoRecepcion> estadoRecepcion) {
-        this.fechaRecepcion = fechaRecepcion;
-        this.provedor = provedor;
-        this.productos = productos;
-        this.estadoRecepcion = estadoRecepcion;
-    }
-
-    public Long getIdRecepcion() {
-        return idRecepcion;
-    }
-
-    public void setIdRecepcion(Long idRecepcion) {
-        this.idRecepcion = idRecepcion;
-    }
-
-    public Date getFechaRecepcion() {
-        return fechaRecepcion;
-    }
-
-    public void setFechaRecepcion(Date fechaRecepcion) {
-        this.fechaRecepcion = fechaRecepcion;
-    }
-
-    public Proveedor getProvedor() {
-        return provedor;
-    }
-
-    public void setProvedor(Proveedor provedor) {
-        this.provedor = provedor;
-    }
-
-    public List<RecepcionProducto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<RecepcionProducto> productos) {
-        this.productos = productos;
-    }
-
-    public List<EstadoRecepcion> getEstadoRecepcion() {
-        return estadoRecepcion;
-    }
-
-    public void setEstadoRecepcion(List<EstadoRecepcion> estadoRecepcion) {
-        this.estadoRecepcion = estadoRecepcion;
-    }
 
     
-    public void addEstadoRecepcion(EstadoRecepcion estadoRecepcion) {
-        this.estadoRecepcion.add(estadoRecepcion);
-    }
-
 }

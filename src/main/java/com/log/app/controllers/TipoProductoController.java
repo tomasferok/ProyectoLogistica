@@ -22,15 +22,16 @@ import com.log.app.services.ITipoProductoService;
 public class TipoProductoController {
 	@Autowired
 	private ITipoProductoService tipoProdService;
-	
+
 	@RequestMapping(value = "/listarTipoProd", method = RequestMethod.GET)
 	public String listarCat(Model model) {
 		model.addAttribute("titulo", "Listado de Tipos de Productos");
 		model.addAttribute("tipoProductos", tipoProdService.findAll());
-		
+
 		return "listarTipoProd";
-		
+
 	}
+
 	@RequestMapping(value = "/formTipoProd")
 	public String crearCat(Map<String, Object> model) {
 
@@ -39,12 +40,13 @@ public class TipoProductoController {
 		model.put("titulo", "Formulario de Tipo de Productos");
 		return "formTipoProd";
 	}
-	@RequestMapping(value="/formTipoProd/{idTipoProd}")
-	public String editarSubCat(@PathVariable(value="idTipoProd") Long idTipoProd, Map<String, Object> model) {
-		
+
+	@RequestMapping(value = "/formTipoProd/{idTipoProd}")
+	public String editarSubCat(@PathVariable(value = "idTipoProd") Long idTipoProd, Map<String, Object> model) {
+
 		TipoProducto tipoProd = null;
-		
-		if(idTipoProd > 0) {
+
+		if (idTipoProd > 0) {
 			tipoProd = tipoProdService.findOne(idTipoProd);
 		} else {
 			return "redirect:/listarTipoProd";
@@ -53,22 +55,23 @@ public class TipoProductoController {
 		model.put("titulo", "Editar Tipo de Producto");
 		return "formTipoProd";
 	}
+
 	@RequestMapping(value = "/formTipoProd", method = RequestMethod.POST)
 	public String guardar(@Valid TipoProducto tipoProd, BindingResult result, Model model, SessionStatus status) {
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario de Tipo De Productos");
 			return "formTipoProd";
 		}
-		
+
 		tipoProdService.save(tipoProd);
 		status.setComplete();
 		return "redirect:listarTipoProd";
 	}
-	
-	@RequestMapping(value="/eliminarTipoPord/{idTipoProd}")
-	public String eliminar(@PathVariable(value="idTipoProd") Long idTipoProd) {
-		
-		if(idTipoProd > 0) {
+
+	@RequestMapping(value = "/eliminarTipoPord/{idTipoProd}")
+	public String eliminar(@PathVariable(value = "idTipoProd") Long idTipoProd) {
+
+		if (idTipoProd > 0) {
 			tipoProdService.delete(idTipoProd);
 		}
 		return "redirect:/listarTipoProd";

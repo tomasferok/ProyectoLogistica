@@ -26,7 +26,6 @@ public class TipoProductosRestController {
     @PostMapping("/tipoProductos")
     public List<TipoProducto> obtenerTiposProducto() {
 
-        
         return tipoProductosService.findAll();
     }
 
@@ -57,7 +56,5 @@ public class TipoProductosRestController {
 
         return tipoProductosService.findOne(idProducto);
     }
-
-  
 
 }

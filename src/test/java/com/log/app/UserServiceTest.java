@@ -47,7 +47,7 @@ public class UserServiceTest {
     String testNombre = "test";
     String testApellido = "test";
 
-    @Test
+    @Before
     public void testCreateUser() throws EmailYaExisteExeption {
 
         Usuario usuario = userService.createUser(testEmail, testPassword, testNombre, testApellido);
@@ -67,7 +67,7 @@ public class UserServiceTest {
         assertThat(usuario.getIdUsuario()).isNotNull();
 
     }
-
+@After
     @Test
     public void testDeleteUser() {
        userService.deleteByEmail(testEmail);

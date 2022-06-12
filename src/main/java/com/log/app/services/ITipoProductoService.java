@@ -9,13 +9,12 @@ public interface ITipoProductoService {
 	public List<TipoProducto> findAll();
 
 	public void save(TipoProducto idTipoProd);
-	
+
 	public TipoProducto findOne(Long idTipoProd);
-	
+
 	public void delete(Long idTipoProd);
 
 	public List<TipoProducto> findByNombre(String nombre);
-
 
 	public List<TipoProducto> findByProvedor_IdProv(Long idProv);
 

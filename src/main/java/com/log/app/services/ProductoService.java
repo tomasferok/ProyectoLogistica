@@ -15,6 +15,7 @@ public class ProductoService {
     IProductoDao productoDao;
 
     public Producto saveEmpyProducto(Producto producto) {
+        
         producto.setCantidadDisponible(0);
         producto.setCantidadEnCuarentena(0);
         producto.setCantidadReservada(0);

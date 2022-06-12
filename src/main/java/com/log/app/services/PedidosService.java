@@ -117,7 +117,7 @@ public class PedidosService implements IPedidosService {
         EstadoPedido estadoPedido = new EstadoPedido();
         estadoPedido.setTipoEstadoPedido(tipoEstadoPedido);
         estadoPedido.setUsuario(usuario);
-        pedido.addEstado(estadoPedido);
+        pedido.getEstadoPedido().add(estadoPedido);
         return pedidosDao.save(pedido);
     }
 

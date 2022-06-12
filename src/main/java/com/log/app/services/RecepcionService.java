@@ -84,8 +84,13 @@ public class RecepcionService {
                     productoDao.save(stockProducto);
 
                 });
-        EstadoRecepcion estadoRecepcion = new EstadoRecepcion(null, usuario, tipoEstadoRecepcion, new Date());
-        recepcion.addEstadoRecepcion(estadoRecepcion);
+        EstadoRecepcion estadoRecepcion = new EstadoRecepcion();
+        estadoRecepcion.setFecha(new Date());
+        estadoRecepcion.setTipoEstado(tipoEstadoRecepcion);
+        estadoRecepcion.setUsuario(usuario);
+
+        //TODO: VERIFICAR
+        recepcion.getEstadoRecepcion().add(estadoRecepcion);
         return recepcionDao.save(recepcion);
     }
 
@@ -93,16 +98,14 @@ public class RecepcionService {
         return recepcionDao.count();
     }
 
-  
-
     public Recepcion cancelarRecepcion(CancelarRecepcionRequest cancelarRecepcionRequest) {
         // TODO: AGREGAR MOTIVO EN LA CANCELACION, EL CUAL DEBE VENIR EN EL REQUEST
 
         Recepcion recepcion = recepcionDao.findById(cancelarRecepcionRequest.getIdRecepcion()).get();
         TipoEstadoRecepcion tipoEstadoRecepcion = TipoEstadoRecepcion.CANCELADO;
         Usuario usuario = userService.findById(cancelarRecepcionRequest.getIdUsuario());
-        EstadoRecepcion estadoRecepcion = new EstadoRecepcion(null, usuario, tipoEstadoRecepcion, new Date());
-        recepcion.addEstadoRecepcion(estadoRecepcion);
+        EstadoRecepcion estadoRecepcion = new EstadoRecepcion();
+        recepcion.getEstadoRecepcion().add(estadoRecepcion);
         return recepcionDao.save(recepcion);
     }
 

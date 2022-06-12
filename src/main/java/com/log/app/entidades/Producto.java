@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 /**
  * 
  * Esta clase define la entidad Producto.
@@ -26,6 +28,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "productos")
+@Data
 public class Producto implements Serializable {
 
 	@Id
@@ -34,7 +37,7 @@ public class Producto implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "tipoProd_id")
-	
+
 	private TipoProducto tipoProducto;
 
 	@Column(name = "cantidad_disponible")
@@ -45,65 +48,5 @@ public class Producto implements Serializable {
 	private double cantidadEnCuarentena;
 
 	private static final long serialVersionUID = 1L;
-
-	public Long getIdProd() {
-		return idProd;
-	}
-
-	public void setIdProd(Long idProd) {
-		this.idProd = idProd;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public double getCantidadDisponible() {
-		return cantidadDisponible;
-	}
-
-	public void setCantidadDisponible(double cantidadDisponible) {
-		this.cantidadDisponible = cantidadDisponible;
-	}
-
-	public double getCantidadReservada() {
-		return cantidadReservada;
-	}
-
-	public void setCantidadReservada(double cantidadReservada) {
-		this.cantidadReservada = cantidadReservada;
-	}
-
-	
-
-	public TipoProducto getTipoProducto() {
-		return tipoProducto;
-	}
-
-	public void setTipoProducto(TipoProducto tipoProducto) {
-		this.tipoProducto = tipoProducto;
-	}
-
-	public double getCantidadEnCuarentena() {
-		return cantidadEnCuarentena;
-	}
-
-	public void setCantidadEnCuarentena(double cantidadEnCuarentena) {
-		this.cantidadEnCuarentena = cantidadEnCuarentena;
-	}
-
-	public Producto() {
-	}
-
-	public Producto(Long idProd, TipoProducto tipoProducto, double cantidadDisponible, double cantidadReservada,
-			double cantidadEnCuarentena) {
-		this.idProd = idProd;
-		this.tipoProducto = tipoProducto;
-		this.cantidadDisponible = cantidadDisponible;
-		this.cantidadReservada = cantidadReservada;
-		this.cantidadEnCuarentena = cantidadEnCuarentena;
-	}
-
-	
 
 }

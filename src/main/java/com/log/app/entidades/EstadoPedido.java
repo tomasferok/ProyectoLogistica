@@ -17,8 +17,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "estado_pedido")
+@Data
+
 public class EstadoPedido implements Serializable {
 
 	/**
@@ -44,51 +48,6 @@ public class EstadoPedido implements Serializable {
 	private TipoEstadoPedido tipoEstadoPedido;
 
 	
-	
-	public TipoEstadoPedido getTipoEstadoPedido() {
-		return tipoEstadoPedido;
-	}
-
-	public void setTipoEstadoPedido(TipoEstadoPedido tipoEstadoPedido) {
-		this.tipoEstadoPedido = tipoEstadoPedido;
-	}
-
-	public EstadoPedido() {
-	}
-
-	public Long getIdEstadoPedido() {
-		return idEstadoPedido;
-	}
-
-	public void setIdEstadoPedido(Long idEstadoPedido) {
-		this.idEstadoPedido = idEstadoPedido;
-	}
-
-	
-
-	public Date getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
-
 	
     
 }

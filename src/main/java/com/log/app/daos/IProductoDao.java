@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
-
 public interface IProductoDao extends JpaRepository<Producto, Long> {
 
     List<Producto> findByCantidadDisponibleGreaterThan(double cantidadDisponible);

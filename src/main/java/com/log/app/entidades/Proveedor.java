@@ -8,8 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "proveedores")
+@Data
+
 public class Proveedor implements Serializable {
 
 	/**
@@ -30,49 +34,4 @@ public class Proveedor implements Serializable {
 	public Proveedor() {
 
 	}
-
-	public Proveedor(String nombreProv, String contacto, String email) {
-	
-
-		this.nombreProv = nombreProv;
-		this.contacto = contacto;
-		this.email = email;
-	}
-
-	public Long getIdProv() {
-		return idProv;
-	}
-
-	public void setIdProv(Long idProv) {
-		this.idProv = idProv;
-	}
-
-	public String getNombreProv() {
-		return nombreProv;
-	}
-
-	public void setNombreProv(String nombreProv) {
-		this.nombreProv = nombreProv;
-	}
-
-	public String getContacto() {
-		return contacto;
-	}
-
-	public void setContacto(String contacto) {
-		this.contacto = contacto;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 }

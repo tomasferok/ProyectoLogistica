@@ -12,8 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "pasillos")
+@Data
+
 public class Pasillo implements Serializable {
 
 	/**
@@ -27,30 +31,6 @@ public class Pasillo implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Deposito deposito;
-
-	public Long getIdPasillo() {
-		return idPasillo;
-	}
-
-	public void setIdPasillo(Long idPasillo) {
-		this.idPasillo = idPasillo;
-	}
-
-	public String getNomPasillo() {
-		return nomPasillo;
-	}
-
-	public void setNomPasillo(String nomPasillo) {
-		this.nomPasillo = nomPasillo;
-	}
-
-	public Deposito getDeposito() {
-		return deposito;
-	}
-
-	public void setDeposito(Deposito deposito) {
-		this.deposito = deposito;
-	}
 	
 	
 }
