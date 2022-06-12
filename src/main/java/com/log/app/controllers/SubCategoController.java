@@ -16,7 +16,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 
 import com.log.app.entidades.SubCategoria;
-import com.log.app.services.ISubCategoriaService;
+import com.log.app.services.Interfaces.ISubCategoriaService;
 
 @Controller
 @SessionAttributes("subCategoria")

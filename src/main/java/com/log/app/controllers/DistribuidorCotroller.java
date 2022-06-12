@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.log.app.entidades.Distribuidor;
-import com.log.app.services.IDistribuidorService;
+import com.log.app.services.Interfaces.IDistribuidorService;
 
 @Controller
 @SessionAttributes("distribuidor")

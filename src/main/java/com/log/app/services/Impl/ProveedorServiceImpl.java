@@ -1,4 +1,4 @@
-package com.log.app.services;
+package com.log.app.services.Impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.log.app.daos.IProveedorDao;
 import com.log.app.entidades.Proveedor;
+import com.log.app.services.Interfaces.IProveedorService;
 
 @Service
 public class ProveedorServiceImpl implements IProveedorService {

@@ -1,4 +1,4 @@
-package com.log.app.services;
+package com.log.app.services.Impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.log.app.daos.IDistribuidorDao;
 import com.log.app.entidades.Distribuidor;
+import com.log.app.services.Interfaces.IDistribuidorService;
 
 @Service
 public class DistribuidorServiceImpl implements IDistribuidorService {

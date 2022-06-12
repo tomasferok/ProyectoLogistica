@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.log.app.entidades.TipoProducto;
-import com.log.app.services.ITipoProductoService;
+import com.log.app.services.Interfaces.ITipoProductoService;
 
 @Controller
 @SessionAttributes("tipoProducto")

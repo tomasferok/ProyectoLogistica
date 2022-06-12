@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.log.app.constants.Constants;
 import com.log.app.entidades.SubCategoria;
-import com.log.app.services.ISubCategoriaService;
+import com.log.app.services.Interfaces.ISubCategoriaService;
 
 //@CrossOrigin(origins = { "http://localhost:4200" })
 @RestController

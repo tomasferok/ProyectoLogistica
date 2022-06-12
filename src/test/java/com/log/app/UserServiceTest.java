@@ -29,8 +29,8 @@ import com.log.app.entidades.Usuario;
 import com.log.app.exepciones.EmailYaExisteExeption;
 import com.log.app.exepciones.LoginRequestIncorrectaExeption;
 import com.log.app.helpers.AuthenticationResponse;
-import com.log.app.services.TipoProductoServiceImpl;
-import com.log.app.services.UserService;
+import com.log.app.services.Impl.TipoProductoServiceImpl;
+import com.log.app.services.Impl.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

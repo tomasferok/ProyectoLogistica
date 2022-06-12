@@ -1,4 +1,4 @@
-package com.log.app.services;
+package com.log.app.services.Impl;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -20,12 +20,13 @@ import com.log.app.entidades.Usuario;
 import com.log.app.exepciones.RecepcionConDiferenciasExeption;
 import com.log.app.helpers.CancelarRecepcionRequest;
 import com.log.app.helpers.ControlarRecepcionRequest;
+import com.log.app.services.Interfaces.IRecepcionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RecepcionService {
+public class RecepcionService implements IRecepcionService {
     @Autowired
     IRecepcionDao recepcionDao;
 

@@ -1,4 +1,4 @@
-package com.log.app.services;
+package com.log.app.services.Impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.log.app.daos.ICategoriaDao;
 import com.log.app.entidades.Categoria;
+import com.log.app.services.Interfaces.ICategoriaService;
 
 @Service
 public class CategoriaServiceImpl implements ICategoriaService {

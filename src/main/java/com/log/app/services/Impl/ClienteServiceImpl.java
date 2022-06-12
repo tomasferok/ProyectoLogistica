@@ -1,4 +1,4 @@
-package com.log.app.services;
+package com.log.app.services.Impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.log.app.daos.IClienteDao;
 import com.log.app.entidades.Cliente;
+import com.log.app.services.Interfaces.IClienteService;
 
 @Service
 public class ClienteServiceImpl implements IClienteService{

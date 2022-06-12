@@ -1,4 +1,4 @@
-package com.log.app.services;
+package com.log.app.services.Interfaces;
 
 import java.util.List;
 

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.log.app.constants.Constants;
 import com.log.app.entidades.Proveedor;
-import com.log.app.services.IProveedorService;
+import com.log.app.services.Interfaces.IProveedorService;
 
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController

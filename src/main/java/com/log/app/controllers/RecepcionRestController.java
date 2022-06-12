@@ -11,7 +11,7 @@ import com.log.app.entidades.TipoEstadoRecepcion;
 import com.log.app.exepciones.RecepcionConDiferenciasExeption;
 import com.log.app.helpers.CancelarRecepcionRequest;
 import com.log.app.helpers.ControlarRecepcionRequest;
-import com.log.app.services.RecepcionService;
+import com.log.app.services.Impl.RecepcionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;

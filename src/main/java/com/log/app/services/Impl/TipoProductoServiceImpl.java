@@ -1,4 +1,4 @@
-package com.log.app.services;
+package com.log.app.services.Impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.log.app.daos.ITipoProductoDao;
 import com.log.app.entidades.TipoProducto;
+import com.log.app.services.Interfaces.ITipoProductoService;
 
 @Service
 public class TipoProductoServiceImpl implements ITipoProductoService {

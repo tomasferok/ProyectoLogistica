@@ -1,4 +1,4 @@
-package com.log.app.services;
+package com.log.app.services.Impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import com.log.app.entidades.RecepcionProducto;
+import com.log.app.services.Interfaces.IEtiquetaService;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class EtiquetaService {
+public class EtiquetaService implements IEtiquetaService {
     EtiquetaService() {
 
     }

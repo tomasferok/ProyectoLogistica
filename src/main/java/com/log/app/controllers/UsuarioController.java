@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.log.app.daos.IUsuarioDao;
 import com.log.app.entidades.TipoUsuario;
 import com.log.app.entidades.Usuario;
-import com.log.app.services.UserService;
+import com.log.app.services.Impl.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

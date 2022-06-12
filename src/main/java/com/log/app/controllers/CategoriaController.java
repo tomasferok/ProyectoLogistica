@@ -19,8 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 
 import com.log.app.entidades.Categoria;
-
-import com.log.app.services.ICategoriaService;
+import com.log.app.services.Interfaces.ICategoriaService;
 
 
 

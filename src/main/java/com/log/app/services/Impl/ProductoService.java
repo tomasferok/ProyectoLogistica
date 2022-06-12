@@ -1,15 +1,17 @@
-package com.log.app.services;
+package com.log.app.services.Impl;
 
 import com.log.app.daos.IProductoDao;
 import com.log.app.entidades.Producto;
+import com.log.app.services.Interfaces.IProductoService;
 
 import java.util.List;
 
+import org.codehaus.jettison.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProductoService {
+public class ProductoService implements IProductoService {
 
     @Autowired
     IProductoDao productoDao;
@@ -68,6 +70,36 @@ public class ProductoService {
 
     public List<Producto> findByNombre(String nombre) {
         return productoDao.findByTipoProducto_NombreIgnoreCaseContaining(nombre);
+    }
+
+    @Override
+    public void deleteProducto(Long id) throws Exception {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Producto getStockProductos() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Producto save(String body) throws JSONException, Exception {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Producto updateProducto(Long id, String body) throws Exception {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Producto updateStock(String body) throws JSONException {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

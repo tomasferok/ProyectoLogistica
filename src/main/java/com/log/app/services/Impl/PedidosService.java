@@ -1,4 +1,4 @@
-package com.log.app.services;
+package com.log.app.services.Impl;
 
 import com.log.app.daos.IDistribuidorDao;
 import com.log.app.daos.IPedidoDao;
@@ -8,6 +8,7 @@ import com.log.app.entidades.EstadoPedido;
 import com.log.app.entidades.Pedido;
 import com.log.app.entidades.TipoEstadoPedido;
 import com.log.app.entidades.Usuario;
+import com.log.app.services.Interfaces.IPedidosService;
 
 import java.util.Date;
 import java.util.List;

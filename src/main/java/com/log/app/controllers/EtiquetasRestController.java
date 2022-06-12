@@ -4,8 +4,6 @@ package com.log.app.controllers;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import com.log.app.services.EtiquetaService;
-
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -16,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.log.app.services.Impl.EtiquetaService;
 
 /**
  * EtiquetasRestController

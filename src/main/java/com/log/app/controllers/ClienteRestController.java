@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.log.app.entidades.Cliente;
-import com.log.app.services.IClienteService;
+import com.log.app.services.Interfaces.IClienteService;
 
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController

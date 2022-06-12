@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.log.app.entidades.Proveedor;
-import com.log.app.services.IProveedorService;
+import com.log.app.services.Interfaces.IProveedorService;
 
 @Controller
 @SessionAttributes("proveedor")

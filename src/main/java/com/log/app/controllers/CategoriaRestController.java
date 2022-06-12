@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.log.app.constants.Constants;
 import com.log.app.entidades.Categoria;
-import com.log.app.services.ICategoriaService;
+import com.log.app.services.Interfaces.ICategoriaService;
 
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController

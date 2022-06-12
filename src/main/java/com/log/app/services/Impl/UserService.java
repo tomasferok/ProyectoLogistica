@@ -1,4 +1,4 @@
-package com.log.app.services;
+package com.log.app.services.Impl;
 
 import com.log.app.daos.IUsuarioDao;
 import com.log.app.entidades.TipoUsuario;

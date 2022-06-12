@@ -1,4 +1,4 @@
-package com.log.app.services;
+package com.log.app.services.Impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.log.app.daos.ISubCategoriaDao;
 import com.log.app.entidades.SubCategoria;
+import com.log.app.services.Interfaces.ISubCategoriaService;
 
 @Service
 public class SubCategoriaServiceImpl implements ISubCategoriaService {

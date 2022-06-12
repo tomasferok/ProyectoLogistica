@@ -1,7 +1,7 @@
 package com.log.app.controllers;
 
 import com.log.app.entidades.Pedido;
-import com.log.app.services.PedidosService;
+import com.log.app.services.Impl.PedidosService;
 
 import java.util.Map;
 

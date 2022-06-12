@@ -8,7 +8,7 @@ import com.log.app.entidades.Categoria;
 import com.log.app.entidades.Producto;
 import com.log.app.entidades.Recepcion;
 import com.log.app.entidades.TipoProducto;
-import com.log.app.services.RecepcionService;
+import com.log.app.services.Impl.RecepcionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

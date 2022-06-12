@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.log.app.entidades.Cliente;
-import com.log.app.services.IClienteService;
+import com.log.app.services.Interfaces.IClienteService;
 
 @Controller
 @SessionAttributes("cliente")

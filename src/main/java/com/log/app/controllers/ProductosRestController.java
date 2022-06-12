@@ -1,7 +1,7 @@
 package com.log.app.controllers;
 
 import com.log.app.entidades.Producto;
-import com.log.app.services.ProductoService;
+import com.log.app.services.Impl.ProductoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

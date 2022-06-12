@@ -9,7 +9,7 @@ import com.log.app.exepciones.LoginRequestIncorrectaExeption;
 import com.log.app.helpers.AuthenticationRequest;
 import com.log.app.helpers.AuthenticationResponse;
 import com.log.app.security.JwtUtil;
-import com.log.app.services.UserService;
+import com.log.app.services.Impl.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
