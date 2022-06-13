@@ -2,12 +2,9 @@ package com.log.app.services.Impl;
 
 import com.log.app.daos.IDistribuidorDao;
 import com.log.app.daos.IPedidoDao;
+import com.log.app.daos.IProductoDao;
 import com.log.app.daos.IUsuarioDao;
-import com.log.app.entidades.Distribuidor;
-import com.log.app.entidades.EstadoPedido;
-import com.log.app.entidades.Pedido;
-import com.log.app.entidades.TipoEstadoPedido;
-import com.log.app.entidades.Usuario;
+import com.log.app.entidades.*;
 import com.log.app.services.Interfaces.IPedidosService;
 
 import java.util.Date;
@@ -28,10 +25,20 @@ public class PedidosService implements IPedidosService {
     @Autowired
     private IDistribuidorDao distribuidorDao;
 
+    @Autowired
+    private IProductoDao productoDao;
+
     @Override
     public Pedido save(Pedido pedido) {
 
         try {
+
+            pedido.getProductos().forEach(producto -> {
+            Producto prod = productoDao.findByTipoProducto_idTipoProd(producto.getProducto().getIdTipoProd());
+                prod.setCantidadDisponible(prod.getCantidadDisponible() - producto.getCantidad());
+                prod.setCantidadReservada(prod.getCantidadReservada() + producto.getCantidad());
+                productoDao.save(prod);
+            });
 
             return pedidosDao.save(pedido);
         } catch (
@@ -108,6 +115,20 @@ public class PedidosService implements IPedidosService {
         Date fecha = new Date();
         Date duracionTotal = new Date(fecha.getTime() - pedido.getFechaPedido().getTime());
         pedido.setDuracionFinal(duracionTotal);
+
+
+        //ACTUALIZAMOS EL STOCK DE LOS PRODUCTOS
+        pedido.getProductos().forEach(producto -> {
+            Producto prod = productoDao.findByTipoProducto_idTipoProd(producto.getProducto().getIdTipoProd());
+
+            prod.setCantidadReservada(prod.getCantidadReservada() - producto.getCantidad());
+            productoDao.save(prod);
+        });
+
+
+
+
+
         return cambiarEstadoPedido(pedido, idUsuario, TipoEstadoPedido.ENTREGADO);
 
     }

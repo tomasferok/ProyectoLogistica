@@ -1,8 +1,10 @@
 package com.log.app.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.log.app.constants.Constants;
+import com.log.app.entidades.Producto;
 import com.log.app.entidades.TipoProducto;
 import com.log.app.services.Impl.TipoProductoServiceImpl;
 
@@ -55,6 +57,19 @@ public class TipoProductosRestController {
     public TipoProducto obtenerTipoProductoPorCodigoDeBarras(@PathVariable("codigoDeBarras") Long idProducto) {
 
         return tipoProductosService.findOne(idProducto);
+    }
+
+    @PostMapping("/tipoProductos/search/")
+    public List<TipoProducto> getProductosByNombre(@RequestParam(name = "nombre", required = false) String nombre, @RequestParam(name = "codigoDeBarras", required = false) Integer codigoDeBarras) {
+        List<TipoProducto> productos
+                =  new ArrayList<>();
+        if (nombre != null && !nombre.isEmpty()) {
+            productos.addAll(tipoProductosService.findByNombre(nombre));
+        }
+        if (codigoDeBarras != null) {
+            productos.add(tipoProductosService.findByCodigoDeBarras(codigoDeBarras));
+        }
+        return productos;
     }
 
 }

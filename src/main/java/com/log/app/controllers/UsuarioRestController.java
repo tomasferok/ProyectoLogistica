@@ -70,7 +70,7 @@ public class UsuarioRestController {
     public ResponseEntity<AuthenticationResponse> logearse(
             @RequestBody AuthenticationRequest loginRequest) throws LoginRequestIncorrectaExeption,
             BadCredentialsException {
-        System.out.println(loginRequest);
+
 
         AuthenticationResponse response = userService.authenticateUsuario(loginRequest.getEmail(),
                 loginRequest.getPassword());

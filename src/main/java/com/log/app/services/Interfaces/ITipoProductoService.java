@@ -18,5 +18,5 @@ public interface ITipoProductoService {
 
 	public List<TipoProducto> findByProvedor_IdProv(Long idProv);
 
-	public TipoProducto findByCodigoDeBarras(Long codigoDeBarras);
+	public TipoProducto findByCodigoDeBarras(Integer codigoDeBarras);
 }

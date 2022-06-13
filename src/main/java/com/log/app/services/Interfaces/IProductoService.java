@@ -36,4 +36,7 @@ public interface IProductoService {
     public void updateCantidadEnCuarentena(Long id, int cantidad);
 
     public void updateCantidadDisponible(Long id, int cantidad);
+
+
+    public List<Producto> findByCodigoDeBarras(int codigo);
 }

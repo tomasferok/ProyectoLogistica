@@ -4,13 +4,10 @@ import com.log.app.entidades.Producto;
 import com.log.app.services.Impl.ProductoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -30,7 +27,7 @@ public class ProductosRestController {
         return productosService.findAll();
     }
 
-    @GetMapping("/productosDisponibles")
+    @GetMapping("/productos/disponibles")
     public Iterable<Producto> getProductosDisponibles() {
         return productosService.findProductosDisponibles();
     }
@@ -40,9 +37,19 @@ public class ProductosRestController {
         return productosService.findById(id);
     }
 
-    @GetMapping("/productos/nombre/{nombre}")
-    public Iterable<Producto> getProductosByNombre(@PathVariable String nombre) {
-        return productosService.findByNombre(nombre);
+    @GetMapping("/productos/search/")
+    public List<Producto> getProductosByNombre(@RequestParam(name = "nombre", required = false) String nombre, @RequestParam(name = "codigoDeBarras", required = false) Integer codigoDeBarras) {
+
+
+        List<Producto> productos
+                =  new ArrayList<>();
+        if (nombre != null && !nombre.isEmpty()) {
+            productos.addAll(productosService.findByNombre(nombre));
+        }
+        if (codigoDeBarras != null) {
+            productos.addAll(productosService.findByCodigoDeBarras(codigoDeBarras));
+        }
+        return productos;
     }
 
 }

@@ -2,6 +2,7 @@ package com.log.app.controllers;
 
 import java.util.List;
 
+import com.log.app.services.Impl.ProveedorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,7 +26,7 @@ import com.log.app.services.Interfaces.IProveedorService;
 public class ProveedorRestController {
 
 	@Autowired
-	private IProveedorService provService;
+	private ProveedorServiceImpl provService;
 
 	@GetMapping("/prov")
 	public List<Proveedor> index() {
@@ -40,7 +41,7 @@ public class ProveedorRestController {
 	}
 
 	@GetMapping("/prov/search/nombre/{nombre}")
-	public Proveedor obtenerPorNombre(@PathVariable String nombre) {
+	public  List<Proveedor>  obtenerPorNombre(@PathVariable String nombre) {
 
 		return provService.findByNombreProvIgnoreCaseContaining(nombre);
 	}

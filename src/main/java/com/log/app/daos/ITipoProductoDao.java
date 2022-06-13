@@ -12,6 +12,6 @@ public interface ITipoProductoDao extends CrudRepository<TipoProducto, Long> {
 
     List<TipoProducto> findByNombreIgnoreCaseContaining(String nombre);
 
-    TipoProducto findByCodigoDeBarras(Long codigoDeBarras);
+    TipoProducto findByCodigoDeBarras(Integer codigoDeBarras);
 
 }

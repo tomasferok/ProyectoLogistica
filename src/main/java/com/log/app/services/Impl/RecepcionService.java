@@ -72,7 +72,7 @@ public class RecepcionService implements IRecepcionService {
             throw new RecepcionConDiferenciasExeption(
                     "La recepcion contiene diferencias. Modifica los datos o haz click en aceptar con diferencias");
         }
-
+//ACTUALIZAMOS EL STOCK DE PRODUCTOS
         productosRecibidos.entrySet().forEach(
 
                 (entry) -> {

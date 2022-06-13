@@ -12,4 +12,6 @@ public interface IClienteService {
 	public Cliente findOne(Long idCliente);
 	
 	public void delete(Long idCliente);
+
+	public List<Cliente> findByDocumentoIgnoreCaseContaining(String documento);
 }

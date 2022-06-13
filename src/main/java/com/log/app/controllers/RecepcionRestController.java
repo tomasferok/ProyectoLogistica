@@ -47,7 +47,7 @@ public class RecepcionRestController {
         return recepcionService.findAll();
     }
 
-    @PostMapping("/controlarRecepcion")
+    @PostMapping("/recepcion/controlar")
     @ResponseStatus(HttpStatus.OK)
     public Recepcion controlarRecepcion(
             @RequestBody ControlarRecepcionRequest controlarRecepcionRequest) throws RecepcionConDiferenciasExeption {
@@ -57,7 +57,7 @@ public class RecepcionRestController {
 
     }
 
-    @PostMapping("/cancelarRecepcion/")
+    @PostMapping("/recepcion/cancelar")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Recepcion cancelarRecepcion(

@@ -4,9 +4,11 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.log.app.entidades.Proveedor;
 
+import java.util.List;
+
 public interface IProveedorDao extends CrudRepository<Proveedor, Long>{
 
-    public Proveedor findByNombreProvIgnoreCaseContaining(String nombreProv);
+    public List<Proveedor> findByNombreProvIgnoreCaseContaining(String nombreProv);
     
 
 }

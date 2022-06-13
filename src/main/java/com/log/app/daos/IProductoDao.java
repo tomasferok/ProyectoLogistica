@@ -15,4 +15,8 @@ public interface IProductoDao extends JpaRepository<Producto, Long> {
     Producto findByTipoProducto_idTipoProd(Long idTipoProd);
 
     List<Producto> findByTipoProducto_NombreIgnoreCaseContaining(String nombre);
+
+    List<Producto> findByTipoProducto_CodigoDeBarras(int codigoDeBarras);
+
+
 }

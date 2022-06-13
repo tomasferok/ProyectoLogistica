@@ -71,6 +71,10 @@ public class ProductoService implements IProductoService {
     public List<Producto> findByNombre(String nombre) {
         return productoDao.findByTipoProducto_NombreIgnoreCaseContaining(nombre);
     }
+    public List<Producto> findByCodigoDeBarras(int codigo) {
+        return productoDao.findByTipoProducto_CodigoDeBarras(codigo);
+    }
+
 
     @Override
     public void deleteProducto(Long id) throws Exception {

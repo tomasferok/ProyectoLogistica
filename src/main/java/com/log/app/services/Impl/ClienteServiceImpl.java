@@ -13,28 +13,34 @@ import com.log.app.services.Interfaces.IClienteService;
 public class ClienteServiceImpl implements IClienteService{
 
 	@Autowired
-	IClienteDao clienteService;
+	IClienteDao clienteDao;
 	@Override
 	public List<Cliente> findAll() {
 		// TODO Auto-generated method stub
-		return (List<Cliente>) clienteService.findAll();
+		return (List<Cliente>) clienteDao.findAll();
 	}
 
 	@Override
 	public Cliente save(Cliente cliente) {
 		// TODO Auto-generated method stub
-		return clienteService.save(cliente);
+		return clienteDao.save(cliente);
 	}
 
 	@Override
 	public Cliente findOne(Long idCliente) {
 		// TODO Auto-generated method stub
-		return clienteService.findById(idCliente).orElse(null);
+		return clienteDao.findById(idCliente).orElse(null);
 	}
 
 	@Override
 	public void delete(Long idCliente) {
-		clienteService.deleteById(idCliente);		
+		clienteDao.deleteById(idCliente);
 	}
 
+
+	@Override
+	public List<Cliente> findByDocumentoIgnoreCaseContaining(String documento) {
+		// TODO Auto-generated method stub
+		return clienteDao.findByDocumentoIgnoreCaseContaining(documento);
+	}
 }

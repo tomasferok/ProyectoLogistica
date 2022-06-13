@@ -145,6 +145,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<systemPropertyVariables>
+						<port>8081</port>
+						<database_url>jdbc:mysql://localhost/db_logistica?serverTimeZone=America/Montevideo</database_url>
+						<database_username>root</database_username>
+						<database_password>root</database_password>
+					</systemPropertyVariables>
+				</configuration>
 			</plugin>
 			<!-- jacoco pluging -->
 			<plugin>

@@ -34,7 +34,7 @@ public class TipoProductoServiceImpl implements ITipoProductoService {
 	}
 
 	@Override
-	public TipoProducto findByCodigoDeBarras(Long codigoDeBarras) {
+	public TipoProducto findByCodigoDeBarras(Integer codigoDeBarras) {
 		// TODO Auto-generated method stub
 		return tipoProductoDao.findByCodigoDeBarras(codigoDeBarras);
 	}

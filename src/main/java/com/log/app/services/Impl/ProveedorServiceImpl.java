@@ -40,7 +40,7 @@ public class ProveedorServiceImpl implements IProveedorService {
 	}
 
 	@Override
-	public Proveedor findByNombreProvIgnoreCaseContaining(String nombre) {
+	public   List<Proveedor>  findByNombreProvIgnoreCaseContaining(String nombre) {
 		// TODO Auto-generated method stub
 		return proveedorDao.findByNombreProvIgnoreCaseContaining(nombre);
 	}
