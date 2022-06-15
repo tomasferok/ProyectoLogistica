@@ -27,7 +27,7 @@ public class Pedido implements Serializable {
 	private double total;
 	private Date duracionEstimada;
 	private Date duracionFinal;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Distribuidor distribuidor;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

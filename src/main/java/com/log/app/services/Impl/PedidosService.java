@@ -9,12 +9,14 @@ import com.log.app.services.Interfaces.IPedidosService;
 
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PedidosService implements IPedidosService {
+    Logger logger = Logger.getLogger("PedidosService Logger");
 
     @Autowired
     private IPedidoDao pedidosDao;
@@ -98,6 +100,7 @@ public class PedidosService implements IPedidosService {
     }
 
     public Pedido despacharPedido(Long idPedido, Long idUsuario, Long idUsuarioDistribuidor) {
+logger.info("despacharPedido" + idPedido.toString() + idUsuario.toString() + idUsuarioDistribuidor.toString());
         Pedido pedido = pedidosDao.findById(idPedido).get();
         Distribuidor distribuidor = distribuidorDao.findById(idUsuarioDistribuidor).get();
         pedido.setDistribuidor(distribuidor);

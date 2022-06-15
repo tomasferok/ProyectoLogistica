@@ -27,9 +27,7 @@ public class PedidosRestController {
     @PostMapping("/pedidos")
     @ResponseStatus(HttpStatus.CREATED)
     public Pedido createPedido(@RequestBody Pedido pedido) {
-            return pedidosService.save(pedido);
-
-
+        return pedidosService.save(pedido);
 
     }
 
@@ -51,13 +49,13 @@ public class PedidosRestController {
     public Pedido cancelarPedido(@PathVariable("idPedido") Long idPedido, @PathParam("idUsuario") Long idUsuario) {
         return pedidosService.cancelarPedido(idPedido, idUsuario);
     }
+
     @PutMapping("/pedidos/preparar/{idPedido}")
     @ResponseStatus(HttpStatus.OK)
     public Pedido prepararPedido(@PathVariable("idPedido") Long idPedido,
-                                  @PathParam("idUsuario") Long idUsuario) {
+            @PathParam("idUsuario") Long idUsuario) {
         return pedidosService.prepararPedido(idPedido, idUsuario);
     }
-
 
     @PutMapping("/pedidos/controlar/{idPedido}")
     @ResponseStatus(HttpStatus.OK)
@@ -73,4 +71,10 @@ public class PedidosRestController {
         return pedidosService.despacharPedido(idPedido, idUsuario, idDistribuidor);
     }
 
+    @PutMapping("/pedidos/entregar/{idPedido}")
+    @ResponseStatus(HttpStatus.OK)
+    public Pedido entregarPedido(@PathVariable("idPedido") Long idPedido,
+            @PathParam("idUsuario") Long idUsuario) {
+        return pedidosService.entregarPedido(idPedido, idUsuario);
+    }
 }
