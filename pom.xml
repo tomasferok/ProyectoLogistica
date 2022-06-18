@@ -57,6 +57,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+	
 		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
 		<dependency>
 			<groupId>org.mockito</groupId>
@@ -72,7 +73,11 @@
 			<artifactId>pdfbox</artifactId>
 			<version>2.0.24</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.github.dhorions</groupId>
+			<artifactId>boxable</artifactId>
+			<version>1.6</version>
+		</dependency>
 		<dependency>
 			<groupId>net.sf.barcode4j</groupId>
 			<artifactId>barcode4j</artifactId>
@@ -155,7 +160,7 @@
 				</configuration>
 			</plugin>
 			<!-- jacoco pluging -->
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.7.201606060606</version>
@@ -171,8 +176,8 @@
 
 					</execution>
 				</executions>
-			</plugin>
-
+			</plugin> -->
+				
 			<!-- jacoco pluging -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
