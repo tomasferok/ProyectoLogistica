@@ -19,6 +19,7 @@ import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDTextField;
 import org.krysalis.barcode4j.impl.code128.Code128Bean;
 import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
+import org.springframework.stereotype.Component;
 
 import com.log.app.entidades.Pedido;
 import com.log.app.entidades.PedidoProducto;
@@ -37,6 +38,8 @@ import be.quodlibet.boxable.Row;
  * @version 1.0
  * @since 1.0
  */
+
+@Component
 public class GeneratorEtiquetas {
     public GeneratorEtiquetas() {
 
