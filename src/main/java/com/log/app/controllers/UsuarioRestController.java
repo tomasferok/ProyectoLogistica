@@ -50,8 +50,8 @@ public class UsuarioRestController {
         return usuario;
     }
 
-    @PostMapping("/")
-    public Usuario getUserById(@RequestParam("id") Long id) {
+    @PostMapping("/usuario/")
+    public Usuario getUserById(@RequestParam(name = "id") Long id) {
 
         Usuario usuario = userService.findById(id);
 

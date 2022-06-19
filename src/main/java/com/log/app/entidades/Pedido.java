@@ -25,8 +25,8 @@ public class Pedido implements Serializable {
 	private Cliente cliente;
 	private String direccion;
 	private double total;
-	private Date duracionEstimada;
-	private Date duracionFinal;
+	private Long duracionEstimada;
+	private Long duracionFinal;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Distribuidor distribuidor;
 

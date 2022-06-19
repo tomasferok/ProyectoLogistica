@@ -4,11 +4,16 @@ import com.log.app.daos.IDistribuidorDao;
 import com.log.app.daos.IPedidoDao;
 import com.log.app.daos.IProductoDao;
 import com.log.app.daos.IUsuarioDao;
+import com.log.app.daos.IVentasDao;
 import com.log.app.entidades.*;
 import com.log.app.services.Interfaces.IPedidosService;
+import com.log.app.services.Interfaces.IVentasService;
 
+import java.time.Duration;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +35,16 @@ public class PedidosService implements IPedidosService {
     @Autowired
     private IProductoDao productoDao;
 
+    @Autowired
+    private VentasService ventasService;
+
     @Override
     public Pedido save(Pedido pedido) {
 
         try {
 
             pedido.getProductos().forEach(producto -> {
-            Producto prod = productoDao.findByTipoProducto_idTipoProd(producto.getProducto().getIdTipoProd());
+                Producto prod = productoDao.findByTipoProducto_idTipoProd(producto.getProducto().getIdTipoProd());
                 prod.setCantidadDisponible(prod.getCantidadDisponible() - producto.getCantidad());
                 prod.setCantidadReservada(prod.getCantidadReservada() + producto.getCantidad());
                 productoDao.save(prod);
@@ -100,7 +108,7 @@ public class PedidosService implements IPedidosService {
     }
 
     public Pedido despacharPedido(Long idPedido, Long idUsuario, Long idUsuarioDistribuidor) {
-logger.info("despacharPedido" + idPedido.toString() + idUsuario.toString() + idUsuarioDistribuidor.toString());
+        logger.info("despacharPedido" + idPedido.toString() + idUsuario.toString() + idUsuarioDistribuidor.toString());
         Pedido pedido = pedidosDao.findById(idPedido).get();
         Distribuidor distribuidor = distribuidorDao.findById(idUsuarioDistribuidor).get();
         pedido.setDistribuidor(distribuidor);
@@ -114,23 +122,37 @@ logger.info("despacharPedido" + idPedido.toString() + idUsuario.toString() + idU
 
         // TODO: AGREGAR EXEPCION EN CASO DE QUE YA ESTE CANCELADO U EN UN ESTADO
         // INCONSISTENTE
+
+        // GUARDAMOS LAS VENTAS COMPLETAS EN LA BASE DE DATOS DE MONGO
+        Venta venta = new Venta();
+        venta.setListaProducto(new HashMap<>());
+
         Pedido pedido = pedidosDao.findById(idPedido).get();
         Date fecha = new Date();
-        Date duracionTotal = new Date(fecha.getTime() - pedido.getFechaPedido().getTime());
+        // Duration duration = Duration.between(fecha.getTime(),
+        // pedido.getFechaPedido().getTime());
+        long diffInMillies = Math.abs(fecha.getTime() - pedido.getFechaPedido().getTime());
+        long duracionTotal = TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        System.out.println("DIFERENCIA TOTAL: " + diffInMillies);
+
+        System.out.println("DURACION TOTAL: " + duracionTotal);
+
+        // Date duracionTotal = new Date(fecha.getTime() -
+        // pedido.getFechaPedido().getTime());
         pedido.setDuracionFinal(duracionTotal);
-
-
-        //ACTUALIZAMOS EL STOCK DE LOS PRODUCTOS
+        // ACTUALIZAMOS EL STOCK DE LOS PRODUCTOS Y AGREGAMOS LOS PRODUCTOS A LA VENTA
         pedido.getProductos().forEach(producto -> {
-            Producto prod = productoDao.findByTipoProducto_idTipoProd(producto.getProducto().getIdTipoProd());
+            venta.getListaProducto().put(producto.getProducto().getNombre(), producto.getCantidad());
 
+            Producto prod = productoDao.findByTipoProducto_idTipoProd(producto.getProducto().getIdTipoProd());
             prod.setCantidadReservada(prod.getCantidadReservada() - producto.getCantidad());
             productoDao.save(prod);
         });
 
-
-
-
+        venta.setDuracion(duracionTotal);
+        venta.setFecha(pedido.getFechaPedido());
+        venta.setTotal(pedido.getTotal());
+        ventasService.save(venta);
 
         return cambiarEstadoPedido(pedido, idUsuario, TipoEstadoPedido.ENTREGADO);
 
