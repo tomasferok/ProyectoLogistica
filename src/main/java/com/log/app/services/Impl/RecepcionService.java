@@ -99,13 +99,16 @@ public class RecepcionService implements IRecepcionService {
         return recepcionDao.count();
     }
 
-    public Recepcion cancelarRecepcion(CancelarRecepcionRequest cancelarRecepcionRequest) {
+    public Recepcion cancelarRecepcion(Long idRecepcion,Long idUsuario) {
         // TODO: AGREGAR MOTIVO EN LA CANCELACION, EL CUAL DEBE VENIR EN EL REQUEST
 
-        Recepcion recepcion = recepcionDao.findById(cancelarRecepcionRequest.getIdRecepcion()).get();
+        Recepcion recepcion = recepcionDao.findById(idRecepcion).get();
         TipoEstadoRecepcion tipoEstadoRecepcion = TipoEstadoRecepcion.CANCELADO;
-        Usuario usuario = userService.findById(cancelarRecepcionRequest.getIdUsuario());
+        Usuario usuario = userService.findById(idUsuario);
         EstadoRecepcion estadoRecepcion = new EstadoRecepcion();
+        estadoRecepcion.setFecha(new Date());
+        estadoRecepcion.setTipoEstado(tipoEstadoRecepcion);
+        estadoRecepcion.setUsuario(usuario);
         recepcion.getEstadoRecepcion().add(estadoRecepcion);
         return recepcionDao.save(recepcion);
     }

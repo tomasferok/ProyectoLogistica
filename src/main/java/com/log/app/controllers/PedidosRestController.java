@@ -44,7 +44,7 @@ public class PedidosRestController {
         return pedidosService.findById(id);
     }
 
-    @PutMapping("/pedidos/cancelar/{idPedido}")
+    @PostMapping("/pedidos/cancelar/{idPedido}")
     @ResponseStatus(HttpStatus.OK)
     public Pedido cancelarPedido(@PathVariable("idPedido") Long idPedido, @PathParam("idUsuario") Long idUsuario) {
         return pedidosService.cancelarPedido(idPedido, idUsuario);
@@ -76,5 +76,12 @@ public class PedidosRestController {
     public Pedido entregarPedido(@PathVariable("idPedido") Long idPedido,
             @PathParam("idUsuario") Long idUsuario) {
         return pedidosService.entregarPedido(idPedido, idUsuario);
+    }
+    
+    @PutMapping("/pedidos/devolver/{idPedido}")
+    @ResponseStatus(HttpStatus.OK)
+    public Pedido devolverPedido(@PathVariable("idPedido") Long idPedido,
+            @PathParam("idUsuario") Long idUsuario) {
+        return pedidosService.devolverPedido(idPedido, idUsuario);
     }
 }

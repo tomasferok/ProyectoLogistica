@@ -12,7 +12,7 @@ public interface IRecepcionService {
             ControlarRecepcionRequest controlarRecepcionRequest) throws RecepcionConDiferenciasExeption;
             
     public long count();
-    public Recepcion cancelarRecepcion(CancelarRecepcionRequest cancelarRecepcionRequest);
+    public Recepcion cancelarRecepcion(Long idUsuario, Long idRecepcion );
     
     public Recepcion findById(Long id);
 }

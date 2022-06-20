@@ -82,7 +82,11 @@ public class PedidosService implements IPedidosService {
 
     public Pedido cancelarPedido(Long idPedido, Long idUsuario) {
         Pedido pedido = pedidosDao.findById(idPedido).get();
-
+        pedido.getProductos().forEach(producto -> {
+            Producto prod = productoDao.findByTipoProducto_idTipoProd(producto.getProducto().getIdTipoProd());
+            prod.setCantidadReservada(prod.getCantidadReservada() - producto.getCantidad());
+            productoDao.save(prod);
+        });
         // TODO: AGREGAR EXEPCION EN CASO DE QUE YA ESTE CANCELADO U EN UN ESTADO
         // INCONSISTENTE
         return cambiarEstadoPedido(pedido, idUsuario, TipoEstadoPedido.CANCELADO);
@@ -124,8 +128,8 @@ public class PedidosService implements IPedidosService {
         // INCONSISTENTE
 
         // GUARDAMOS LAS VENTAS COMPLETAS EN LA BASE DE DATOS DE MONGO
-        Venta venta = new Venta();
-        venta.setListaProducto(new HashMap<>());
+        // Venta venta = new Venta();
+        // venta.setListaProducto(new HashMap<>());
 
         Pedido pedido = pedidosDao.findById(idPedido).get();
         Date fecha = new Date();
@@ -142,17 +146,18 @@ public class PedidosService implements IPedidosService {
         pedido.setDuracionFinal(duracionTotal);
         // ACTUALIZAMOS EL STOCK DE LOS PRODUCTOS Y AGREGAMOS LOS PRODUCTOS A LA VENTA
         pedido.getProductos().forEach(producto -> {
-            venta.getListaProducto().put(producto.getProducto().getNombre(), producto.getCantidad());
+            // venta.getListaProducto().put(producto.getProducto().getNombre(),
+            // producto.getCantidad());
 
             Producto prod = productoDao.findByTipoProducto_idTipoProd(producto.getProducto().getIdTipoProd());
             prod.setCantidadReservada(prod.getCantidadReservada() - producto.getCantidad());
             productoDao.save(prod);
         });
 
-        venta.setDuracion(duracionTotal);
-        venta.setFecha(pedido.getFechaPedido());
-        venta.setTotal(pedido.getTotal());
-        ventasService.save(venta);
+        // venta.setDuracion(duracionTotal);
+        // venta.setFecha(pedido.getFechaPedido());
+        // venta.setTotal(pedido.getTotal());
+        // ventasService.save(venta);
 
         return cambiarEstadoPedido(pedido, idUsuario, TipoEstadoPedido.ENTREGADO);
 
@@ -170,6 +175,27 @@ public class PedidosService implements IPedidosService {
 
     public List<Pedido> findByFehaPedidoIsBetween(Date fechaPedidoStart, Date fechaPedidoEnd) {
         return pedidosDao.findByFechaPedidoIsBetween(fechaPedidoStart, fechaPedidoEnd);
+    }
+
+    public Pedido devolverPedido(Long idPedido, Long idUsuario) {
+        Pedido pedido = pedidosDao.findById(idPedido).get();
+        Date fecha = new Date();
+
+        pedido.getProductos().forEach(producto -> {
+            // venta.getListaProducto().put(producto.getProducto().getNombre(),
+            // producto.getCantidad());
+
+            Producto prod = productoDao.findByTipoProducto_idTipoProd(producto.getProducto().getIdTipoProd());
+            prod.setCantidadReservada(prod.getCantidadReservada() + producto.getCantidad());
+            productoDao.save(prod);
+        });
+
+        // venta.setDuracion(duracionTotal);
+        // venta.setFecha(pedido.getFechaPedido());
+        // venta.setTotal(pedido.getTotal());
+        // ventasService.save(venta);
+
+        return cambiarEstadoPedido(pedido, idUsuario, TipoEstadoPedido.DEVUELTO);
     }
 
 }

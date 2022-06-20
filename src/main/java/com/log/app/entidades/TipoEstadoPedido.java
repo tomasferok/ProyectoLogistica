@@ -11,7 +11,8 @@ public enum TipoEstadoPedido {
     CONTROLADO("CONTROLADO"),
     DESPACHADO("DESPACHADO"),
     ENTREGADO("ENTREGADO"),
-    CANCELADO("CANCELADO");
+    CANCELADO("CANCELADO"),
+    DEVUELTO("DEVUELTO");
 
 
     private String tipoEstadoPedido;
