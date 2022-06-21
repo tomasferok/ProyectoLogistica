@@ -60,7 +60,7 @@ public class PedidosService implements IPedidosService {
         }
     }
 
-    public Iterable<Pedido> findAll() {
+    public List<Pedido> findAll() {
         return pedidosDao.findAll();
     }
 

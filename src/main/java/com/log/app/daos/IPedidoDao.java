@@ -15,4 +15,6 @@ public interface IPedidoDao extends CrudRepository<Pedido, Long> {
 
     List<Pedido> findByfechaPedido(Date fecha);
 
+    List<Pedido> findAll();
+
 }

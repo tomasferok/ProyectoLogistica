@@ -6,16 +6,12 @@ import com.log.app.entidades.*;
 import com.log.app.exepciones.RecepcionConDiferenciasExeption;
 import com.log.app.helpers.CancelarRecepcionRequest;
 import com.log.app.helpers.ControlarRecepcionRequest;
-import com.log.app.services.Impl.RecepcionService;
-import com.log.app.services.Impl.UserService;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
@@ -58,7 +54,7 @@ class RecepcionServiceTest {
 
         // RECEPCION
         recepcion.setIdRecepcion(1l);
-        recepcion.setFechaRecepcion(new Date());
+        recepcion.setFechaRecepcion(new java.util.Date());
 
         // REQUEST DE CONTROL DE RECEPCION
         request.setIdRecepcion(1l);

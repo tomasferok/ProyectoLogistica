@@ -33,13 +33,15 @@ public class ClienteServiceImplTest {
         cliente.setIdCliente(1l);
         cliente.setNombre("ClienteTest");
         cliente.setRazonSocial("RazonTest");
-        
+        cliente.setDocumento("documentoTest");
 
         org.mockito.Mockito.when(clienteDao.findById(1l)).thenReturn(Optional.ofNullable(cliente));
         
         org.mockito.Mockito.when(clienteDao.save(cliente)).thenReturn(cliente);
         org.mockito.Mockito.when(clienteDao.findAll()).thenReturn(Arrays.asList(cliente));
-    
+        org.mockito.Mockito.when(clienteDao.findByDocumentoIgnoreCaseContaining(
+                "documentoTest")).thenReturn(Arrays.asList(cliente));
+
     };
 
 
@@ -60,16 +62,24 @@ public class ClienteServiceImplTest {
 
     @Test
     void testFindByDocumentoIgnoreCaseContaining() {
+            
+            assertEquals(1, clienteService.findByDocumentoIgnoreCaseContaining("documentoTest").size());
+    
 
     }
 
     @Test
     void testFindOne() {
 
+        assertEquals(cliente, clienteService.findOne(1l));
+
     }
 
     @Test
     void testSave() {
+
+        assertEquals(cliente, clienteService.save(cliente));
+
 
     }
 }
