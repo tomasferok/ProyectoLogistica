@@ -1,4 +1,4 @@
-package com.log.app.services;
+package com.log.app.services.Impl;
 
 import com.log.app.daos.IProductoDao;
 import com.log.app.daos.IRecepcionDao;
@@ -50,15 +50,17 @@ class RecepcionServiceTest {
 
     private Producto producto = new Producto();
 
+    private Usuario usuario = new Usuario();
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        //RECEPCION
+        // RECEPCION
         recepcion.setIdRecepcion(1l);
         recepcion.setFechaRecepcion(new Date());
 
-//REQUEST DE CONTROL DE RECEPCION
+        // REQUEST DE CONTROL DE RECEPCION
         request.setIdRecepcion(1l);
         Map<Long, Double> map = new HashMap<>();
         map.put(1l, 1d);
@@ -67,8 +69,7 @@ class RecepcionServiceTest {
         request.setControlarDiferencias(true);
         request.setProductosRecibidos(map);
 
-
-        //CREAMOS UN PRODUCTO
+        // CREAMOS UN PRODUCTO
         tipoProducto.setIdTipoProd(1l);
         tipoProducto.setNombre("TipoProducto");
 
@@ -78,27 +79,42 @@ class RecepcionServiceTest {
         producto.setCantidadDisponible(1d);
         producto.setCantidadEnCuarentena(1d);
 
-
-        //LISTA DE PRODUCTOS EN LA RECEPCION
+        // LISTA DE PRODUCTOS EN LA RECEPCION
         recepcionProducto.setIdRecepcionProducto(1l);
         recepcionProducto.setCantidad(1.0);
         recepcionProducto.setProducto(tipoProducto);
         List<RecepcionProducto> list = new ArrayList<>();
         list.add(recepcionProducto);
 
-        //CREAMOS UN ESTADO DE RECEPCION
+        // CREAMOS UN ESTADO DE RECEPCION
         List<EstadoRecepcion> estados = new ArrayList<>();
         EstadoRecepcion estado = new EstadoRecepcion();
         estado.setIdEstadoRecepcion(1l);
         estado.setTipoEstado(TipoEstadoRecepcion.PENDIENTE);
 
-
-//AGREGAMOS LOS DATOS A LA RECEPCION
+        // AGREGAMOS LOS DATOS A LA RECEPCION
         recepcion.setProductos(list);
         recepcion.setEstadoRecepcion(estados);
 
         cancelarRecepcionRequest.setIdRecepcion(1l);
         cancelarRecepcionRequest.setIdUsuario(1l);
+
+        usuario.setIdUsuario(1l);
+        usuario.setNombre("Usuario");
+        usuario.setApellido("Apellido");
+        usuario.setEmail("username@test.com");
+        usuario.setPassword("password");
+
+        // MOCKEAMOS LOS DAOS Y SERVICIOS EXTRAS
+
+        org.mockito.Mockito.when(recepcionDao.findById(1l)).thenReturn(Optional.ofNullable(recepcion));
+        org.mockito.Mockito.when(recepcionDao.findAll()).thenReturn(Arrays.asList(recepcion));
+        org.mockito.Mockito.when(recepcionDao.save(recepcion)).thenReturn(recepcion);
+        org.mockito.Mockito.when(recepcionDao.save(recepcion)).thenReturn(recepcion);
+        org.mockito.Mockito.when(userService.findById(1l)).thenReturn((usuario));
+        org.mockito.Mockito.when(productoDao.findByTipoProducto_idTipoProd(1l)).thenReturn(producto);
+        org.mockito.Mockito.when(recepcionDao.count()).thenReturn(1l);
+
     }
 
     @AfterEach
@@ -107,43 +123,42 @@ class RecepcionServiceTest {
 
     @Test
     void findAll() {
-        org.mockito.Mockito.when(recepcionService.findAll()).thenReturn(Arrays.asList(recepcion));
-        assertNotNull(recepcionService.findAll());
+        assertEquals(Arrays.asList(recepcion), recepcionService.findAll());
     }
 
     @Test
     void save() {
-        org.mockito.Mockito.when(recepcionService.save(recepcion)).thenReturn(recepcion);
         assertNotNull(recepcionService.save(recepcion));
     }
 
     @Test
     void recibirRecepcion() throws RecepcionConDiferenciasExeption {
-        org.mockito.Mockito.when(recepcionDao.findById(1l)).thenReturn(Optional.ofNullable(recepcion));
-        org.mockito.Mockito.when(productoDao.findByTipoProducto_idTipoProd(1l)).thenReturn(producto);
-        org.mockito.Mockito.when(recepcionService.recibirRecepcion(request)).thenReturn(recepcion);
         assertNotNull(recepcionService.recibirRecepcion(request));
+        int ultimoEstado = recepcion.getEstadoRecepcion().size() - 1;
+        assertEquals(TipoEstadoRecepcion.RECIBIDO, recepcion.getEstadoRecepcion().get(ultimoEstado).getTipoEstado());
     }
 
     @Test
     void count() {
-        org.mockito.Mockito.when(recepcionService.count()).thenReturn(1l);
         assertNotNull(recepcionService.count());
+        assertEquals(1l, recepcionService.count());
+
     }
 
     @Test
     void cancelarRecepcion() {
-        org.mockito.Mockito.when(recepcionDao.findById(1l)).thenReturn(Optional.ofNullable(recepcion));
-         org.mockito.Mockito.when(recepcionService.cancelarRecepcion(cancelarRecepcionRequest)).thenReturn(recepcion);
-         assertNotNull(recepcionService.cancelarRecepcion(cancelarRecepcionRequest));
 
+        assertEquals(recepcion, recepcionService.cancelarRecepcion(1l, 1l));
+        int ultimoEstado = recepcion.getEstadoRecepcion().size() - 1;
+        EstadoRecepcion estadoRecepcion = recepcion.getEstadoRecepcion().get(ultimoEstado);
+        assertEquals(TipoEstadoRecepcion.CANCELADO, estadoRecepcion.getTipoEstado());
     }
 
     @Test
     void findById() {
         org.mockito.Mockito.when(recepcionDao.findById(1l)).thenReturn(Optional.ofNullable(recepcion));
 
-         assertNotNull(recepcionService.findById(1l));
+        assertEquals(recepcion, recepcionService.findById(1l));
 
     }
 }
