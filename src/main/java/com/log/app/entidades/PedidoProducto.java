@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -24,10 +26,15 @@ public class PedidoProducto implements Serializable {
     private Long idPedidoProducto;
 
     @ManyToOne()
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false, name = "id_tipo_producto")
 
     private TipoProducto producto;
 
     @Column(name = "cantidad")
     Double cantidad;
+
+    @ManyToOne()
+    @JsonIgnore
+    @JoinColumn( name = "id_pedido")
+    Pedido pedido;
 }

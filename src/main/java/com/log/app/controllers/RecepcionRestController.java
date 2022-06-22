@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.websocket.server.PathParam;
 
+import com.log.app.data.ReporteProductos;
 import com.log.app.entidades.Recepcion;
 import com.log.app.entidades.RecepcionProducto;
 import com.log.app.entidades.TipoEstadoRecepcion;
@@ -68,17 +69,27 @@ public class RecepcionRestController {
 
     }
 
-
     @GetMapping("/recepcion/{id}")
     public Recepcion getRecepcion(@PathVariable Long id) {
         return recepcionService.findById(id);
     }
-
 
     @ExceptionHandler({ RecepcionConDiferenciasExeption.class })
     public ResponseEntity<Object> loginExeptionHandler(RecepcionConDiferenciasExeption exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
+    @GetMapping("/recepcion/reporte/{year}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ReporteProductos> reporteAnual(@PathVariable("year") Integer year) {
+        return recepcionService.reporteProductosPedidosAnual(year);
+    }
+
+    @GetMapping("/recepcion/reporte/{year}/")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ReporteProductos> reporteAnual(@PathVariable("year") Integer year,
+            @RequestParam(name = "idProducto") Long idProducto) {
+        return recepcionService.reporteProductoPedidoAnual(year, idProducto);
+    }
 
 }

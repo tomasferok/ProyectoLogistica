@@ -34,7 +34,7 @@ public class Recepcion {
     @ManyToOne
     private Proveedor provedor;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "recepcion_id_recepcion")
+    @JoinColumn(name = "id_recepcion")
     private List<RecepcionProducto> productos;
 
     @OneToMany(cascade = CascadeType.ALL)

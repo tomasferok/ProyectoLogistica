@@ -34,6 +34,7 @@ public class Pedido implements Serializable {
 
 	private List<EstadoPedido> estadoPedido;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_pedido")
 	private List<PedidoProducto> productos;
 	private Date fechaPedido;
 

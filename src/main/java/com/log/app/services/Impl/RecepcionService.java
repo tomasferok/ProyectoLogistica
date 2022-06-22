@@ -2,6 +2,7 @@ package com.log.app.services.Impl;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 
 import com.log.app.daos.IProductoDao;
 import com.log.app.daos.IRecepcionDao;
+import com.log.app.data.ReporteProductos;
 import com.log.app.entidades.EstadoRecepcion;
 import com.log.app.entidades.Producto;
 import com.log.app.entidades.Recepcion;
@@ -72,7 +74,7 @@ public class RecepcionService implements IRecepcionService {
             throw new RecepcionConDiferenciasExeption(
                     "La recepcion contiene diferencias. Modifica los datos o haz click en aceptar con diferencias");
         }
-//ACTUALIZAMOS EL STOCK DE PRODUCTOS
+        // ACTUALIZAMOS EL STOCK DE PRODUCTOS
         productosRecibidos.entrySet().forEach(
 
                 (entry) -> {
@@ -90,7 +92,7 @@ public class RecepcionService implements IRecepcionService {
         estadoRecepcion.setTipoEstado(tipoEstadoRecepcion);
         estadoRecepcion.setUsuario(usuario);
 
-        //TODO: VERIFICAR
+        // TODO: VERIFICAR
         recepcion.getEstadoRecepcion().add(estadoRecepcion);
         return recepcionDao.save(recepcion);
     }
@@ -99,7 +101,7 @@ public class RecepcionService implements IRecepcionService {
         return recepcionDao.count();
     }
 
-    public Recepcion cancelarRecepcion(Long idRecepcion,Long idUsuario) {
+    public Recepcion cancelarRecepcion(Long idRecepcion, Long idUsuario) {
         // TODO: AGREGAR MOTIVO EN LA CANCELACION, EL CUAL DEBE VENIR EN EL REQUEST
 
         Recepcion recepcion = recepcionDao.findById(idRecepcion).get();
@@ -117,4 +119,26 @@ public class RecepcionService implements IRecepcionService {
         return recepcionDao.findById(id).get();
     }
 
+    public List<ReporteProductos> reporteProductosPedidosAnual(int year) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, 01, 01);
+        Date startDate = calendar.getTime();
+        calendar.set(year, 12, 31);
+        Date endDate = calendar.getTime();
+        List<ReporteProductos> reporteProductos = recepcionDao.sumProductosSolicitadosByMonthBetweenFechas(startDate,
+                endDate);
+        return reporteProductos;
+    }
+
+    public List<ReporteProductos> reporteProductoPedidoAnual(int year, long idProducto) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, 01, 01);
+        Date startDate = calendar.getTime();
+        calendar.set(year, 12, 31);
+        Date endDate = calendar.getTime();
+        List<ReporteProductos> reporteProductos = recepcionDao.sumProductosSolicitadosByMonthBetweenFechasByProducto(
+                startDate,
+                endDate, idProducto);
+        return reporteProductos;
+    }
 }

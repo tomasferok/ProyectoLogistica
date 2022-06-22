@@ -1,8 +1,10 @@
 package com.log.app.controllers;
 
+import com.log.app.data.ReporteProductos;
 import com.log.app.entidades.Pedido;
 import com.log.app.services.Impl.PedidosService;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.websocket.server.PathParam;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -83,5 +86,17 @@ public class PedidosRestController {
     public Pedido devolverPedido(@PathVariable("idPedido") Long idPedido,
             @PathParam("idUsuario") Long idUsuario) {
         return pedidosService.devolverPedido(idPedido, idUsuario);
+    }
+
+    @GetMapping("/pedidos/reporte/{year}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ReporteProductos> reporteAnual(@PathVariable("year") Integer year) {
+        return pedidosService.reporteProductosVendidosAnual(year);
+    }
+
+    @GetMapping("/pedidos/reporte/{year}/")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ReporteProductos> reporteAnualProducto(@PathVariable("year") Integer year, @RequestParam(name = "idProducto") Long idProducto) {
+        return pedidosService.reporteProductoVendidoAnual(year, idProducto);
     }
 }

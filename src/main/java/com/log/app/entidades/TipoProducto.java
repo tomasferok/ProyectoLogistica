@@ -44,7 +44,7 @@ public class TipoProducto implements Serializable {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 
-	@JoinColumn(name = "idProv")
+	@JoinColumn(name = "id_prov")
 	private Proveedor provedor;
 
 }

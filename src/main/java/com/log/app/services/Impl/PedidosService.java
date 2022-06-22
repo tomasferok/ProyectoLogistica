@@ -5,11 +5,13 @@ import com.log.app.daos.IPedidoDao;
 import com.log.app.daos.IProductoDao;
 import com.log.app.daos.IUsuarioDao;
 import com.log.app.daos.IVentasDao;
+import com.log.app.data.ReporteProductos;
 import com.log.app.entidades.*;
 import com.log.app.services.Interfaces.IPedidosService;
 import com.log.app.services.Interfaces.IVentasService;
 
 import java.time.Duration;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -198,4 +200,25 @@ public class PedidosService implements IPedidosService {
         return cambiarEstadoPedido(pedido, idUsuario, TipoEstadoPedido.DEVUELTO);
     }
 
+    public List<ReporteProductos> reporteProductosVendidosAnual(int year) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, 01, 01);
+        Date startDate = calendar.getTime();
+        calendar.set(year, 12, 31);
+        Date endDate = calendar.getTime();
+        List<ReporteProductos> reporteProductos = pedidosDao
+                .sumProductosVendidosByMonthBetweenFechas(startDate, endDate);
+        return reporteProductos;
+    }
+
+    public List<ReporteProductos> reporteProductoVendidoAnual(int year, long idProducto) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, 01, 01);
+        Date startDate = calendar.getTime();
+        calendar.set(year, 12, 31);
+        Date endDate = calendar.getTime();
+        List<ReporteProductos> reporteProductos = pedidosDao
+                .sumProductosVendidosByMonthBetweenFechasByTipoProducto(startDate, endDate, idProducto);
+        return reporteProductos;
+    }
 }

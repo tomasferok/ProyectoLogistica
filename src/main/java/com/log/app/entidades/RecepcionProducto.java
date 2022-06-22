@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,11 +23,16 @@ public class RecepcionProducto {
     private Long idRecepcionProducto;
 
     @ManyToOne()
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false, name = "id_tipo_producto")
 
     private TipoProducto producto;
 
     @Column(name = "cantidad")
     Double cantidad;
+
+    @JoinColumn( name = "id_recepcion")
+    @JsonIgnore
+    @ManyToOne
+    Recepcion recepcion;
 
 }
