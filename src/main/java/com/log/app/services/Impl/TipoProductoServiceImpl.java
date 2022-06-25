@@ -1,12 +1,17 @@
 package com.log.app.services.Impl;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.log.app.daos.ITipoProductoDao;
+import com.log.app.data.ReporteProductos;
 import com.log.app.entidades.TipoProducto;
+import com.log.app.helpers.ReporteProductosMasVendidos;
 import com.log.app.services.Interfaces.ITipoProductoService;
 
 @Service
@@ -54,6 +59,19 @@ public class TipoProductoServiceImpl implements ITipoProductoService {
 	public List<TipoProducto> findByNombre(String nombre) {
 		// TODO Auto-generated method stub
 		return tipoProductoDao.findByNombreIgnoreCaseContaining(nombre);
+	}
+
+
+
+	@Override
+	public List<ReporteProductosMasVendidos> productosMasVendidos(int year) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(year, 01, 01);
+		Date startDate = calendar.getTime();
+		calendar.set(year, 12, 31);
+		Date endDate = calendar.getTime();
+
+		return tipoProductoDao.productosMasVendidos(startDate, endDate);
 	}
 
 }

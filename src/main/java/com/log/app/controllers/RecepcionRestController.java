@@ -15,6 +15,7 @@ import com.log.app.helpers.ControlarRecepcionRequest;
 import com.log.app.services.Impl.RecepcionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,8 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = { "*" })
+
 public class RecepcionRestController {
 
     @Autowired

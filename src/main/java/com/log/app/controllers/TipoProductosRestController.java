@@ -1,11 +1,15 @@
 package com.log.app.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.log.app.constants.Constants;
+import com.log.app.data.ReporteProductos;
 import com.log.app.entidades.Producto;
 import com.log.app.entidades.TipoProducto;
+import com.log.app.helpers.ReporteProductosMasVendidos;
 import com.log.app.services.Impl.TipoProductoServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = { "*" })
 public class TipoProductosRestController {
     @Autowired
     private TipoProductoServiceImpl tipoProductosService;
 
-    @CrossOrigin
     @PostMapping("/tipoProductos")
     public List<TipoProducto> obtenerTiposProducto() {
 
@@ -70,6 +74,14 @@ public class TipoProductosRestController {
             productos.add(tipoProductosService.findByCodigoDeBarras(codigoDeBarras));
         }
         return productos;
+    }
+
+
+    @GetMapping("/tipoProductos/masVendidos/{year}")
+    public List<ReporteProductosMasVendidos> obtenerProductosMasVendidos(@PathVariable(name = "year") int year
+           ) {
+       
+        return tipoProductosService.productosMasVendidos(year);
     }
 
 }

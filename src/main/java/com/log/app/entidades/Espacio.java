@@ -10,8 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -29,9 +33,10 @@ public class Espacio implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEsp;
 	private String nomEspacio;
-	private double capacidad;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Producto> productos;
-	private String estadoProducto;
-
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "espacio")	
+	private List<ProductoEspacio> productos;
+	@ManyToOne()
+	@JoinColumn(name = "id_pasillo")
+	@JsonIgnore
+	private Pasillo pasillo;
 }
