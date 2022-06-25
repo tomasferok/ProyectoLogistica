@@ -20,7 +20,7 @@ import com.log.app.constants.Constants;
 import com.log.app.entidades.Proveedor;
 import com.log.app.services.Interfaces.IProveedorService;
 
-@CrossOrigin(origins = { "http://localhost:4200" })
+@CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api")
 public class ProveedorRestController {

@@ -31,6 +31,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = { "*" })
 public class UsuarioRestController {
     @Autowired
     private UserService userService;
@@ -63,7 +64,7 @@ public class UsuarioRestController {
     public ResponseEntity<AuthenticationResponse> logearse(
             @RequestBody AuthenticationRequest loginRequest) throws LoginRequestIncorrectaExeption,
             BadCredentialsException {
-
+        System.out.println("loginRequest: " + loginRequest.getEmail() + " " + loginRequest.getPassword());
         AuthenticationResponse response = userService.authenticateUsuario(loginRequest.getEmail(),
                 loginRequest.getPassword());
 
