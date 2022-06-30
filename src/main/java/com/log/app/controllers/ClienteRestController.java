@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.log.app.entidades.Cliente;
 import com.log.app.services.Interfaces.IClienteService;
 
-@CrossOrigin(origins = { "http://localhost:4200" })
+@CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api")
 public class ClienteRestController {

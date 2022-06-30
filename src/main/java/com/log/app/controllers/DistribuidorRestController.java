@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.log.app.entidades.Distribuidor;
 import com.log.app.services.Interfaces.IDistribuidorService;
 
-@CrossOrigin(origins = { "http://localhost:4200" })
+@CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api")
 public class DistribuidorRestController {

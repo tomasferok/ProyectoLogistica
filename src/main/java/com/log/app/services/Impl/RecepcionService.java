@@ -43,8 +43,9 @@ public class RecepcionService implements IRecepcionService {
     }
 
     public Recepcion save(Recepcion recepcion) {
-
+        recepcion.setFechaRecepcion(new Date());
         try {
+
             return recepcionDao.save(recepcion);
 
         } catch (Exception e) {

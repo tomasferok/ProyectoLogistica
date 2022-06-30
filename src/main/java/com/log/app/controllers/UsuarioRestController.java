@@ -40,17 +40,29 @@ public class UsuarioRestController {
 
     private JwtUtil jwtUtil;
 
-    @CrossOrigin
-
+    /**
+     * @param email
+     * @param password
+     * @param nombre
+     * @param apellido
+     * @return Usuario
+     * @throws EmailYaExisteExeption
+     * @describe Crea un usuario nuevo en la base de datos, el password se encripta
+     *           con bcrypt
+     */
     @PostMapping("/register")
     public Usuario registrarse(String email, String password, String nombre, String apellido)
             throws EmailYaExisteExeption {
-
+        System.out.println("Password " + password);
         Usuario usuario = userService.createUser(email, password, nombre, apellido);
 
         return usuario;
     }
 
+    /**
+     * @param id
+     * @return Usuario
+     */
     @PostMapping("/usuario/")
     public Usuario getUserById(@RequestParam(name = "id") Long id) {
 
@@ -59,6 +71,10 @@ public class UsuarioRestController {
         return usuario;
     }
 
+    /**
+     * @param logearse(
+     * @return ResponseEntity<AuthenticationResponse>
+     */
     @CrossOrigin
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> logearse(
@@ -73,16 +89,28 @@ public class UsuarioRestController {
 
     }
 
+    /**
+     * @param exception
+     * @return ResponseEntity<Object>
+     */
     @ExceptionHandler({ LoginRequestIncorrectaExeption.class })
     public ResponseEntity<Object> loginExeptionHandler(LoginRequestIncorrectaExeption exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 
+    /**
+     * @param exception
+     * @return ResponseEntity<Object>
+     */
     @ExceptionHandler({ BadCredentialsException.class })
     public ResponseEntity<Object> badCredentialsExceptonHandler(BadCredentialsException exception) {
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 
+    /**
+     * @param exception
+     * @return ResponseEntity<Object>
+     */
     @ExceptionHandler({ EmailYaExisteExeption.class })
     public ResponseEntity<Object> registrationExeptionHandler(EmailYaExisteExeption exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);

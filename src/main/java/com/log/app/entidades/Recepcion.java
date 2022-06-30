@@ -36,10 +36,7 @@ public class Recepcion {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_recepcion")
     private List<RecepcionProducto> productos;
-
     @OneToMany(cascade = CascadeType.ALL)
     private List<EstadoRecepcion> estadoRecepcion;
 
-
-    
 }

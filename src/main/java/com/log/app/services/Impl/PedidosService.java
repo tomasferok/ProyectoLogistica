@@ -1,5 +1,6 @@
 package com.log.app.services.Impl;
 
+import com.log.app.daos.IClienteDao;
 import com.log.app.daos.IDistribuidorDao;
 import com.log.app.daos.IPedidoDao;
 import com.log.app.daos.IProductoDao;
@@ -17,6 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,23 +41,28 @@ public class PedidosService implements IPedidosService {
     private IProductoDao productoDao;
 
     @Autowired
+    private IClienteDao clienteDao;
+
+    @Autowired
     private VentasService ventasService;
 
     @Override
+    @Transactional
     public Pedido save(Pedido pedido) {
-
         try {
-
+            Long idCliente = clienteDao.findByDocumento(pedido.getCliente().getDocumento()).isPresent()
+                    ? clienteDao.findByDocumento(pedido.getCliente().getDocumento()).get().getIdCliente()
+                    : null;
+            pedido.getCliente().setIdCliente(idCliente);
+            clienteDao.save(pedido.getCliente());
             pedido.getProductos().forEach(producto -> {
                 Producto prod = productoDao.findByTipoProducto_idTipoProd(producto.getProducto().getIdTipoProd());
                 prod.setCantidadDisponible(prod.getCantidadDisponible() - producto.getCantidad());
                 prod.setCantidadReservada(prod.getCantidadReservada() + producto.getCantidad());
                 productoDao.save(prod);
             });
-
             return pedidosDao.save(pedido);
         } catch (
-
         Exception e) {
             // TODO: handle exceptio
             System.out.println(e.getMessage());

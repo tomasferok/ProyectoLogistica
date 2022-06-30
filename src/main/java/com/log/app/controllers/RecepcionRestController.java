@@ -40,7 +40,7 @@ public class RecepcionRestController {
     @Autowired
     private RecepcionService recepcionService;
 
-    @PostMapping("/recepcion")
+    @PostMapping("/recepcion/")
     @ResponseStatus(HttpStatus.CREATED)
     public Recepcion createRecepcion(@RequestBody Recepcion recepcion) {
         return recepcionService.save(recepcion);
