@@ -34,12 +34,11 @@ public class Pasillo implements Serializable {
 	private Long idPasillo;
 	private String nomPasillo;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_deposito")
 	@JsonIgnore
 	private Deposito deposito;
 	
-	@OneToMany()
-
+	@OneToMany(mappedBy="pasillo", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Espacio> espacio;
 }

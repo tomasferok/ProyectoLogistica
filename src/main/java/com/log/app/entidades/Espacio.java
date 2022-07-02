@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -33,8 +35,9 @@ public class Espacio implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEsp;
 	private String nomEspacio;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "espacio")	
-	private List<ProductoEspacio> productos;
+	@ManyToMany(fetch = FetchType.EAGER)	
+	@JoinTable(name = "espacios_productos", joinColumns = @JoinColumn(name = "id_tipo_producto"), inverseJoinColumns = @JoinColumn(name = "id_espacio"))
+	private List<TipoProducto> productos;
 	@ManyToOne()
 	@JoinColumn(name = "id_pasillo")
 	@JsonIgnore

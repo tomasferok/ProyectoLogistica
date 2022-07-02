@@ -34,7 +34,7 @@ public class Deposito implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_empresa")
 	private Empresa empresa;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "deposito")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "deposito")
 	private List<Pasillo> pasillos;
 	
 	
