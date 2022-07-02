@@ -27,7 +27,7 @@ pipeline {
 
     stage('Deliver') {
       steps {
-        sh './jenkins/scripts/deliver.sh'
+        sh 'mvn -B -DskipTests clean package -P cloud-gcp'
       }
     }
 
