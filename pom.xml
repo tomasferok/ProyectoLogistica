@@ -13,7 +13,7 @@
 	<name>LogisticaApp</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
@@ -159,6 +159,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<systemPropertyVariables>
+						<profile>dev</profile>
 						<port>8081</port>
 						<database_url>jdbc:mysql://localhost/db_logistica?serverTimeZone=America/Montevideo</database_url>
 						<database_username>root</database_username>
