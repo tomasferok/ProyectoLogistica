@@ -3,10 +3,11 @@ pipeline {
         node {
             label 'ubuntu-2004'
         }
-        tools {
+       
+    }
+     tools {
             maven 'maven'
         }
-    }
     stages {
         stage('Build') {
             steps {

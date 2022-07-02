@@ -109,6 +109,8 @@ class RecepcionServiceTest {
         org.mockito.Mockito.when(recepcionDao.save(recepcion)).thenReturn(recepcion);
         org.mockito.Mockito.when(userService.findById(1l)).thenReturn((usuario));
         org.mockito.Mockito.when(productoDao.findByTipoProducto_idTipoProd(1l)).thenReturn(producto);
+      
+      
         org.mockito.Mockito.when(recepcionDao.count()).thenReturn(1l);
 
     }
