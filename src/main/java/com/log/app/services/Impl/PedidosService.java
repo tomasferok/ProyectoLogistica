@@ -5,11 +5,10 @@ import com.log.app.daos.IDistribuidorDao;
 import com.log.app.daos.IPedidoDao;
 import com.log.app.daos.IProductoDao;
 import com.log.app.daos.IUsuarioDao;
-import com.log.app.daos.IVentasDao;
+
 import com.log.app.data.ReporteProductos;
 import com.log.app.entidades.*;
 import com.log.app.services.Interfaces.IPedidosService;
-import com.log.app.services.Interfaces.IVentasService;
 
 import java.time.Duration;
 import java.util.Calendar;
@@ -43,8 +42,8 @@ public class PedidosService implements IPedidosService {
     @Autowired
     private IClienteDao clienteDao;
 
-    @Autowired
-    private VentasService ventasService;
+    // @Autowired
+    // private VentasService ventasService;
 
     @Override
     @Transactional
