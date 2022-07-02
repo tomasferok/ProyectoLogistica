@@ -9,7 +9,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'mvn -B -DskipTests clean package'
-        fingerprint '/tmp/workspace/ectoLogistica_feature_despliegue/src/target/**.jar'
+        googleStorageUpload(pattern: '/tmp/workspace/ectoLogistica_feature_despliegue/src/target/**.jar', bucket: 'clawtech-logistica-proyecto-jenkins-artifacts', credentialsId: 'gcloud')
       }
     }
 
