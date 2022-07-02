@@ -1,13 +1,16 @@
 pipeline {
     agent {
-       node {
-        label 'ubuntu-2004'
-    }
+        node {
+            label 'ubuntu-2004'
+        }
+        tools {
+            maven 'maven'
+        }
     }
     stages {
-        stage('Build') { 
+        stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package -P cloud-gcp' 
+                sh 'mvn -B -DskipTests clean package -P cloud-gcp'
             }
         }
     }
