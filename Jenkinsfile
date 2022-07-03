@@ -8,7 +8,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
-                googleStorageUpload(pattern: '/tmp/workspace/ectoLogistica_feature_despliegue/target/LogisticaApp-0.0.1-SNAPSHOT.jar', bucket: 'gs://clawtech-logistica-proyecto-jenkins-artifacts/$JOB_NAME/$BUILD_NUMBER', credentialsId: 'gcloud')
+                googleStorageUpload(pattern: '/tmp/workspace/ectoLogistica_feature_despliegue/target/LogisticaApp-0.0.1-SNAPSHOT.jar', bucket: 'gs://clawtech-logistica-proyecto-jenkins-artifacts/springboot/$JOB_NAME/$BUILD_NUMBER', credentialsId: 'gcloud')
             }
         }
 
