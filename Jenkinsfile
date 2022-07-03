@@ -1,4 +1,5 @@
 pipeline {
+
     agent {
         node {
             label 'ubuntu-2004'
@@ -29,7 +30,8 @@ pipeline {
             }
         }
     }
-    tools {
-        maven 'maven'
-    }
+   
+  tools {
+    maven 'maven'
+  }
 }
