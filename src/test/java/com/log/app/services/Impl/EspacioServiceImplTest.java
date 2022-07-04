@@ -18,7 +18,7 @@ import com.log.app.entidades.Deposito;
 import com.log.app.entidades.Espacio;
 import com.log.app.entidades.Pasillo;
 
-public class DepositoServiceTest {
+public class EspacioServiceImplTest {
 
     @Mock
     IDepositoDao depositoDao;
@@ -28,7 +28,7 @@ public class DepositoServiceTest {
     @Mock
     IEspacioDao espacioDao;
     @InjectMocks
-    private DepositoService depositoService;
+    private EspacioServiceImpl espacioServiceImpl;
 
     Deposito deposito = new Deposito();
 
@@ -39,72 +39,73 @@ public class DepositoServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        //GENERAMOS DATOS DEL DEPOSITO
+        // GENERAMOS DATOS DEL DEPOSITO
         deposito.setIdDeposito(1l);
         deposito.setNomDeposito("DepositoTest");
         deposito.setDireccion("Direccion test");
 
-
-        //GENERAMOS DATOS DEL PASILLO
+        // GENERAMOS DATOS DEL PASILLO
         pasillo.setIdPasillo(1l);
         pasillo.setNomPasillo("PasilloTest");
         pasillo.setDeposito(deposito);
-        //GENERAMOS DATOS DEL ESPACIO
+        
+        // GENERAMOS DATOS DEL ESPACIO
         espacio.setIdEsp(1l);
         espacio.setNomEspacio("EspacioTest");
         espacio.setPasillo(pasillo);
-        //GENERAMOS LISTA DE ESPACIOS
+        // GENERAMOS LISTA DE ESPACIOS
         pasillo.setEspacio(Arrays.asList(espacio));
-        //GENERAMOS LISTA DE PASILLOS
+        // GENERAMOS LISTA DE PASILLOS
         deposito.setPasillos(Arrays.asList(pasillo));
-        
-        //MOCKEAMOS DEPOSITO DAO
+
+        // MOCKEAMOS DEPOSITO DAO
         org.mockito.Mockito.when(depositoDao.findById(1l)).thenReturn(Optional.ofNullable(deposito));
         org.mockito.Mockito.when(depositoDao.save(deposito)).thenReturn(deposito);
         org.mockito.Mockito.when(depositoDao.findAll()).thenReturn(Arrays.asList(deposito));
 
-        //MOCKEAMOS PASILLO DAO
+        // MOCKEAMOS PASILLO DAO
 
         org.mockito.Mockito.when(pasilloDao.findById(1l)).thenReturn(Optional.ofNullable(pasillo));
         org.mockito.Mockito.when(pasilloDao.save(pasillo)).thenReturn(pasillo);
 
-        //MOCKEAMOS ESPACIO DAO
+        // MOCKEAMOS ESPACIO DAO
         org.mockito.Mockito.when(espacioDao.save(espacio)).thenReturn(espacio);
-    }
-
-
-
-    @Test
-    void testCreateDeposito() {
-        depositoService.createDeposito(deposito);
-        org.mockito.Mockito.verify(depositoDao, org.mockito.Mockito.times(1)).save(deposito);
-        assertEquals(deposito, depositoService.createDeposito(deposito));
-        
-    }
-
-    @Test
-    void testDeleteDeposito() {
-        depositoService.deleteDeposito(1l);
-        org.mockito.Mockito.verify(depositoDao, org.mockito.Mockito.times(1)).deleteById(1l);
 
     }
 
     @Test
-    void testGetAllDepositos() {
-        assertEquals(1, depositoService.getAllDepositos().size());
+    void testDelete() {
+        espacioServiceImpl.delete(espacio.getIdEsp());
+        org.mockito.Mockito.verify(espacioDao, org.mockito.Mockito.times(1)).deleteById(espacio.getIdEsp());
+
     }
 
     @Test
-    void testGetDepositoById() {
+    void testFindAll() {
 
-        assertEquals(deposito, depositoService.getDepositoById(1l));
+        org.mockito.Mockito.when(espacioDao.findAll()).thenReturn(Arrays.asList(espacio));
+        espacioServiceImpl.findAll();
+        org.mockito.Mockito.verify(espacioDao, org.mockito.Mockito.times(1)).findAll();
     }
 
     @Test
-    void testUpdateDeposito() {
-        deposito.setIdDeposito(2l);
-        assertEquals(deposito, depositoService.updateDeposito(deposito));
-        assertEquals(2l, depositoService.updateDeposito(deposito).getIdDeposito());
-
+    void testFindById() {
+        org.mockito.Mockito.when(espacioDao.findById(1l)).thenReturn(Optional.ofNullable(espacio));
+        espacioServiceImpl.findById(1l);
+        org.mockito.Mockito.verify(espacioDao, org.mockito.Mockito.times(1)).findById(1l);
     }
+
+    @Test
+    void testSave() {
+        espacioServiceImpl.save(espacio);
+        org.mockito.Mockito.verify(espacioDao, org.mockito.Mockito.times(1)).save(espacio);
+    }
+
+    // @Test
+    // void testUpdate() {
+    //     espacio.setIdEsp(2l);
+    //     espacioServiceImpl.update(espacio);
+    //     assertEquals(espacioServiceImpl.update(espacio).getIdEsp(), 2l);
+    //     org.mockito.Mockito.verify(espacioDao, org.mockito.Mockito.times(1)).save(espacio);
+    // }
 }
