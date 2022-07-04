@@ -148,7 +148,7 @@ public class RecepcionRestController {
      * @param recepcion
      * @return Recepcion
      */
-    @PutMapping
+    @PutMapping("/recepcion/")
     public Recepcion updateRecepcion(@RequestBody Recepcion recepcion) {
         return recepcionService.save(recepcion);
     }
@@ -156,7 +156,7 @@ public class RecepcionRestController {
     /** 
      * @param id
      */
-    @DeleteMapping
+    @DeleteMapping("/recepcion/")
     public void deleteRecepcion(@RequestBody Recepcion recepcion) {
         recepcionService.delete(recepcion);
     }   
