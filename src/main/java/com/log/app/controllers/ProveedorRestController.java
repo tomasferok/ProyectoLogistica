@@ -20,6 +20,14 @@ import com.log.app.constants.Constants;
 import com.log.app.entidades.Proveedor;
 import com.log.app.services.Interfaces.IProveedorService;
 
+/**
+ * Controlador Rest para la clase Provedor
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 @CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api")
@@ -28,24 +36,43 @@ public class ProveedorRestController {
 	@Autowired
 	private ProveedorServiceImpl provService;
 
+	
+	/** 
+	 * @return List<Proveedor>
+	 */
 	@GetMapping("/prov")
 	public List<Proveedor> index() {
 
 		return provService.findAll();
 	}
 
+	
+	/** 
+	 * @param idProv
+	 * @return Proveedor
+	 */
 	@GetMapping("/prov/{idProv}")
 	public Proveedor show(@PathVariable Long idProv) {
 
 		return provService.findOne(idProv);
 	}
 
+	
+	/** 
+	 * @param nombre
+	 * @return List<Proveedor>
+	 */
 	@GetMapping("/prov/search/nombre/{nombre}")
 	public  List<Proveedor>  obtenerPorNombre(@PathVariable String nombre) {
 
 		return provService.findByNombreProvIgnoreCaseContaining(nombre);
 	}
 
+	
+	/** 
+	 * @param prov
+	 * @return Proveedor
+	 */
 	@PostMapping("/prov")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Proveedor create(@RequestBody Proveedor prov) {
@@ -53,6 +80,12 @@ public class ProveedorRestController {
 
 	}
 
+	
+	/** 
+	 * @param prov
+	 * @param idProv
+	 * @return Proveedor
+	 */
 	@PutMapping("/prov/{idProv}")
 	public Proveedor update(@RequestBody Proveedor prov, @PathVariable Long idProv) {
 		Proveedor provActual = provService.findOne(idProv);
@@ -64,6 +97,10 @@ public class ProveedorRestController {
 		return provService.save(provActual);
 	}
 
+	
+	/** 
+	 * @param idProv
+	 */
 	@DeleteMapping("/prov/{idProv}")
 	public void delete(@PathVariable Long idProv) {
 		provService.delete(idProv);

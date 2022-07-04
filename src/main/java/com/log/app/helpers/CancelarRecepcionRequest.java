@@ -1,6 +1,14 @@
 
 package com.log.app.helpers;
 
+/**
+ * Clase representativa de un cancelar recepcion request
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 public class CancelarRecepcionRequest {
     
     private Long idRecepcion;

@@ -19,28 +19,56 @@ import com.log.app.constants.Constants;
 import com.log.app.entidades.SubCategoria;
 import com.log.app.services.Interfaces.ISubCategoriaService;
 
+/**
+ * Controlador Rest para la clase Sub Categoria
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 //@CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
 public class SubCategoriaRestController {
 	@Autowired
 	private ISubCategoriaService subCatService;
+	/** 
+	 * @return List<SubCategoria>
+	 */
+	
 
 	@GetMapping("/subCat")
 	public List<SubCategoria> index() {
 		return subCatService.findAll();
 	}
+	/** 
+	 * @param idSubCat
+	 * @return SubCategoria
+	 */
+	
 
 	@GetMapping("/SubCat/{idSubCat}")
 	public SubCategoria show(@PathVariable Long idSubCat) {
 
 		return subCatService.findOne(idSubCat);
 	}
+	/** 
+	 * @param subCat
+	 * @return SubCategoria
+	 */
+	
 
 	@PostMapping("/subCat")
 	@ResponseStatus(HttpStatus.CREATED)
 	public SubCategoria create(@RequestBody SubCategoria subCat) {
 		return subCatService.save(subCat);
+		
+		/** 
+		 * @param subCat
+		 * @param idSubCat
+		 * @return SubCategoria
+		 */
 		
 }
 	@PutMapping("/subCat/{idSubCat}")
@@ -51,6 +79,10 @@ public class SubCategoriaRestController {
 		
 		return subCatService.save(subCatActual);
 	}
+	/** 
+	 * @param idSubCat
+	 */
+	
 	
 	@DeleteMapping("/subCat/{idSubCat}")
 	public void delete(@PathVariable Long idSubCat) {

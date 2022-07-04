@@ -19,7 +19,14 @@ import javax.persistence.TemporalType;
 
 import lombok.Data;
 
-
+/**
+ * Entidad Recepcion
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 @Entity
 @Table(name = "recepciones")
 @Data

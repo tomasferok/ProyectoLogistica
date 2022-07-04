@@ -15,10 +15,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.log.app.daos.IClienteDao;
 import com.log.app.daos.IDistribuidorDao;
 import com.log.app.daos.IPedidoDao;
 import com.log.app.daos.IProductoDao;
 import com.log.app.daos.IUsuarioDao;
+import com.log.app.entidades.Cliente;
 import com.log.app.entidades.Distribuidor;
 import com.log.app.entidades.EstadoPedido;
 import com.log.app.entidades.Pedido;
@@ -41,6 +43,9 @@ public class PedidosServiceTest {
     @Mock
     IDistribuidorDao distribuidorDao;
 
+    @Mock
+    IClienteDao clienteDao;
+
     @InjectMocks
     private PedidosService pedidoService;
 
@@ -53,6 +58,8 @@ public class PedidosServiceTest {
     private Producto producto = new Producto();
 
     private Usuario usuario = new Usuario();
+
+    private Cliente cliente = new Cliente();
 
     private Distribuidor distribuidor = new Distribuidor();
 
@@ -101,6 +108,12 @@ public class PedidosServiceTest {
         distribuidor.setIdDistribu(1l);
         distribuidor.setChofer("Distribuidor");
 
+        // AGREGAMOS DATOS DEL CLIENTE
+
+        cliente.setIdCliente(1l);
+        cliente.setNombre("Cliente");
+        cliente.setDocumento("1");
+        pedido.setCliente(cliente);
         // MOCKEAMOS LOS DAOS Y SERVICIOS EXTRAS
 
         org.mockito.Mockito.when(pedidoDao.findById(1l)).thenReturn(Optional.ofNullable(pedido));
@@ -119,6 +132,9 @@ public class PedidosServiceTest {
         org.mockito.Mockito.when(productoDao.findByTipoProducto_idTipoProd(1l)).thenReturn(producto);
         org.mockito.Mockito.when(pedidoDao.count()).thenReturn(1l);
         org.mockito.Mockito.when(distribuidorDao.findById(1l)).thenReturn(Optional.ofNullable(distribuidor));
+
+        org.mockito.Mockito.when(clienteDao.findByDocumento("1")).thenReturn(Optional.ofNullable(cliente));
+        org.mockito.Mockito.when(clienteDao.save(cliente)).thenReturn(cliente);
 
     }
 

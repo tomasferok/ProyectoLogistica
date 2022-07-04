@@ -1,8 +1,7 @@
 package com.log.app.controllers;
 
-import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
 
+import javax.validation.ValidationException;
 import com.log.app.entidades.Usuario;
 import com.log.app.exepciones.EmailYaExisteExeption;
 import com.log.app.exepciones.LoginRequestIncorrectaExeption;
@@ -10,25 +9,28 @@ import com.log.app.helpers.AuthenticationRequest;
 import com.log.app.helpers.AuthenticationResponse;
 import com.log.app.security.JwtUtil;
 import com.log.app.services.Impl.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+
+/**
+ * Controlador Rest para la clase Usuario
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = { "*" })
@@ -37,7 +39,6 @@ public class UsuarioRestController {
     private UserService userService;
 
     @Autowired
-
     private JwtUtil jwtUtil;
 
     /**
@@ -90,6 +91,35 @@ public class UsuarioRestController {
     }
 
     /**
+     * @param 
+     * @return List<Usuario>
+     * @describe Obtiene todos los usuarios de la base de datos
+     */
+
+    @GetMapping("/usuario/")
+    public List<Usuario> getAllUsers() {
+        return userService.findAll();
+    }
+
+    /**
+     * @param id
+     * @return void
+     * @describe Elimina un usuario de la base de datos
+     */
+    @DeleteMapping("/usuario/")
+    public void deleteUser(@RequestParam(name = "id") Long id) {
+        userService.deleteUser(id);
+    }
+
+
+    /**
+     * @param exception
+     * @return ResponseEntity<Object>
+     * @describe Maneja las excepciones de la clase UsuarioService
+     */
+     */
+    
+    /** 
      * @param exception
      * @return ResponseEntity<Object>
      */
@@ -101,6 +131,13 @@ public class UsuarioRestController {
     /**
      * @param exception
      * @return ResponseEntity<Object>
+     * @describe Maneja las excepciones de la clase UsuarioService
+     */
+     */
+    
+    /** 
+     * @param exception
+     * @return ResponseEntity<Object>
      */
     @ExceptionHandler({ BadCredentialsException.class })
     public ResponseEntity<Object> badCredentialsExceptonHandler(BadCredentialsException exception) {
@@ -108,6 +145,12 @@ public class UsuarioRestController {
     }
 
     /**
+     * @param exception
+     * @return ResponseEntity<Object>
+     * @describe Maneja las excepciones de la clase UsuarioService
+     */
+    
+    /** 
      * @param exception
      * @return ResponseEntity<Object>
      */

@@ -15,6 +15,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.log.app.services.Impl.UserService;
 
+/**
+ * Clase de configuracion para seguridad mediante tokens
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {

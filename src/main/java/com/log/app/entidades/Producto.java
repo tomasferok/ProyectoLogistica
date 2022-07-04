@@ -19,11 +19,12 @@ import lombok.Data;
  * 
  * Esta clase define la entidad Producto.
  * La misma guarda la cantidad y estado de los productos en el stock
- * 
- * @author: ClawTech Team
- * 
- * 
- * 
+
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ *
  */
 
 @Entity

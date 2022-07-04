@@ -1,5 +1,13 @@
 package com.log.app.helpers;
 
+/**
+ * Clase representativa de un request de autenticacion
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 public class AuthenticationRequest {
     private String email;
     private String password;

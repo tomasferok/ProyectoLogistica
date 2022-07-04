@@ -18,6 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.log.app.entidades.Distribuidor;
 import com.log.app.services.Interfaces.IDistribuidorService;
 
+
+/**
+ * Controlador Rest para la clase Distribuidor
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 @CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api")
@@ -25,11 +34,20 @@ public class DistribuidorRestController {
 	@Autowired
 	private IDistribuidorService distService;
 
+/** 
+ * @return List<Distribuidor>
+ */
+
 	@GetMapping("/dist")
 	public List<Distribuidor> index() {
 
 		return distService.findAll();
 	}
+
+/** 
+ * @param idDistribu
+ * @return Distribuidor
+ */
 
 	@GetMapping("/dist/{idDistribu}")
 	public Distribuidor show(@PathVariable Long idDistribu) {
@@ -37,12 +55,23 @@ public class DistribuidorRestController {
 		return distService.findOne(idDistribu);
 	}
 
+/** 
+ * @param dist
+ * @return Distribuidor
+ */
+
 	@PostMapping("/dist")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Distribuidor create(@RequestBody Distribuidor dist) {
 		return distService.save(dist);
 		
 }
+/** 
+ * @param dist
+ * @param idDistribu
+ * @return Distribuidor
+ */
+
 	@PutMapping("/dist/{idDistribu}")
 	public Distribuidor update(@RequestBody Distribuidor dist, @PathVariable Long idDistribu) {
 		Distribuidor distActual= distService.findOne(idDistribu);
@@ -54,6 +83,10 @@ public class DistribuidorRestController {
 		
 		return distService.save(distActual);
 	}
+	
+	/** 
+	 * @param idDistribu
+	 */
 	
 	@DeleteMapping("/dist/{idDistribu}")
 	public void delete(@PathVariable Long idDistribu) {

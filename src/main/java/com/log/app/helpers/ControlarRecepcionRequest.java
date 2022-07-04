@@ -3,9 +3,13 @@ package com.log.app.helpers;
 import java.util.Map;
 
 /*
- *Esta clase representa los parametros solicitados para controlar una recepcion
  */
-
+ *Esta clase representa los parametros solicitados para controlar una recepcion
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 
 
 public class ControlarRecepcionRequest {
