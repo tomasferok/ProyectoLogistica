@@ -157,8 +157,8 @@ public class RecepcionRestController {
      * @param id
      */
     @DeleteMapping
-    public void deleteRecepcion(@PathVariable Long id) {
-        recepcionService.delete(id);
+    public void deleteRecepcion(@RequestBody Recepcion recepcion) {
+        recepcionService.delete(recepcion);
     }   
 
 }

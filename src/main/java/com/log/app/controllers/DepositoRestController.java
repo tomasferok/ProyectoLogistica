@@ -36,7 +36,7 @@ public class DepositoRestController {
     /** 
      * @return List<Deposito>
      */
-    GetMapping("/deposito")
+    @GetMapping("/deposito")
     public List<Deposito> getAllDepositos() {
 
         return depositoService.getAllDepositos();
@@ -47,7 +47,7 @@ public class DepositoRestController {
      * @param id
      * @return Deposito
      */
-    GetMapping("/deposito/{id}")
+    @GetMapping("/deposito/{id}")
     public Deposito getDepositoById(@PathVariable Long id) {
 
         return depositoService.getDepositoById(id);
@@ -58,7 +58,7 @@ public class DepositoRestController {
      * @param deposito
      * @return Deposito
      */
-    PostMapping("/deposito")
+    @PostMapping("/deposito")
     public Deposito createDeposito(@RequestBody Deposito deposito) {
 
         return depositoService.createDeposito(deposito);
@@ -69,7 +69,7 @@ public class DepositoRestController {
      * @param deposito
      * @return Deposito
      */
-    PutMapping("/deposito")
+    @PutMapping("/deposito")
     public Deposito updateDeposito(@RequestBody Deposito deposito) {
 
         return depositoService.updateDeposito(deposito);
@@ -79,7 +79,7 @@ public class DepositoRestController {
     /** 
      * @param id
      */
-    DeleteMapping("/deposito/{id}")
+    @DeleteMapping("/deposito/{id}")
     public void deleteDeposito(@PathVariable Long id) {
 
         depositoService.deleteDeposito(id);

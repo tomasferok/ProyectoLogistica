@@ -10,12 +10,24 @@ import com.log.app.daos.ISubCategoriaDao;
 import com.log.app.entidades.SubCategoria;
 import com.log.app.services.Interfaces.ISubCategoriaService;
 
+/**
+ * Servicio de la entidad SubCategoria
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 @Service
 public class SubCategoriaServiceImpl implements ISubCategoriaService {
 
 	@Autowired
 	ISubCategoriaDao subCategoDao;
 
+	
+	/** 
+	 * @return List<SubCategoria>
+	 */
 	@Override
 	@Transactional(readOnly = true)
 	public List<SubCategoria> findAll() {
@@ -23,6 +35,11 @@ public class SubCategoriaServiceImpl implements ISubCategoriaService {
 		return (List<SubCategoria>) subCategoDao.findAll();
 	}
 
+	
+	/** 
+	 * @param subCat
+	 * @return SubCategoria
+	 */
 	@Override
 	@Transactional
 	public SubCategoria save(SubCategoria subCat) {
@@ -30,6 +47,11 @@ public class SubCategoriaServiceImpl implements ISubCategoriaService {
 		return subCategoDao.save(subCat);
 	}
 
+	
+	/** 
+	 * @param idSubCat
+	 * @return SubCategoria
+	 */
 	@Override
 	@Transactional(readOnly = true)
 	public SubCategoria findOne(Long idSubCat) {
@@ -37,6 +59,10 @@ public class SubCategoriaServiceImpl implements ISubCategoriaService {
 		return subCategoDao.findById(idSubCat).orElse(null);
 	}
 
+	
+	/** 
+	 * @param idSubCat
+	 */
 	@Override
 	@Transactional
 	public void delete(Long idSubCat) {

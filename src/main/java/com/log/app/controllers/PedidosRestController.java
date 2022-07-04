@@ -172,7 +172,7 @@ public class PedidosRestController {
      * @param id
      */
     @DeleteMapping
-    public void deletePedido(@PathVariable Long id) {
-        pedidosService.delete(id);
+    public void deletePedido(@RequestBody Pedido pedido) {
+        pedidosService.delete(pedido);
     }
 }

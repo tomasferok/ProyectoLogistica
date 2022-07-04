@@ -26,54 +26,54 @@ public class ClienteRestController {
 	@Autowired
 	private IClienteService cliService;
 
-	@G
+	
 	/** 
 	 * @return List<Cliente>
 	 */
-	etMapping("/cli")
+	@GetMapping("/cli")
 	public List<Cliente> index() {
 
 		return cliService.findAll();
 	}
 
-	@G
+	
 	/** 
 	 * @param idCliente
 	 * @return Cliente
 	 */
-	etMapping("/cli/{idCliente}")
+	@GetMapping("/cli/{idCliente}")
 	public Cliente show(@PathVariable Long idCliente) {
 
 		return cliService.findOne(idCliente);
 	}
-	@G
+	
 	/** 
 	 * @param documento
 	 * @return List<Cliente>
 	 */
-	etMapping("/cli/search/")
+	@GetMapping("/cli/search/")
 	public List<Cliente> findByDocument(@RequestParam(name = "documento") String documento) {
 		return cliService.findByDocumentoIgnoreCaseContaining(documento);
 	}
 
-	@P
+	
 	/** 
 	 * @param cli
 	 * @return Cliente
 	 */
-	ostMapping("/cli")
+	@PostMapping("/cli")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente create(@RequestBody Cliente cli) {
 		return cliService.save(cli);
 		
 }
-	@P
+	
 	/** 
 	 * @param cli
 	 * @param idCliente
 	 * @return Cliente
 	 */
-	utMapping("/cli/{idCliente}")
+	@PutMapping("/cli/{idCliente}")
 	public Cliente update(@RequestBody Cliente cli, @PathVariable Long idCliente) {
 		Cliente cliActual= cliService.findOne(idCliente);
 		
@@ -91,11 +91,11 @@ public class ClienteRestController {
 		return cliService.save(cliActual);
 	}
 	
-	@D
+	
 	/** 
 	 * @param idCliente
 	 */
-	eleteMapping("/cli/{idCliente}")
+	@DeleteMapping("/cli/{idCliente}")
 	public void delete(@PathVariable Long idCliente) {
 		cliService.delete(idCliente);
 	}

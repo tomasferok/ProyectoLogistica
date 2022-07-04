@@ -1,9 +1,9 @@
-package com.log.app.services.Interfaces;
+// package com.log.app.services.Interfaces;
 
-import com.log.app.entidades.Venta;
+// import com.log.app.entidades.Venta;
 
-public interface IVentasService {
+// public interface IVentasService {
 
-    public Venta save(Venta venta);
+//     public Venta save(Venta venta);
     
-}
+// }

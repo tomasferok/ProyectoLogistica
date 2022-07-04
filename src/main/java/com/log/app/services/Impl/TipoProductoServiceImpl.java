@@ -14,54 +14,98 @@ import com.log.app.entidades.TipoProducto;
 import com.log.app.helpers.ReporteProductosMasVendidos;
 import com.log.app.services.Interfaces.ITipoProductoService;
 
+/**
+ * Servicio de la entidad TipoProducto
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 @Service
 public class TipoProductoServiceImpl implements ITipoProductoService {
 
 	@Autowired
-	ITipoProductoDao tipoProductoDao;
+	ITipoProductoDao tipoProductoDao
+	/**
+	 * @return List<TipoProducto>
+	 */
+	;
 
 	@Override
 	public List<TipoProducto> findAll() {
 		// TODO Auto-generated method stub
 		return (List<TipoProducto>) tipoProductoDao.findAll();
+
 	}
 
+	/**
+	 * @param tipoProd
+	 */
 	@Override
 	public void save(TipoProducto tipoProd) {
 
-		tipoProductoDao.save(tipoProd);
+		 tipoProductoDao.save(tipoProd);
+
 	}
+
+	/**
+	 * @param idTipoProd
+	 * @return TipoProducto
+	 */
 
 	@Override
 	public TipoProducto findOne(Long idTipoProd) {
 		// TODO Auto-generated method stub
 		return tipoProductoDao.findById(idTipoProd).orElse(null);
+
 	}
 
+	/**
+	 * @param codigoDeBarras
+	 * @return TipoProducto
+	 */
 	@Override
 	public TipoProducto findByCodigoDeBarras(Integer codigoDeBarras) {
 		// TODO Auto-generated method stub
 		return tipoProductoDao.findByCodigoDeBarras(codigoDeBarras);
+
 	}
 
+	/**
+	 * @param idTipoProd
+	 */
 	@Override
 	public void delete(Long idTipoProd) {
 		tipoProductoDao.deleteById(idTipoProd);
+
 	}
 
+	/**
+	 * @param idProv
+	 * @return List<TipoProducto>
+	 */
 	@Override
 	public List<TipoProducto> findByProvedor_IdProv(Long idProv) {
 		// TODO Auto-generated method stub
 		return tipoProductoDao.findByProvedor_IdProv(idProv);
+
 	}
 
+	/**
+	 * @param nombre
+	 * @return List<TipoProducto>
+	 */
 	@Override
 	public List<TipoProducto> findByNombre(String nombre) {
 		// TODO Auto-generated method stub
 		return tipoProductoDao.findByNombreIgnoreCaseContaining(nombre);
 	}
 
-
+	/**
+	 * @param year
+	 * @return List<ReporteProductosMasVendidos>
+	 */
 
 	@Override
 	public List<ReporteProductosMasVendidos> productosMasVendidos(int year) {

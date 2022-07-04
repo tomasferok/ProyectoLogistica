@@ -27,10 +27,12 @@ import org.springframework.stereotype.Service;
  * y sirve para crear etiquetas de pedidos, recepciones, y
  * codigos de barra de productos
  * 
- * @author Clawtech
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
  * @version 1.0
  * @since 1.0
  */
+
 
 @Service
 public class EtiquetaService implements IEtiquetaService {

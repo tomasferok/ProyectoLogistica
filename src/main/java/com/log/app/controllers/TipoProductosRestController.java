@@ -137,8 +137,8 @@ public class TipoProductosRestController {
      * @return TipoProducto
      */
     @PutMapping
-    public TipoProducto actualizarTipoProducto(@RequestBody TipoProducto tipoProducto) {
-        return tipoProductosService.save(tipoProducto);
+    public void actualizarTipoProducto(@RequestBody TipoProducto tipoProducto) {
+         tipoProductosService.save(tipoProducto);
     }
 
     

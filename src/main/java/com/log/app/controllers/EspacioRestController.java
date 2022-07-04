@@ -1,8 +1,12 @@
 package com.log.app.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,41 +32,38 @@ public class EspacioRestController {
     @Autowired
     private EspacioServiceImpl espacioService;
 
-    @G
     /** 
      * @return List<Espacio>
      */
-    etMapping("/espacio")
-    public List<Espacio> getAllEspacios() {
-        return espacioService.getAllEspacios();
+
+    @GetMapping("/espacio")
+    public List<Espacio> findAll() {
+        return espacioService.findAll();
     }
 
-    @P
+    
     /** 
      * @param espacio
      * @return Espacio
      */
-    ostMapping("/espacio")
+    
+    @PostMapping("/espacio")
     public Espacio createEspacio(@RequestBody Espacio espacio) {
         return espacioService.save(espacio);
 
     }
-     @P
+     
      /** 
       * @param espacio
       * @return Espacio
       */
-     utMapping("/espacio")
+     @PutMapping("/espacio")
     public Espacio updateEspacio(@RequestBody Espacio espacio) {
         return espacioService.update(espacio);
 
     }
 
-    @D
-    /** 
-     * @param id
-     */
-    eleteMapping("/espacio/{id}")
+    @DeleteMapping("/espacio/{id}")
     public void deleteEspacio(@PathVariable Long id) {
         espacioService.delete(id);
     }

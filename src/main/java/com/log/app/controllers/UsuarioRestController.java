@@ -1,6 +1,8 @@
 package com.log.app.controllers;
 
 
+import java.util.List;
+
 import javax.validation.ValidationException;
 import com.log.app.entidades.Usuario;
 import com.log.app.exepciones.EmailYaExisteExeption;
@@ -12,6 +14,7 @@ import com.log.app.services.Impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -107,7 +110,7 @@ public class UsuarioRestController {
      * @describe Elimina un usuario de la base de datos
      */
     @DeleteMapping("/usuario/")
-    public void deleteUser(@RequestParam(name = "id") Long id) {
+    public void deleteUser(@RequestBody Usuario id) {
         userService.deleteUser(id);
     }
 
@@ -117,7 +120,7 @@ public class UsuarioRestController {
      * @return ResponseEntity<Object>
      * @describe Maneja las excepciones de la clase UsuarioService
      */
-     */
+     
     
     /** 
      * @param exception
@@ -133,7 +136,7 @@ public class UsuarioRestController {
      * @return ResponseEntity<Object>
      * @describe Maneja las excepciones de la clase UsuarioService
      */
-     */
+     
     
     /** 
      * @param exception
