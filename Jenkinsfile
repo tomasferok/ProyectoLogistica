@@ -1,5 +1,4 @@
 pipeline {
-
     agent {
         node {
             label 'ubuntu-2004'
@@ -21,6 +20,14 @@ pipeline {
             }
             steps {
                 sh 'mvn test'
+                        emailext(subject: 'Jenkins Notificación IMPORTANTE', attachLog: true, body: 'Resultados de test:', to: 'guillermo.rodriguez@estudiantes.utec.edu.uy')
+
+            }
+        }
+
+        stage('Espera Autorizacion') {
+            steps {
+                input '¿Autoriza realizar el despliegue a produccion?'
             }
         }
 
@@ -30,8 +37,8 @@ pipeline {
             }
         }
     }
-   
-  tools {
-    maven 'maven'
-  }
+
+    tools {
+        maven 'maven'
+    }
 }
