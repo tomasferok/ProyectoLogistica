@@ -27,9 +27,9 @@ import com.log.app.services.Interfaces.ISubCategoriaService;
  * @version 1.0
  * @since 1.0
  */
-//@CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = { "*" })
 public class SubCategoriaRestController {
 	@Autowired
 	private ISubCategoriaService subCatService;

@@ -43,7 +43,6 @@ import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = { "*" })
-
 public class RecepcionRestController {
 
     @Autowired

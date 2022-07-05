@@ -28,9 +28,10 @@ import com.log.app.services.Interfaces.IProveedorService;
  * @version 1.0
  * @since 1.0
  */
-@CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = { "*" })
+
 public class ProveedorRestController {
 
 	@Autowired

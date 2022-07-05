@@ -28,7 +28,7 @@ import com.log.app.services.Interfaces.ICategoriaService;
  * @version 1.0
  * @since 1.0
  */
-@CrossOrigin(origins = { "http://localhost:4200" })
+@CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api")
 public class CategoriaRestController {

@@ -43,7 +43,7 @@ public class TipoProductosRestController {
     /** 
      * @return List<TipoProducto>
      */
-    @PostMapping("/tipoProductos")
+    @GetMapping("/tipoProductos")
     public List<TipoProducto> obtenerTiposProducto() {
 
         return tipoProductosService.findAll();
@@ -54,7 +54,6 @@ public class TipoProductosRestController {
      * @param idProv
      * @return List<TipoProducto>
      */
-    @CrossOrigin
     @PostMapping("/tipoProductos/prov/")
     public List<TipoProducto> obtenerTiposProductoPorProveedor(@RequestParam("idProv") Long idProv) {
 
@@ -66,7 +65,6 @@ public class TipoProductosRestController {
      * @param nombre
      * @return List<TipoProducto>
      */
-    @CrossOrigin
     @GetMapping("/tipoProductos/nombre/{nombre}")
     public List<TipoProducto> obtenerTiposProductoPorNombre(@PathVariable("nombre") String nombre) {
 
@@ -78,7 +76,6 @@ public class TipoProductosRestController {
      * @param idProducto
      * @return TipoProducto
      */
-    @CrossOrigin
     @PostMapping("/tipoProductos/id/{idProducto}")
     public TipoProducto obtenerTipoProductoPorId(@PathVariable("idProducto") Long idProducto) {
 
@@ -90,7 +87,6 @@ public class TipoProductosRestController {
      * @param idProducto
      * @return TipoProducto
      */
-    @CrossOrigin
     @PostMapping("/tipoProductos/cb/{codigoDeBarras}")
     public TipoProducto obtenerTipoProductoPorCodigoDeBarras(@PathVariable("codigoDeBarras") Long idProducto) {
 
