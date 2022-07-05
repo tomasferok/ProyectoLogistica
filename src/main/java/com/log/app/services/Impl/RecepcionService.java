@@ -27,6 +27,14 @@ import com.log.app.services.Interfaces.IRecepcionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Servicio de la entidad Recepcion
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 @Service
 public class RecepcionService implements IRecepcionService {
     @Autowired
@@ -38,10 +46,19 @@ public class RecepcionService implements IRecepcionService {
     @Autowired
     IProductoDao productoDao;
 
+    
+    /** 
+     * @return Iterable<Recepcion>
+     */
     public Iterable<Recepcion> findAll() {
         return recepcionDao.findAll();
     }
 
+    
+    /** 
+     * @param recepcion
+     * @return Recepcion
+     */
     public Recepcion save(Recepcion recepcion) {
         recepcion.setFechaRecepcion(new Date());
         try {
@@ -55,6 +72,12 @@ public class RecepcionService implements IRecepcionService {
         }
     }
 
+    
+    /** 
+     * @param controlarRecepcionRequest
+     * @return Recepcion
+     * @throws RecepcionConDiferenciasExeption
+     */
     public Recepcion recibirRecepcion(
             ControlarRecepcionRequest controlarRecepcionRequest) throws RecepcionConDiferenciasExeption {
         TipoEstadoRecepcion tipoEstadoRecepcion = TipoEstadoRecepcion.RECIBIDO;
@@ -98,10 +121,20 @@ public class RecepcionService implements IRecepcionService {
         return recepcionDao.save(recepcion);
     }
 
+    
+    /** 
+     * @return long
+     */
     public long count() {
         return recepcionDao.count();
     }
 
+    
+    /** 
+     * @param idRecepcion
+     * @param idUsuario
+     * @return Recepcion
+     */
     public Recepcion cancelarRecepcion(Long idRecepcion, Long idUsuario) {
         // TODO: AGREGAR MOTIVO EN LA CANCELACION, EL CUAL DEBE VENIR EN EL REQUEST
 
@@ -116,10 +149,20 @@ public class RecepcionService implements IRecepcionService {
         return recepcionDao.save(recepcion);
     }
 
+    
+    /** 
+     * @param id
+     * @return Recepcion
+     */
     public Recepcion findById(Long id) {
         return recepcionDao.findById(id).get();
     }
 
+    
+    /** 
+     * @param year
+     * @return List<ReporteProductos>
+     */
     public List<ReporteProductos> reporteProductosPedidosAnual(int year) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, 01, 01);
@@ -131,6 +174,12 @@ public class RecepcionService implements IRecepcionService {
         return reporteProductos;
     }
 
+    
+    /** 
+     * @param year
+     * @param idProducto
+     * @return List<ReporteProductos>
+     */
     public List<ReporteProductos> reporteProductoPedidoAnual(int year, long idProducto) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, 01, 01);
@@ -141,5 +190,9 @@ public class RecepcionService implements IRecepcionService {
                 startDate,
                 endDate, idProducto);
         return reporteProductos;
+    }
+
+    public void delete(Recepcion recepcion) {
+        recepcionDao.delete(recepcion);
     }
 }

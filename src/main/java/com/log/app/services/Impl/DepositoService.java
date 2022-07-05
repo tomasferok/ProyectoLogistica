@@ -11,6 +11,14 @@ import com.log.app.daos.IPasilloDao;
 import com.log.app.entidades.Deposito;
 import com.log.app.services.Interfaces.IDepositoService;
 
+/**
+ * Servicio de la entidad Deposito
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 
 @Service
 public class DepositoService implements IDepositoService {
@@ -24,27 +32,46 @@ public class DepositoService implements IDepositoService {
     @Autowired
     private IPasilloDao pasilloDao;
 
-    @Override
+    @
+    /** 
+     * @return List<Deposito>
+     */
+    Override
     public List<Deposito> getAllDepositos() {
         // TODO Auto-generated method stub
         return depositoDao.findAll();
     }
 
-    @Override
+    @
+    /** 
+     * @param id
+     * @return Deposito
+     */
+    Override
     public Deposito getDepositoById(Long id) {
         // TODO Auto-generated method stub
         
         return depositoDao.findById(id).get();
     }
 
-    @Override
+    @
+    /** 
+     * @param deposito
+     * @return Deposito
+     */
+    Override
     public Deposito createDeposito(Deposito deposito) {
         // TODO Auto-generated method stub
        
         return depositoDao.save(deposito);
     }
 
-    @Override
+    @
+    /** 
+     * @param deposito
+     * @return Deposito
+     */
+    Override
     public Deposito updateDeposito(Deposito deposito) {
         // TODO Auto-generated method stub
 
@@ -59,7 +86,11 @@ public class DepositoService implements IDepositoService {
         return depositoDao.save(deposito);
     }
 
-    @Override
+    @
+    /** 
+     * @param id
+     */
+    Override
     public void deleteDeposito(Long id) {
         // TODO Auto-generated method stub
         depositoDao.deleteById(id);

@@ -9,6 +9,14 @@ import javax.persistence.*;
 
 import lombok.Data;
 
+/**
+ * Entidad Pedido
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 @Entity
 @Table(name = "pedidos")
 @Data

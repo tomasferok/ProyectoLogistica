@@ -2,6 +2,14 @@ package com.log.app.helpers;
 
 import com.log.app.entidades.Usuario;
 
+/**
+ * Clase representativa de un response de autenticacion
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 public class AuthenticationResponse {
     private String jwt;
 

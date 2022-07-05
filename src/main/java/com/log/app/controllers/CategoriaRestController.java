@@ -20,7 +20,15 @@ import com.log.app.constants.Constants;
 import com.log.app.entidades.Categoria;
 import com.log.app.services.Interfaces.ICategoriaService;
 
-@CrossOrigin(origins = { "http://localhost:4200" })
+/**
+ * Controlador Rest para la clase categoria
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
+@CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api")
 public class CategoriaRestController {
@@ -28,11 +36,20 @@ public class CategoriaRestController {
 	@Autowired
 	private ICategoriaService categoriaService;
 
+	
+	/** 
+	 * @return List<Categoria>
+	 */
 	@GetMapping("/categoria")
 	public List<Categoria> index() {
 		return categoriaService.findAll();
 	}
 
+	
+	/** 
+	 * @param idCat
+	 * @return Categoria
+	 */
 	@GetMapping("/categoria{idCat}")
 	public Categoria show(@PathVariable Long idCat) {
 		
@@ -40,12 +57,24 @@ public class CategoriaRestController {
 		return categoriaService.findOne(idCat);
 	}
 
+	
+	/** 
+	 * @param categoria
+	 * @return Categoria
+	 */
 	@PostMapping("/categoria")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Categoria create(@RequestBody Categoria categoria) {
 		return categoriaService.save(categoria);
 		
 }
+	
+	/** 
+	 * @param categoria
+	 * @param idCat
+	 * @param flash
+	 * @return Categoria
+	 */
 	@PutMapping("/categoria/{idCat}")
 	public Categoria update(@RequestBody Categoria categoria, @PathVariable Long idCat, RedirectAttributes flash) {
 		Categoria categoriaActual= categoriaService.findOne(idCat);
@@ -66,6 +95,10 @@ public class CategoriaRestController {
 		return categoriaService.save(categoriaActual);
 	}
 	
+	
+	/** 
+	 * @param idCat
+	 */
 	@DeleteMapping("/categoria/{idCat}")
 	public void delete(@PathVariable Long idCat) {
 		categoriaService.delete(idCat);

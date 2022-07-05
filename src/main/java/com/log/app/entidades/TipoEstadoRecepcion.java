@@ -2,6 +2,14 @@ package com.log.app.entidades;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+/**
+ * Enumerado TipoEstadoRecepcion
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 public enum TipoEstadoRecepcion {
     PENDIENTE("PENDIENTE"),
     RECIBIDO("RECIBIDO"),

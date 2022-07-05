@@ -8,20 +8,28 @@ import com.log.app.exepciones.LoginRequestIncorrectaExeption;
 import com.log.app.helpers.AuthenticationResponse;
 import com.log.app.security.JwtUtil;
 
-import org.hibernate.exception.ConstraintViolationException;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Servicio de la entidad Usuario
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 @Service
 @Transactional
 public class UserService implements UserDetailsService {
@@ -40,10 +48,22 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * @param id
+     * @return Usuario
+     */
     public Usuario findById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
+    /**
+     * @param email
+     * @param password
+     * @param nombre
+     * @param apellido
+     * @return Usuario
+     * @throws EmailYaExisteExeption
+     */
     public Usuario createUser(String email, String password, String nombre, String apellido)
             throws EmailYaExisteExeption {
         if (userRepository.findByEmail(email) != null) {
@@ -63,17 +83,25 @@ public class UserService implements UserDetailsService {
 
     }
 
+    /**
+     * @param user
+     * @return Usuario
+     */
     public Usuario createUser(Usuario user) {
         return userRepository.save(user);
     }
 
+    /**
+     * @param email
+     * @param password
+     * @return AuthenticationResponse
+     * @throws LoginRequestIncorrectaExeption
+     */
     public AuthenticationResponse authenticateUsuario(String email, String password)
             throws LoginRequestIncorrectaExeption {
 
         authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(
-                        email,
-                        password));
+                .authenticate(new UsernamePasswordAuthenticationToken(email, password));
 
         UserDetails userDetals = loadUserByUsername(email);
         Usuario usuario = findByEmail(email);
@@ -87,10 +115,24 @@ public class UserService implements UserDetailsService {
         return new AuthenticationResponse(jwt, usuario.getEmail(), usuario.getIdUsuario());
     }
 
+    /**
+     * @param email
+     * @return Usuario
+     */
     public Usuario findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
+    public List<Usuario> findAll() {
+        return userRepository.findAll();
+    }
+
+
+    /**
+     * @param username
+     * @return UserDetails
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println(username);
@@ -102,7 +144,16 @@ public class UserService implements UserDetailsService {
 
         return user;
     }
+    
+    public void deleteUser(Usuario user) {
+         userRepository.delete(user);
+    }
 
+
+
+    /**
+     * @param email
+     */
     public void deleteByEmail(String email) {
         userRepository.deleteByEmail(email);
     }

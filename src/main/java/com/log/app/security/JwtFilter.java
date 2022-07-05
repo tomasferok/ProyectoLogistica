@@ -17,6 +17,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.log.app.services.Impl.UserService;
 
+/**
+ * Clase de configuracion para el filtro de autenticacion
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {

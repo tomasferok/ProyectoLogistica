@@ -11,4 +11,7 @@ public interface IPedidosService {
     public List<Pedido> findAll();
 
     List<ReporteProductos> reporteProductoVendidoAnual(int year, long idProducto);
+
+    
+    
 }

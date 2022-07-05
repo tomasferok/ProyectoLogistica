@@ -10,23 +10,41 @@ import com.log.app.daos.ICategoriaDao;
 import com.log.app.entidades.Categoria;
 import com.log.app.services.Interfaces.ICategoriaService;
 
+/**
+ * Servicio de la entidad Categoria
+ * 
+ * @author ClawTech - UTEC
+ * @author www.clawtech.com.uy
+ * @version 1.0
+ * @since 1.0
+ */
+
 @Service
 public class CategoriaServiceImpl implements ICategoriaService {
 
 	@Autowired
 	private ICategoriaDao categoriaDao;
+	/** 
+	 * @return List<Categoria>
+	 */
+	
 	
 	@Override
 	@Transactional(readOnly = true)
 	public List<Categoria> findAll() {
 		// TODO Auto-generated method stub
-		return (List<Categoria>) categoriaDao.findAll();
+		return categoriaDao.findAll();
 	}
 
 	@Override
 	@Transactional
 	public Categoria save(Categoria categoria) {
-		return categoriaDao.save(categoria);
+		return categoriaDao.
+		/** 
+		 * @param idCat
+		 * @return Categoria
+		 */
+		save(categoria);
 		
 	}
 
@@ -34,7 +52,11 @@ public class CategoriaServiceImpl implements ICategoriaService {
 	@Transactional(readOnly = true)
 	public Categoria findOne(Long idCat) {
 		// TODO Auto-generated method stub
-		return categoriaDao.findById(idCat).orElse(null);
+		return categoriaDao.findById(
+		/** 
+		 * @param idCat
+		 */
+		idCat).orElse(null);
 	}
 
 	@Override

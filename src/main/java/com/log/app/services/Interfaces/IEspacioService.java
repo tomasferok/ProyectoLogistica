@@ -1,5 +1,7 @@
 package com.log.app.services.Interfaces;
 
+import java.util.List;
+
 import com.log.app.entidades.Espacio;
 
 public interface IEspacioService {
@@ -10,4 +12,6 @@ public interface IEspacioService {
     public void delete(Long id);
 
     public Espacio update (Espacio espacio);
+
+    public List<Espacio> findAll();
 }
