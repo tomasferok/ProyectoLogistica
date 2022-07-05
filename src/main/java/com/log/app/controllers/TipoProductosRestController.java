@@ -49,6 +49,15 @@ public class TipoProductosRestController {
         return tipoProductosService.findAll();
     }
 
+    /**
+     * @return List<TipoProducto>
+     */
+    @PostMapping("/tipoProductos")
+    public TipoProducto saveTipoProducto(@RequestBody TipoProducto tipoProducto) {
+
+        return tipoProductosService.save(tipoProducto);
+    }
+
     
     /** 
      * @param idProv
@@ -132,9 +141,9 @@ public class TipoProductosRestController {
      * @param tipoProducto
      * @return TipoProducto
      */
-    @PutMapping
+    @PutMapping("/tipoProductos/")
     public void actualizarTipoProducto(@RequestBody TipoProducto tipoProducto) {
-         tipoProductosService.save(tipoProducto);
+         tipoProductosService.update(tipoProducto);
     }
 
     

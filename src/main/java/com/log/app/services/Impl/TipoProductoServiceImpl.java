@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.log.app.daos.ITipoProductoDao;
 import com.log.app.data.ReporteProductos;
+import com.log.app.entidades.Producto;
 import com.log.app.entidades.TipoProducto;
 import com.log.app.helpers.ReporteProductosMasVendidos;
+import com.log.app.services.Interfaces.IProductoService;
 import com.log.app.services.Interfaces.ITipoProductoService;
 
 /**
@@ -26,11 +28,14 @@ import com.log.app.services.Interfaces.ITipoProductoService;
 public class TipoProductoServiceImpl implements ITipoProductoService {
 
 	@Autowired
-	ITipoProductoDao tipoProductoDao
+	ITipoProductoDao tipoProductoDao;
+
+	@Autowired
+	IProductoService productoService;
 	/**
 	 * @return List<TipoProducto>
 	 */
-	;
+	
 
 	@Override
 	public List<TipoProducto> findAll() {
@@ -43,10 +48,17 @@ public class TipoProductoServiceImpl implements ITipoProductoService {
 	 * @param tipoProd
 	 */
 	@Override
-	public void save(TipoProducto tipoProd) {
+	public TipoProducto save(TipoProducto tipoProd) {
+		TipoProducto productoCreado = tipoProductoDao.save(tipoProd);
+		Producto stock = new Producto();
+		stock.setIdProd(productoCreado.getIdTipoProd());
+		productoService.saveEmpyProducto(stock);
+		return productoCreado;
+	}
 
-		 tipoProductoDao.save(tipoProd);
-
+	@Override
+	public void update(TipoProducto tipoProd) {
+		tipoProductoDao.save(tipoProd);
 	}
 
 	/**

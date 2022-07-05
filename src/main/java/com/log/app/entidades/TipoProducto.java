@@ -40,18 +40,16 @@ public class TipoProducto implements Serializable {
 	private Long idTipoProd;
 	private int codigoDeBarras;
 	private String nombre;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "subCategoria_id")
 	private SubCategoria subCat;
 	private String descripcion;
 	private double precio;
 	private double neto;
-
 	@ManyToOne(cascade = CascadeType.ALL)
-
 	@JoinColumn(name = "id_prov")
 	private Proveedor provedor;
 
