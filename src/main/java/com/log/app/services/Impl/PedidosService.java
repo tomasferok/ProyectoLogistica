@@ -221,9 +221,6 @@ public class PedidosService implements IPedidosService {
         pedido.setDuracionFinal(duracionTotal);
         // ACTUALIZAMOS EL STOCK DE LOS PRODUCTOS Y AGREGAMOS LOS PRODUCTOS A LA VENTA
         pedido.getProductos().forEach(producto -> {
-            // venta.getListaProducto().put(producto.getProducto().getNombre(),
-            // producto.getCantidad());
-
             Producto prod = productoDao.findByTipoProducto_idTipoProd(producto.getProducto().getIdTipoProd());
             prod.setCantidadReservada(prod.getCantidadReservada() - producto.getCantidad());
             productoDao.save(prod);
@@ -250,6 +247,7 @@ public class PedidosService implements IPedidosService {
         Usuario usuario = usuarioDao.findById(idUsuario).get();
         EstadoPedido estadoPedido = new EstadoPedido();
         estadoPedido.setTipoEstadoPedido(tipoEstadoPedido);
+        estadoPedido.setFecha(new Date());
         estadoPedido.setUsuario(usuario);
         pedido.getEstadoPedido().add(estadoPedido);
         return pedidosDao.save(pedido);

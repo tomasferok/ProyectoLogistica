@@ -36,18 +36,13 @@ public interface IPedidoDao extends CrudRepository<Pedido, Long> {
         @Transactional
 
         @Query(value = "select year(pedidos.fecha_pedido) as year, month(pedidos.fecha_pedido) as mes, " +
-
-        // "tipo_productos.nombre, tipo_productos.id_tipo_prod as idTipoProd"
                         " sum(cantidad) as cantidad from pedidos_producto " +
                         "inner join pedidos on pedidos_producto.id_pedido = pedidos.id_pedido " +
                         "inner join tipo_productos on tipo_productos.id_tipo_prod = pedidos_producto.id_tipo_producto "
                         +
                         "where  (pedidos.fecha_pedido BETWEEN ?1 AND ?2) " +
-                        "GROUP BY month(pedidos.fecha_pedido), year(pedidos.fecha_pedido)  "
-                        + "order by year(pedidos.fecha_pedido), month(pedidos.fecha_pedido)",
-                        // tipo_productos.id_tipo_prod" +
-                        // "order by tipo_productos.id_tipo_prod ",
-                        nativeQuery = true)
+                        "GROUP BY month(pedidos.fecha_pedido), year(pedidos.fecha_pedido) "
+                        + "order by year(pedidos.fecha_pedido), month(pedidos.fecha_pedido)", nativeQuery = true)
         List<ReporteProductos> sumProductosVendidosByMonthBetweenFechas(Date fechaPedidoStart,
                         Date fechaPedidoEnd);
 
