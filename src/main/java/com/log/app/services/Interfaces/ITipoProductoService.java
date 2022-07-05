@@ -12,7 +12,7 @@ public interface ITipoProductoService {
 
 	public List<TipoProducto> findAll();
 
-	public void save(TipoProducto idTipoProd);
+	public TipoProducto save(TipoProducto idTipoProd);
 
 	public TipoProducto findOne(Long idTipoProd);
 
@@ -26,5 +26,5 @@ public interface ITipoProductoService {
 
 
 	List<ReporteProductosMasVendidos>  productosMasVendidos(int year);
-
+void update(TipoProducto tipoProd) ;
 }

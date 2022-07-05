@@ -13,6 +13,7 @@ import com.log.app.data.ReporteProductos;
 import com.log.app.entidades.Producto;
 import com.log.app.entidades.TipoProducto;
 import com.log.app.helpers.ReporteProductosMasVendidos;
+import com.log.app.services.Interfaces.IProductoService;
 import com.log.app.services.Interfaces.ITipoProductoService;
 
 /**
@@ -27,13 +28,14 @@ import com.log.app.services.Interfaces.ITipoProductoService;
 public class TipoProductoServiceImpl implements ITipoProductoService {
 
 	@Autowired
-	ITipoProductoDao tipoProductoDao
+	ITipoProductoDao tipoProductoDao;
+
+	@Autowired
+	IProductoService productoService;
 	/**
 	 * @return List<TipoProducto>
 	 */
-
-	@Autowired
-ProductoService productoService;
+	
 
 	@Override
 	public List<TipoProducto> findAll() {
@@ -46,11 +48,17 @@ ProductoService productoService;
 	 * @param tipoProd
 	 */
 	@Override
-	public void save(TipoProducto tipoProd) {
-		tipoProductoDao.save(tipoProd);
+	public TipoProducto save(TipoProducto tipoProd) {
+		TipoProducto productoCreado = tipoProductoDao.save(tipoProd);
 		Producto stock = new Producto();
-		stock.setIdProd(tipoProd.getIdTipoProd());
-		productoService.saveEmpyProducto(stock)
+		stock.setIdProd(productoCreado.getIdTipoProd());
+		productoService.saveEmpyProducto(stock);
+		return productoCreado;
+	}
+
+	@Override
+	public void update(TipoProducto tipoProd) {
+		tipoProductoDao.save(tipoProd);
 	}
 
 	/**
