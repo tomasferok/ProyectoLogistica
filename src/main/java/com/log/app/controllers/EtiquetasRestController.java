@@ -4,6 +4,8 @@ package com.log.app.controllers;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import javax.websocket.server.PathParam;
+
 import com.log.app.services.Impl.RecepcionService;
 import com.log.app.services.Impl.TipoProductoServiceImpl;
 
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.log.app.services.Impl.EtiquetaService;
@@ -106,10 +109,12 @@ public class EtiquetasRestController {
          * @return ResponseEntity<Resource>
          * @throws IOException
          */
-        @GetMapping("/etiquetas/tipoProducto/{idProducto}")
-        public ResponseEntity<Resource> crearEtiquetaProducto(@PathVariable Long idProducto) throws IOException {
+        @GetMapping("/etiquetas/tipoProducto/{idProducto}/")
+        public ResponseEntity<Resource> crearEtiquetaProducto(@PathVariable Long idProducto, @RequestParam int cantidad ) throws IOException {
 
-                byte[] pdfResult = etiquetaService.crearEtiquetaProducto(tipoProductoService.findOne(idProducto), 1);
+                byte[] pdfResult = etiquetaService.crearEtiquetaProducto(tipoProductoService.findOne(idProducto), 
+                                cantidad);
+                                
                 return ResponseEntity.ok()
                                 .contentType(MediaType.parseMediaType("application/pdf"))
                                 .header(HttpHeaders.CONTENT_DISPOSITION,

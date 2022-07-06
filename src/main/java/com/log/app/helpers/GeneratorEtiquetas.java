@@ -66,7 +66,7 @@ public class GeneratorEtiquetas {
             contentStream.setFont(PDType1Font.HELVETICA, 10);
 
             createTableDetalleRecepcion(document, page, contentStream, recepcion);
-            
+
             contentStream.beginText();
 
             addRecepcionData(document, page, recepcion, contentStream);
@@ -95,36 +95,42 @@ public class GeneratorEtiquetas {
      * @param recepcion
      * @throws IOException
      */
-    public void addRecepcionData(final PDDocument document, final PDPage page, final Recepcion recepcion, 
+    public void addRecepcionData(final PDDocument document, final PDPage page, final Recepcion recepcion,
             PDPageContentStream cs)
             throws IOException {
         final double costoTotal = recepcion.getProductos().stream().mapToDouble(x -> x.getProducto().getPrecio()).sum();
-        
+
         cs.newLineAtOffset(50, 800);
-        
+        cs.setFont(PDType1Font.HELVETICA, 20);
+
+        // cs.newLineAtOffset(600, 200);
+
+        cs.showText("Remito de Recepcion");
+
+        cs.setFont(PDType1Font.HELVETICA, 10);
+
         addText(document, page, 0, 20, 150, 30, false, "CLAWTECH", cs);
         addText(document, page, 0, 20, 150, 30, false, "UTEC - FRAY BENTOS", cs);
         addText(document, page, 0, 20, 150, 30, false, "URUGUAY", cs);
 
         addText(document, page, 0,
                 20, 200, 30, false, "Proveedor:" +
-        recepcion.getProvedor().getNombreProv(), 
+                        recepcion.getProvedor().getNombreProv(),
                 cs);
         addText(document, page, 0,
                 20, 200, 30, false, "Recepcion Nª: " +
-        recepcion.getIdRecepcion() + " - "+  "Fecha:" + recepcion.getFechaRecepcion().getDay() + "/"
-        + recepcion.getFechaRecepcion().getMonth() + "/" +
-        recepcion.getFechaRecepcion().getYear(), 
+                        recepcion.getIdRecepcion() + " - " + "Fecha:" + recepcion.getFechaRecepcion().getDay() + "/"
+                        + recepcion.getFechaRecepcion().getMonth() + "/" +
+                        recepcion.getFechaRecepcion().getYear(),
                 cs);
-        
 
-        addText(document, page,  -300,
+        addText(document, page, -300,
                 500, 250, 30, false,
-        "Cantidad Producto :"
-        + recepcion.getProductos().stream().mapToDouble(mapper ->
-        mapper.getCantidad()).sum(), cs);
+                "Cantidad Producto :"
+                        + recepcion.getProductos().stream().mapToDouble(mapper -> mapper.getCantidad()).sum(),
+                cs);
         addText(document, page, 0, 20, 250, 30, false, "Costo Total: $" +
-        costoTotal, cs);
+                costoTotal, cs);
 
         addText(document, page, 0, 30, 250, 30, false, "Firma: ____________", cs);
 
@@ -225,14 +231,11 @@ public class GeneratorEtiquetas {
 
         contentStream.endText();
 
-
-
         File file = new ClassPathResource("logo.png").getFile();
 
         PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file, document);
         contentStream.drawImage(pdImage, 450, 700, 100, 100);
-        addImageToPdf(document
-        ,
+        addImageToPdf(document,
                 100, 150, 100, 50, true,
                 barcodeImage,
                 contentStream);
@@ -255,19 +258,22 @@ public class GeneratorEtiquetas {
         final double costoTotal = pedido.getProductos().stream().mapToDouble(x -> x.getProducto().getPrecio()).sum();
         // Add Company Name and details
         cs.newLineAtOffset(50, 800);
+        cs.setFont(PDType1Font.HELVETICA, 20);
+
+        // cs.newLineAtOffset(600, 200);
+
+        cs.showText("Remito de Pedido");
+
+        cs.setFont(PDType1Font.HELVETICA, 10);
+
         addText(document, page, 0, 20, 150, 30, false, "CLAWTECH", cs);
         addText(document, page, 0, 20, 150, 30, false, "UTEC - FRAY BENTOS", cs);
         addText(document, page, 0, 20, 150, 30, false, "URUGUAY", cs);
 
         addText(document, page, 0, 20, 200, 30, false, "Cliente:" + pedido.getCliente().getRazonSocial(), cs);
-        addText(document, page, 0, 20, 200, 30, false, "Pedido Nª: " + pedido.getIdPedido() + 
-        " - " + "Fecha:" + pedido.getFechaPedido().getDay() + "/"
+        addText(document, page, 0, 20, 200, 30, false, "Pedido Nª: " + pedido.getIdPedido() +
+                " - " + "Fecha:" + pedido.getFechaPedido().getDay() + "/"
                 + pedido.getFechaPedido().getMonth() + "/" + pedido.getFechaPedido().getYear(), cs);
-        
-        
-     
-
-
 
         addText(document, page, -300,
                 500, 250, 30, false,
@@ -320,7 +326,6 @@ public class GeneratorEtiquetas {
         table.draw();
 
     }
-
 
     /**
      * Crea las etiquetas de los productos de una recepcion
@@ -394,19 +399,30 @@ public class GeneratorEtiquetas {
             document.addPage(page);
 
             final PDPageContentStream contentStream = new PDPageContentStream(document, page);
+           
+           
+            contentStream.beginText();
+
+            contentStream.newLineAtOffset(150, 800);
+            contentStream.setFont(PDType1Font.HELVETICA, 12);
+            contentStream.showText("Etiquetas de Producto: " + listaProductos.get(0).getNombre());
+            contentStream.endText();
+           
 
             contentStream.setNonStrokingColor(Color.WHITE);
             contentStream.setStrokingColor(Color.BLACK);
             contentStream.setLineWidth(1);
+
+
+
             int x = 50;
-            int y = 700;
+            int y = 650;
 
             final int width = 100;
             final int height = 100;
             for (final TipoProducto producto : listaProductos) {
                 // addText(document, page, x, y, 200, 50, false,
                 // "Codigos de barra producto: " + producto.getNombre());
-                y -= height;
 
                 final java.awt.image.BufferedImage image = generateEAN13BarcodeImage(String.valueOf(
                         producto.getCodigoDeBarras()));
@@ -423,7 +439,7 @@ public class GeneratorEtiquetas {
             }
 
             contentStream.stroke();
-
+           
             contentStream.close();
 
             return document;
@@ -454,7 +470,6 @@ public class GeneratorEtiquetas {
 
         contentStream.newLineAtOffset(-x, -y);
 
-        
         contentStream.showText(message);
 
     }
