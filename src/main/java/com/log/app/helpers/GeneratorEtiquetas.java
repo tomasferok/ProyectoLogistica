@@ -62,11 +62,23 @@ public class GeneratorEtiquetas {
         try {
             final PDPage page = new PDPage(PDRectangle.A4);
             document.addPage(page);
-            addRecepcionData(document, page, recepcion);
             final PDPageContentStream contentStream = new PDPageContentStream(document, page);
+            contentStream.setFont(PDType1Font.HELVETICA, 10);
+
             createTableDetalleRecepcion(document, page, contentStream, recepcion);
+            
+            contentStream.beginText();
+
+            addRecepcionData(document, page, recepcion, contentStream);
+            contentStream.endText();
+
+            File file = new ClassPathResource("logo.png").getFile();
+
+            PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file, document);
+            contentStream.drawImage(pdImage, 450, 700, 100, 100);
+
             addImageToPdf(document,
-                    450, 750, 100, 50, true,
+                    100, 150, 100, 50, true,
                     barcodeImage,
                     contentStream);
             contentStream.close();
@@ -83,31 +95,38 @@ public class GeneratorEtiquetas {
      * @param recepcion
      * @throws IOException
      */
-    public void addRecepcionData(final PDDocument document, final PDPage page, final Recepcion recepcion)
+    public void addRecepcionData(final PDDocument document, final PDPage page, final Recepcion recepcion, 
+            PDPageContentStream cs)
             throws IOException {
         final double costoTotal = recepcion.getProductos().stream().mapToDouble(x -> x.getProducto().getPrecio()).sum();
-        // addText(document, page, 50, 780, 150, 30, false, "CLAWTECH");
-        // addText(document, page, 50, 760, 150, 30, false, "UTEC - FRAY BENTOS");
-        // addText(document, page, 50, 740, 150, 30, false, "URUGUAY");
+        
+        cs.newLineAtOffset(50, 800);
+        
+        addText(document, page, 0, 20, 150, 30, false, "CLAWTECH", cs);
+        addText(document, page, 0, 20, 150, 30, false, "UTEC - FRAY BENTOS", cs);
+        addText(document, page, 0, 20, 150, 30, false, "URUGUAY", cs);
 
-        // addText(document, page, 250, 780, 200, 30, false, "Proveedor:" +
-        // recepcion.getProvedor().getNombreProv());
-        // addText(document, page, 250, 760, 200, 30, false, "Recepcion Nª: " +
-        // recepcion.getIdRecepcion());
-        // addText(document, page,
-        // 250,
-        // 740, 200, 30, false, "Fecha:" + recepcion.getFechaRecepcion().getDay() + "/"
-        // + recepcion.getFechaRecepcion().getMonth() + "/" +
-        // recepcion.getFechaRecepcion().getYear());
+        addText(document, page, 0,
+                20, 200, 30, false, "Proveedor:" +
+        recepcion.getProvedor().getNombreProv(), 
+                cs);
+        addText(document, page, 0,
+                20, 200, 30, false, "Recepcion Nª: " +
+        recepcion.getIdRecepcion() + " - "+  "Fecha:" + recepcion.getFechaRecepcion().getDay() + "/"
+        + recepcion.getFechaRecepcion().getMonth() + "/" +
+        recepcion.getFechaRecepcion().getYear(), 
+                cs);
+        
 
-        // addText(document, page, 250, 150, 250, 30, false,
-        // "Cantidad Producto :"
-        // + recepcion.getProductos().stream().mapToDouble(mapper ->
-        // mapper.getCantidad()).sum());
-        // addText(document, page, 250, 120, 250, 30, false, "Costo Total: $" +
-        // costoTotal);
+        addText(document, page,  -300,
+                500, 250, 30, false,
+        "Cantidad Producto :"
+        + recepcion.getProductos().stream().mapToDouble(mapper ->
+        mapper.getCantidad()).sum(), cs);
+        addText(document, page, 0, 20, 250, 30, false, "Costo Total: $" +
+        costoTotal, cs);
 
-        // addText(document, page, 250, 50, 250, 30, false, "Firma: ____________");
+        addText(document, page, 0, 30, 250, 30, false, "Firma: ____________", cs);
 
     }
 
@@ -152,13 +171,13 @@ public class GeneratorEtiquetas {
             final PDPageContentStream contentStream,
             final Recepcion recepcion) throws IOException {
 
-        final float margin = 50;
+        final float margin = 60;
         final float yStartNewPage = myPage.getMediaBox().getHeight() - (2 * margin);
 
         final float tableWidth = myPage.getMediaBox().getWidth() - (2 * margin);
         final boolean drawContent = true;
         final float bottomMargin = 35;
-        final BaseTable table = new BaseTable(700, yStartNewPage, bottomMargin, tableWidth, margin, mainDocument,
+        final BaseTable table = new BaseTable(650, yStartNewPage, bottomMargin, tableWidth, margin, mainDocument,
                 myPage,
                 true, drawContent);
 
@@ -172,7 +191,7 @@ public class GeneratorEtiquetas {
             row.createCell(25, d.get(i).getProducto().getNombre());
             row.createCell(15, Double.toString(d.get(i).getCantidad()));
             row.createCell(15, Double.toString(d.get(i).getProducto().getPrecio()));
-            row.createCell(15, Double.toString(d.get(i).getProducto().getCodigoDeBarras()));
+            row.createCell(15, Integer.toString(d.get(i).getProducto().getCodigoDeBarras()));
         }
 
         table.draw();
@@ -295,7 +314,7 @@ public class GeneratorEtiquetas {
             row.createCell(25, d.get(i).getProducto().getNombre());
             row.createCell(15, Double.toString(d.get(i).getCantidad()));
             row.createCell(15, Double.toString(d.get(i).getProducto().getPrecio()));
-            row.createCell(15, Double.toString(d.get(i).getProducto().getCodigoDeBarras()));
+            row.createCell(15, Integer.toString(d.get(i).getProducto().getCodigoDeBarras()));
         }
 
         table.draw();
