@@ -72,10 +72,10 @@ public class GeneratorEtiquetas {
             addRecepcionData(document, page, recepcion, contentStream);
             contentStream.endText();
 
-            File file = new ClassPathResource("logo.png").getFile();
+            // File file = new ClassPathResource("logo.png").getFile();
 
-            PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file, document);
-            contentStream.drawImage(pdImage, 450, 700, 100, 100);
+            // PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file, document);
+            // contentStream.drawImage(pdImage, 450, 700, 100, 100);
 
             addImageToPdf(document,
                     100, 150, 100, 50, true,
@@ -231,10 +231,14 @@ public class GeneratorEtiquetas {
 
         contentStream.endText();
 
-        File file = new ClassPathResource("logo.png").getFile();
+        // File file = new ClassPathResource("logo.png").getFile();
 
-        PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file, document);
-        contentStream.drawImage(pdImage, 450, 700, 100, 100);
+        // PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file, document);
+        // contentStream.drawImage(pdImage, 450, 700, 100, 100);
+        
+        
+        
+        
         addImageToPdf(document,
                 100, 150, 100, 50, true,
                 barcodeImage,
