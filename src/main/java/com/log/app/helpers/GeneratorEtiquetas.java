@@ -1,6 +1,7 @@
 package com.log.app.helpers;
 
 import java.awt.Color;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,8 +18,10 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotationWidget;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDTextField;
+import org.aspectj.apache.bcel.util.ClassPath;
 import org.krysalis.barcode4j.impl.code128.Code128Bean;
 import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import com.log.app.entidades.Pedido;
@@ -45,15 +48,16 @@ public class GeneratorEtiquetas {
 
     }
 
-    
-    /** 
+    /**
      * Crea un PDF con el remito de recepcion.
+     * 
      * @param recepcion
      * @return PDDocument
      * @throws IOException
      */
     public PDDocument createRemitoRecepcion(final Recepcion recepcion) throws IOException {
-        final java.awt.image.BufferedImage barcodeImage = generateEAN13BarcodeImage(recepcion.getIdRecepcion().toString());
+        final java.awt.image.BufferedImage barcodeImage = generateEAN13BarcodeImage(
+                recepcion.getIdRecepcion().toString());
         final PDDocument document = new PDDocument();
         try {
             final PDPage page = new PDPage(PDRectangle.A4);
@@ -73,38 +77,43 @@ public class GeneratorEtiquetas {
 
     }
 
-    
-    /** 
+    /**
      * @param document
      * @param page
      * @param recepcion
      * @throws IOException
      */
-    public void addRecepcionData(final PDDocument document, final PDPage page, final Recepcion recepcion) throws IOException {
+    public void addRecepcionData(final PDDocument document, final PDPage page, final Recepcion recepcion)
+            throws IOException {
         final double costoTotal = recepcion.getProductos().stream().mapToDouble(x -> x.getProducto().getPrecio()).sum();
-        addText(document, page, 50, 780, 150, 30, false, "CLAWTECH");
-        addText(document, page, 50, 760, 150, 30, false, "UTEC - FRAY BENTOS");
-        addText(document, page, 50, 740, 150, 30, false, "URUGUAY");
+        // addText(document, page, 50, 780, 150, 30, false, "CLAWTECH");
+        // addText(document, page, 50, 760, 150, 30, false, "UTEC - FRAY BENTOS");
+        // addText(document, page, 50, 740, 150, 30, false, "URUGUAY");
 
-        addText(document, page, 250, 780, 200, 30, false, "Proveedor:" + recepcion.getProvedor().getNombreProv());
-        addText(document, page, 250, 760, 200, 30, false, "Recepcion Nª: " + recepcion.getIdRecepcion());
-        addText(document, page,
-                250,
-                740, 200, 30, false, "Fecha:" + recepcion.getFechaRecepcion().getDay() + "/"
-                        + recepcion.getFechaRecepcion().getMonth() + "/" + recepcion.getFechaRecepcion().getYear());
+        // addText(document, page, 250, 780, 200, 30, false, "Proveedor:" +
+        // recepcion.getProvedor().getNombreProv());
+        // addText(document, page, 250, 760, 200, 30, false, "Recepcion Nª: " +
+        // recepcion.getIdRecepcion());
+        // addText(document, page,
+        // 250,
+        // 740, 200, 30, false, "Fecha:" + recepcion.getFechaRecepcion().getDay() + "/"
+        // + recepcion.getFechaRecepcion().getMonth() + "/" +
+        // recepcion.getFechaRecepcion().getYear());
 
-        addText(document, page, 250, 150, 250, 30, false,
-                "Cantidad Producto :"
-                        + recepcion.getProductos().stream().mapToDouble(mapper -> mapper.getCantidad()).sum());
-        addText(document, page, 250, 120, 250, 30, false, "Costo Total: $" + costoTotal);
+        // addText(document, page, 250, 150, 250, 30, false,
+        // "Cantidad Producto :"
+        // + recepcion.getProductos().stream().mapToDouble(mapper ->
+        // mapper.getCantidad()).sum());
+        // addText(document, page, 250, 120, 250, 30, false, "Costo Total: $" +
+        // costoTotal);
 
-        addText(document, page, 250, 50, 250, 30, false, "Firma: ____________");
+        // addText(document, page, 250, 50, 250, 30, false, "Firma: ____________");
 
     }
 
-    
-    /** 
+    /**
      * Crea los headers de la tabla con los detalles del remito de recepcion.
+     * 
      * @param table
      * @return Row<PDPage>
      */
@@ -130,25 +139,27 @@ public class GeneratorEtiquetas {
         return headerRow;
     }
 
-    
-    /** 
+    /**
      * Crea una tabla con los detalles del remito de recepcion.
+     * 
      * @param mainDocument
      * @param myPage
      * @param contentStream
      * @param recepcion
      * @throws IOException
      */
-    public void createTableDetalleRecepcion(final PDDocument mainDocument, final PDPage myPage, final PDPageContentStream contentStream,
+    public void createTableDetalleRecepcion(final PDDocument mainDocument, final PDPage myPage,
+            final PDPageContentStream contentStream,
             final Recepcion recepcion) throws IOException {
 
         final float margin = 50;
         final float yStartNewPage = myPage.getMediaBox().getHeight() - (2 * margin);
-      
+
         final float tableWidth = myPage.getMediaBox().getWidth() - (2 * margin);
         final boolean drawContent = true;
         final float bottomMargin = 35;
-        final BaseTable table = new BaseTable(700, yStartNewPage, bottomMargin, tableWidth, margin, mainDocument, myPage,
+        final BaseTable table = new BaseTable(700, yStartNewPage, bottomMargin, tableWidth, margin, mainDocument,
+                myPage,
                 true, drawContent);
 
         final Row<PDPage> headerRow = createHeaderTableRecepcion(table);
@@ -168,9 +179,9 @@ public class GeneratorEtiquetas {
 
     }
 
-    
-    /** 
+    /**
      * Crea el remito del pedido
+     * 
      * @param pedido
      * @return PDDocument
      * @throws IOException
@@ -180,69 +191,87 @@ public class GeneratorEtiquetas {
         final java.awt.image.BufferedImage barcodeImage = generateEAN13BarcodeImage(pedido.getIdPedido().toString());
 
         final PDDocument document = new PDDocument();
-        try {
-            // PDDocument document = new PDDocument();
-            final PDPage page = new PDPage(PDRectangle.A4);
-            document.addPage(page);
-            addPedidoData(document, page, pedido);
+        // PDDocument document = new PDDocument();
+        final PDPage page = new PDPage(PDRectangle.A4);
+        document.addPage(page);
 
-            final PDPageContentStream contentStream = new PDPageContentStream(document, page);
-            // contentStream.addLine(0, 450, 400, 450);
-            createTableDetallePedido(document, page, contentStream, pedido);
-            addImageToPdf(document,
-                    450, 750, 100, 50, true,
-                    barcodeImage,
-                    contentStream);
-            contentStream.close();
+        final PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-            return document;
-        } catch (final Exception e) {
-            return document;
-        }
+        contentStream.setFont(PDType1Font.HELVETICA, 10);
+        // contentStream.addLine(0, 450, 400, 450);
+        createTableDetallePedido(document, page, contentStream, pedido);
+        contentStream.beginText();
+
+        addPedidoData(document, page, pedido, contentStream);
+
+        contentStream.endText();
+
+
+
+        File file = new ClassPathResource("logo.png").getFile();
+
+        PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file, document);
+        contentStream.drawImage(pdImage, 450, 700, 100, 100);
+        addImageToPdf(document
+        ,
+                100, 150, 100, 50, true,
+                barcodeImage,
+                contentStream);
+        contentStream.close();
+
+        return document;
 
     }
 
-    
-    /** 
+    /**
      * Agrega los datos del pedido al documento.
+     * 
      * @param document
      * @param page
      * @param pedido
      * @throws IOException
      */
-    public void addPedidoData(final PDDocument document, final PDPage page, final Pedido pedido) throws IOException {
+    public void addPedidoData(final PDDocument document, final PDPage page, final Pedido pedido, PDPageContentStream cs)
+            throws IOException {
         final double costoTotal = pedido.getProductos().stream().mapToDouble(x -> x.getProducto().getPrecio()).sum();
         // Add Company Name and details
-        addText(document, page, 50, 780, 150, 30, false, "CLAWTECH");
-        addText(document, page, 50, 760, 150, 30, false, "UTEC - FRAY BENTOS");
-        addText(document, page, 50, 740, 150, 30, false, "URUGUAY");
+        cs.newLineAtOffset(50, 800);
+        addText(document, page, 0, 20, 150, 30, false, "CLAWTECH", cs);
+        addText(document, page, 0, 20, 150, 30, false, "UTEC - FRAY BENTOS", cs);
+        addText(document, page, 0, 20, 150, 30, false, "URUGUAY", cs);
 
-        addText(document, page, 250, 780, 200, 30, false, "Cliente:" + pedido.getCliente().getRazonSocial());
-        addText(document, page, 250, 760, 200, 30, false, "Pedido Nª: " + pedido.getIdPedido());
-        addText(document, page, 250,
-                740, 200, 30, false, "Fecha:" + pedido.getFechaPedido().getDay() + "/"
-                        + pedido.getFechaPedido().getMonth() + "/" + pedido.getFechaPedido().getYear());
-        addText(document, page, 250, 150, 250, 30, false,
+        addText(document, page, 0, 20, 200, 30, false, "Cliente:" + pedido.getCliente().getRazonSocial(), cs);
+        addText(document, page, 0, 20, 200, 30, false, "Pedido Nª: " + pedido.getIdPedido() + 
+        " - " + "Fecha:" + pedido.getFechaPedido().getDay() + "/"
+                + pedido.getFechaPedido().getMonth() + "/" + pedido.getFechaPedido().getYear(), cs);
+        
+        
+     
+
+
+
+        addText(document, page, -300,
+                500, 250, 30, false,
                 "Cantidad Producto :"
-                        + pedido.getProductos().stream().mapToDouble(mapper -> mapper.getCantidad()).sum());
-        addText(document, page, 250, 120, 250, 30, false, "Costo Total: $" + costoTotal);
+                        + pedido.getProductos().stream().mapToDouble(mapper -> mapper.getCantidad()).sum(),
+                cs);
+        addText(document, page, 0, 20, 250, 30, false, "Costo Total: $" + costoTotal, cs);
 
-        addText(document, page, 250, 50, 250, 30, false, "Firma: ____________");
+        addText(document, page, 0, 30, 250, 30, false, "Firma: ____________", cs);
 
     }
 
-    
-    
-    
-    /** 
+    /**
      * Crea la tabla de productos de un pedido
+     * 
      * @param mainDocument
      * @param myPage
      * @param contentStream
      * @param pedido
      * @throws IOException
      */
-    private void createTableDetallePedido(final PDDocument mainDocument, final PDPage myPage, final PDPageContentStream contentStream,
+    private void createTableDetallePedido(final PDDocument mainDocument, final PDPage myPage,
+            final PDPageContentStream contentStream,
             final Pedido pedido) throws IOException {
 
         final float margin = 50;
@@ -252,7 +281,8 @@ public class GeneratorEtiquetas {
         final boolean drawContent = true;
         final float bottomMargin = 35;
 
-        final BaseTable table = new BaseTable(700, yStartNewPage, bottomMargin, tableWidth, margin, mainDocument, myPage,
+        final BaseTable table = new BaseTable(650, yStartNewPage, bottomMargin, tableWidth, margin, mainDocument,
+                myPage,
                 true, drawContent);
 
         final Row<PDPage> headerRow = createHeaderTableRecepcion(table);
@@ -272,9 +302,10 @@ public class GeneratorEtiquetas {
 
     }
 
-    
-    /** 
+
+    /**
      * Crea las etiquetas de los productos de una recepcion
+     * 
      * @param recepcion
      * @return PDDocument
      * @throws IOException
@@ -296,27 +327,28 @@ public class GeneratorEtiquetas {
 
             final int width = 100;
             final int height = 100;
-            for (final RecepcionProducto recepcionProducto : productos) {
-                addText(document, page, x, y, 200, 50, false,
-                        "Codigos de barra producto: " + recepcionProducto.getProducto().getNombre());
-                y -= height;
-                for (int i = 0; i < recepcionProducto.getCantidad(); i++) {
+            // for (final RecepcionProducto recepcionProducto : productos) {
+            // addText(document, page, x, y, 200, 50, false,
+            // "Codigos de barra producto: " + recepcionProducto.getProducto().getNombre());
+            // y -= height;
+            // for (int i = 0; i < recepcionProducto.getCantidad(); i++) {
 
-                    final java.awt.image.BufferedImage image = generateEAN13BarcodeImage(String.valueOf(
-                            recepcionProducto.getProducto().getCodigoDeBarras()));
-                    addImageToPdf(document, x, y, width, height, true,
-                            image, contentStream);
+            // final java.awt.image.BufferedImage image =
+            // generateEAN13BarcodeImage(String.valueOf(
+            // recepcionProducto.getProducto().getCodigoDeBarras()));
+            // addImageToPdf(document, x, y, width, height, true,
+            // image, contentStream);
 
-                    contentStream.addRect(x, y, width, height);
+            // contentStream.addRect(x, y, width, height);
 
-                    x += width;
-                    if (x > 500) {
-                        x = 50;
-                        y -= height;
-                    }
-                }
+            // x += width;
+            // if (x > 500) {
+            // x = 50;
+            // y -= height;
+            // }
+            // }
 
-            }
+            // }
             contentStream.stroke();
 
             contentStream.close();
@@ -328,9 +360,9 @@ public class GeneratorEtiquetas {
 
     }
 
-    
-    /** 
-     * Crea las etiquetas de los productos de una lista de productos 
+    /**
+     * Crea las etiquetas de los productos de una lista de productos
+     * 
      * @param listaProductos
      * @return PDDocument
      * @throws IOException
@@ -353,8 +385,8 @@ public class GeneratorEtiquetas {
             final int width = 100;
             final int height = 100;
             for (final TipoProducto producto : listaProductos) {
-                addText(document, page, x, y, 200, 50, false,
-                        "Codigos de barra producto: " + producto.getNombre());
+                // addText(document, page, x, y, 200, 50, false,
+                // "Codigos de barra producto: " + producto.getNombre());
                 y -= height;
 
                 final java.awt.image.BufferedImage image = generateEAN13BarcodeImage(String.valueOf(
@@ -382,9 +414,9 @@ public class GeneratorEtiquetas {
 
     }
 
-    
-    /** 
+    /**
      * Agrega un texto a el pdf
+     * 
      * @param document
      * @param page
      * @param x
@@ -396,15 +428,21 @@ public class GeneratorEtiquetas {
      * @throws IOException
      */
     private void addText(final PDDocument document, final PDPage page, final int x, final int y, final int weight,
-            final int height, final boolean format, final String message) throws IOException {
+            final int height, final boolean format, final String message,
+            PDPageContentStream contentStream) throws IOException {
+
         final PDTextField nameOfCompany = createTextBox(document);
-        addTextBoxToPage(nameOfCompany, page, x, y, weight, height, format);
-        nameOfCompany.setValue(message);
+
+        contentStream.newLineAtOffset(-x, -y);
+
+        
+        contentStream.showText(message);
+
     }
 
-    
-    /** 
+    /**
      * Agrega un textbox al pdf
+     * 
      * @param textBox
      * @param page
      * @param x
@@ -414,7 +452,8 @@ public class GeneratorEtiquetas {
      * @param required
      * @throws IOException
      */
-    private void addTextBoxToPage(final PDTextField textBox, final PDPage page, final float x, final float y, final float weight, final float height,
+    private void addTextBoxToPage(final PDTextField textBox, final PDPage page, final float x, final float y,
+            final float weight, final float height,
             final boolean required) throws IOException {
         final PDAnnotationWidget widget = textBox.getWidgets().get(0);
         final PDRectangle rect = new PDRectangle(x, y, weight, height);
@@ -425,12 +464,9 @@ public class GeneratorEtiquetas {
 
     }
 
-    
-   
-
-    
-    /** 
+    /**
      * Crea un textbox
+     * 
      * @param document
      * @return PDTextField
      */
@@ -452,9 +488,9 @@ public class GeneratorEtiquetas {
         return textBox;
     }
 
-    
-    /** 
+    /**
      * Genera una imagen de un codigo de barras a partir del texto
+     * 
      * @param barcodeText
      * @return BufferedImage
      */
@@ -468,9 +504,9 @@ public class GeneratorEtiquetas {
         return canvas.getBufferedImage();
     }
 
-    
-    /** 
+    /**
      * Agrega una imagen al pdf
+     * 
      * @param document
      * @param x
      * @param y
@@ -482,7 +518,8 @@ public class GeneratorEtiquetas {
      * @throws IOException
      */
     private void addImageToPdf(final PDDocument document, final int x, final int y, final int width, final int height,
-            final boolean format, final java.awt.image.BufferedImage image, final PDPageContentStream contentStream) throws IOException {
+            final boolean format, final java.awt.image.BufferedImage image, final PDPageContentStream contentStream)
+            throws IOException {
         final PDImageXObject pdfImage = JPEGFactory.createFromImage(document, image);
         contentStream.drawImage(pdfImage, x, y, width, height);
     }
