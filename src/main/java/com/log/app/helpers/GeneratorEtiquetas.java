@@ -8,6 +8,8 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -17,10 +19,12 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.JPEGFactory;
+import org.apache.pdfbox.pdmodel.graphics.image.LosslessFactory;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotationWidget;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDTextField;
+import org.apache.tools.ant.util.FileUtils;
 import org.aspectj.apache.bcel.util.ClassPath;
 import org.krysalis.barcode4j.impl.code128.Code128Bean;
 import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
@@ -51,6 +55,8 @@ public class GeneratorEtiquetas {
 
     }
 
+    private String URL = "https://storage.googleapis.com/clawtechlogo/logo.png";
+
     /**
      * Crea un PDF con el remito de recepcion.
      * 
@@ -60,14 +66,21 @@ public class GeneratorEtiquetas {
      * @throws URISyntaxException
      */
     public PDDocument createRemitoRecepcion(final Recepcion recepcion) throws IOException, URISyntaxException {
+        URL url = new URL(URL);
+        File file = new File(url.getFile());
 
         final java.awt.image.BufferedImage barcodeImage = generateEAN13BarcodeImage(
                 recepcion.getIdRecepcion().toString());
         final PDDocument document = new PDDocument();
+        // PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file,
+        // document);
+        PDImageXObject pdImage = LosslessFactory.createFromImage(document, ImageIO.read(url));
+
         try {
             final PDPage page = new PDPage(PDRectangle.A4);
             document.addPage(page);
             final PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
             contentStream.setFont(PDType1Font.HELVETICA, 10);
 
             createTableDetalleRecepcion(document, page, contentStream, recepcion);
@@ -77,15 +90,15 @@ public class GeneratorEtiquetas {
             addRecepcionData(document, page, recepcion, contentStream);
             contentStream.endText();
 
-            File file = new ClassPathResource("logo.png").getFile();
-
-            PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file, document);
-            contentStream.drawImage(pdImage, 450, 700, 100, 100);
+            // File file = new ClassPathResource("logo.png").getFile();
 
             addImageToPdf(document,
                     100, 150, 100, 50, true,
                     barcodeImage,
                     contentStream);
+
+            contentStream.drawImage(pdImage, 450, 700, 100, 100);
+
             contentStream.close();
             return document;
         } catch (final Exception e) {
@@ -217,7 +230,8 @@ public class GeneratorEtiquetas {
      * @throws IOException
      */
     public PDDocument createRemitoPedido(final Pedido pedido) throws IOException {
-
+        URL url = new URL(URL);
+        File file = new File(url.getFile());
         final java.awt.image.BufferedImage barcodeImage = generateEAN13BarcodeImage(pedido.getIdPedido().toString());
 
         final PDDocument document = new PDDocument();
@@ -226,6 +240,9 @@ public class GeneratorEtiquetas {
         document.addPage(page);
 
         final PDPageContentStream contentStream = new PDPageContentStream(document, page);
+        // PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file,
+        // document);
+        PDImageXObject pdImage = LosslessFactory.createFromImage(document, ImageIO.read(url));
 
         contentStream.setFont(PDType1Font.HELVETICA, 10);
         // contentStream.addLine(0, 450, 400, 450);
@@ -234,14 +251,14 @@ public class GeneratorEtiquetas {
 
         addPedidoData(document, page, pedido, contentStream);
         contentStream.endText();
-        File file = new ClassPathResource("logo.png").getFile();
-        PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file, document);
-        contentStream.drawImage(pdImage, 450, 700, 100, 100);
+        // File file = new ClassPathResource("logo.png").getFile();
 
         addImageToPdf(document,
                 100, 150, 100, 50, true,
                 barcodeImage,
                 contentStream);
+        contentStream.drawImage(pdImage, 450, 700, 100, 100);
+
         contentStream.close();
 
         return document;
