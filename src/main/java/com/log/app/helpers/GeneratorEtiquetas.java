@@ -3,6 +3,9 @@ package com.log.app.helpers;
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.apache.pdfbox.cos.COSName;
@@ -54,8 +57,10 @@ public class GeneratorEtiquetas {
      * @param recepcion
      * @return PDDocument
      * @throws IOException
+     * @throws URISyntaxException
      */
-    public PDDocument createRemitoRecepcion(final Recepcion recepcion) throws IOException {
+    public PDDocument createRemitoRecepcion(final Recepcion recepcion) throws IOException, URISyntaxException {
+
         final java.awt.image.BufferedImage barcodeImage = generateEAN13BarcodeImage(
                 recepcion.getIdRecepcion().toString());
         final PDDocument document = new PDDocument();
@@ -72,10 +77,10 @@ public class GeneratorEtiquetas {
             addRecepcionData(document, page, recepcion, contentStream);
             contentStream.endText();
 
-            // File file = new ClassPathResource("logo.png").getFile();
+            File file = new ClassPathResource("logo.png").getFile();
 
-            // PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file, document);
-            // contentStream.drawImage(pdImage, 450, 700, 100, 100);
+            PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file, document);
+            contentStream.drawImage(pdImage, 450, 700, 100, 100);
 
             addImageToPdf(document,
                     100, 150, 100, 50, true,
@@ -228,17 +233,11 @@ public class GeneratorEtiquetas {
         contentStream.beginText();
 
         addPedidoData(document, page, pedido, contentStream);
-
         contentStream.endText();
+        File file = new ClassPathResource("logo.png").getFile();
+        PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file, document);
+        contentStream.drawImage(pdImage, 450, 700, 100, 100);
 
-        // File file = new ClassPathResource("logo.png").getFile();
-
-        // PDImageXObject pdImage = PDImageXObject.createFromFileByContent(file, document);
-        // contentStream.drawImage(pdImage, 450, 700, 100, 100);
-        
-        
-        
-        
         addImageToPdf(document,
                 100, 150, 100, 50, true,
                 barcodeImage,
@@ -403,33 +402,29 @@ public class GeneratorEtiquetas {
             document.addPage(page);
 
             final PDPageContentStream contentStream = new PDPageContentStream(document, page);
-           
-           
+
             contentStream.beginText();
 
             contentStream.newLineAtOffset(150, 800);
-            contentStream.setFont(PDType1Font.HELVETICA, 12);
+            contentStream.setFont(PDType1Font.HELVETICA, 14);
             contentStream.showText("Etiquetas de Producto: " + listaProductos.get(0).getNombre());
             contentStream.endText();
-           
 
             contentStream.setNonStrokingColor(Color.WHITE);
             contentStream.setStrokingColor(Color.BLACK);
             contentStream.setLineWidth(1);
 
-
-
             int x = 50;
-            int y = 650;
+            int y = 600;
 
-            final int width = 100;
-            final int height = 100;
+            final int width = 250;
+            final int height = 150;
             for (final TipoProducto producto : listaProductos) {
                 // addText(document, page, x, y, 200, 50, false,
                 // "Codigos de barra producto: " + producto.getNombre());
-
-                final java.awt.image.BufferedImage image = generateEAN13BarcodeImage(String.valueOf(
-                        producto.getCodigoDeBarras()));
+                Long codigoDeBarras = Integer.valueOf(producto.getCodigoDeBarras()).longValue();
+                final java.awt.image.BufferedImage image = generateEAN13BarcodeImage(
+                        codigoDeBarras.toString());
                 addImageToPdf(document, x, y, width, height, true,
                         image, contentStream);
 
@@ -443,7 +438,7 @@ public class GeneratorEtiquetas {
             }
 
             contentStream.stroke();
-           
+
             contentStream.close();
 
             return document;
@@ -534,7 +529,7 @@ public class GeneratorEtiquetas {
      */
     private static java.awt.image.BufferedImage generateEAN13BarcodeImage(final String barcodeText) {
         final Code128Bean barcodeGenerator = new Code128Bean();
-        final BitmapCanvasProvider canvas = new BitmapCanvasProvider(160, java.awt.image.BufferedImage.TYPE_BYTE_BINARY,
+        final BitmapCanvasProvider canvas = new BitmapCanvasProvider(600, java.awt.image.BufferedImage.TYPE_BYTE_BINARY,
                 false, 0);
 
         barcodeGenerator.generateBarcode(canvas, barcodeText);

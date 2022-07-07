@@ -2,6 +2,7 @@ package com.log.app.services.Impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,9 +55,16 @@ public class EtiquetaService implements IEtiquetaService {
     public byte[] crearEtiquetaRecepcion(Recepcion recepcion) throws IOException {
         // TODO Auto-generated method stub
         ByteArrayOutputStream output = new ByteArrayOutputStream();
-        PDDocument MyPDF = etiquetasGenerator.createRemitoRecepcion(recepcion);
-        MyPDF.save(output);
-        MyPDF.close();
+        PDDocument MyPDF;
+        try {
+            MyPDF = etiquetasGenerator.createRemitoRecepcion(recepcion);
+            MyPDF.save(output);
+            MyPDF.close();
+        } catch (URISyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+       
 
         return output.toByteArray();
     }
