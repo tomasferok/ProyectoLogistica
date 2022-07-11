@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -52,5 +54,6 @@ public class TipoProducto implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_prov")
 	private Proveedor provedor;
-
+	@Enumerated(EnumType.STRING)
+	private MetodoPicking metodoPicking;
 }
