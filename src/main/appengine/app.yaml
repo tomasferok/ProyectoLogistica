@@ -1,7 +1,6 @@
-runtime: java11
-instance_class: b8
-manual_scaling: 
-  instances: 1
+runtime: java
+env: flex
+
 
 handlers:
 - url: /.*

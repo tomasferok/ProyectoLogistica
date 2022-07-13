@@ -50,10 +50,14 @@ public class TipoProducto implements Serializable {
 	private SubCategoria subCat;
 	private String descripcion;
 	private double precio;
+	private double precioDeVenta;
 	private double neto;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_prov")
 	private Proveedor provedor;
 	@Enumerated(EnumType.STRING)
 	private MetodoPicking metodoPicking;
+
+	private String imageUrl;
+
 }

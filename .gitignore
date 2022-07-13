@@ -37,3 +37,6 @@ build/
 src/main/resources/application.properties
 .m2/
 /bin/
+
+
+clave.json

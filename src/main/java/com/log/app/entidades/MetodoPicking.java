@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @since 1.0
  */
 public enum MetodoPicking {
-    FIFO("FIFO"), LIFO("LIFO"), FEFO("FEFO"), AZAR("AZAR"),;
+    FIFO("FIFO"), LIFO("LIFO"), FEFO("FEFO"), AZAR("AL AZAR"),;
 
     private String metodoPicking;
 
