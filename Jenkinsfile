@@ -25,11 +25,11 @@ pipeline {
             }
         }
 
-        stage('Espera Autorizacion') {
-            steps {
-                input '¿Autoriza realizar el despliegue a produccion?'
-            }
-        }
+        // stage('Espera Autorizacion') {
+        //     steps {
+        //         input '¿Autoriza realizar el despliegue a produccion?'
+        //     }
+        // }
 
         stage('Deliver') {
             steps {
