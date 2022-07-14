@@ -16,7 +16,7 @@ import lombok.Setter;
  * @version 1.0
  * @since 1.0
  */
-public interface ReporteProductos {
+public interface ReporteCategorias {
     int getYear();
 
     int getMes();
