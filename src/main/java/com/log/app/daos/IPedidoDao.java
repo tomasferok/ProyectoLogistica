@@ -61,9 +61,9 @@ public interface IPedidoDao extends CrudRepository<Pedido, Long> {
                         Date fechaPedidoEnd, long idTipoProducto);
 
 
-        @Modifying
-        @Transactional
+        // @Modifying
+        // @Transactional
 
-List<ReporteProductos> sumProductosPorCategoriaByMonth (Date fechaPedidoStart, Date fechaPedidoEnd);
+// List<ReporteProductos> sumProductosPorCategoriaByMonth (Date fechaPedidoStart, Date fechaPedidoEnd);
 
 }
