@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -148,26 +149,30 @@ public class TipoProductoServiceImpl implements ITipoProductoService {
 		Bucket bucket = storage.get("clawtechpics");
 		Blob blob = bucket.create("clawtechpics", bytes);
 		blob.getSelfLink();
-		Blob blob1   = bucket.get("clawtechpics");
+		Blob blob1 = bucket.get("clawtechpics");
 		String s = new String(blob1.getContent());
 
 		return blob.getSelfLink();
 	}
 
+	public String saveImage(Optional<MultipartFile> file, String tipoProductoNombre) {
 
-	public String saveImage(MultipartFile file, String tipoProductoNombre) {
-		byte[] bytes;
-		try {
-			bytes = file.getBytes();
-			Bucket bucket = storage.get("clawtechpics");
-			Blob blob = bucket.create("tipoProducto/" + tipoProductoNombre + ".png", bytes);
-			blob.getSelfLink();
-			return blob.getSelfLink();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (!file.isPresent()) {
 			return null;
+		} else {
+
+			byte[] bytes;
+			try {
+				bytes = file.get().getBytes();
+				Bucket bucket = storage.get("clawtechpics");
+				Blob blob = bucket.create("tipoProducto/" + tipoProductoNombre + ".png", bytes);
+				blob.getSelfLink();
+				return blob.getMediaLink();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
 		}
-		
 	}
 }

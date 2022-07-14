@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.websocket.server.PathParam;
 
@@ -65,8 +66,11 @@ public class TipoProductosRestController {
 
     @PostMapping("tipoProductos/image/{tipoProductoNombre}")
     public String saveTipoProducto(
-            @RequestParam("image") MultipartFile file, @PathVariable("tipoProductoNombre") String tipoProductoNombre) {
-        return tipoProductosService.saveImage(file, tipoProductoNombre);
+            @RequestParam("image") Optional<MultipartFile>file, @PathVariable("tipoProductoNombre") String tipoProductoNombre) {
+        
+       
+        
+                return tipoProductosService.saveImage(file, tipoProductoNombre);
 
     }
 
