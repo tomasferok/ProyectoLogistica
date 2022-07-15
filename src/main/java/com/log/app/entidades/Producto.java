@@ -37,15 +37,15 @@ public class Producto implements Serializable {
 	private Long idProd;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "tipoProd_id")
+	@JoinColumn(name = "tipoProd_id", nullable = false)
 
 	private TipoProducto tipoProducto;
 
-	@Column(name = "cantidad_disponible")
+	@Column(name = "cantidad_disponible", nullable = false)
 	private double cantidadDisponible;
-	@Column(name = "cantidad_reservada")
+	@Column(name = "cantidad_reservada", nullable = false)
 	private double cantidadReservada;
-	@Column(name = "cantidad_cuarentena")
+	@Column(name = "cantidad_cuarentena", nullable = false)
 	private double cantidadEnCuarentena;
 
 	private static final long serialVersionUID = 1L;

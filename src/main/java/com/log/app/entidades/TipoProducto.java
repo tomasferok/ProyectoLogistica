@@ -3,6 +3,7 @@ package com.log.app.entidades;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -40,7 +41,10 @@ public class TipoProducto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idTipoProd;
+	@Column(nullable = false, unique = true)
 	private int codigoDeBarras;
+	@Column(nullable = false, unique = true)
+
 	private String nombre;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "categoria_id")
@@ -48,14 +52,24 @@ public class TipoProducto implements Serializable {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "subCategoria_id")
 	private SubCategoria subCat;
+	@Column(nullable = false)
+
 	private String descripcion;
+	@Column(nullable = false)
+
 	private double precio;
+	@Column(nullable = false)
+
 	private double precioDeVenta;
+	@Column(nullable = false)
+
 	private double neto;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_prov")
 	private Proveedor provedor;
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+
 	private MetodoPicking metodoPicking;
 
 	private String imageUrl;

@@ -1,22 +1,27 @@
 package com.log.app.services.Impl;
 
+import com.log.app.daos.ICategoriaDao;
 import com.log.app.daos.IClienteDao;
 import com.log.app.daos.IDistribuidorDao;
 import com.log.app.daos.IPedidoDao;
 import com.log.app.daos.IProductoDao;
 import com.log.app.daos.IUsuarioDao;
-
+import com.log.app.data.ReporteCategorias;
 import com.log.app.data.ReporteProductos;
 import com.log.app.entidades.*;
 import com.log.app.services.Interfaces.IPedidosService;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -50,13 +55,16 @@ public class PedidosService implements IPedidosService {
     @Autowired
     private IClienteDao clienteDao;
 
+    @Autowired
+    private ICategoriaDao categoriaDao;
+
     // @Autowired
     // private VentasService ventasService;
 
-/** 
- * @param pedido
- * @return Pedido
- */
+    /**
+     * @param pedido
+     * @return Pedido
+     */
 
     @Override
     @Transactional
@@ -67,6 +75,7 @@ public class PedidosService implements IPedidosService {
                     : null;
             pedido.getCliente().setIdCliente(idCliente);
             clienteDao.save(pedido.getCliente());
+        
             pedido.getProductos().forEach(producto -> {
                 Producto prod = productoDao.findByTipoProducto_idTipoProd(producto.getProducto().getIdTipoProd());
                 prod.setCantidadDisponible(prod.getCantidadDisponible() - producto.getCantidad());
@@ -74,61 +83,60 @@ public class PedidosService implements IPedidosService {
                 productoDao.save(prod);
             });
             return pedidosDao.save(pedido);
-        } catch (
-        Exception e) {
+        } catch (Exception e) {
             // TODO: handle exceptio
             System.out.println(e.getMessage());
             return null;
         }
     }
 
-/** 
- * @return List<Pedido>
- */
+    /**
+     * @return List<Pedido>
+     */
 
     public List<Pedido> findAll() {
         return pedidosDao.findAll();
     }
 
-/** 
- * @param id
- * @return Pedido
- */
+    /**
+     * @param id
+     * @return Pedido
+     */
 
     public Pedido findById(Long id) {
         return pedidosDao.findById(id).get();
     }
 
-/** 
- * @param id
- */
+    /**
+     * @param id
+     */
 
     public void deleteById(Long id) {
         pedidosDao.deleteById(id);
     }
 
-/** 
- * @param pedido
- */
+    /**
+     * @param pedido
+     */
 
     public void delete(Pedido pedido) {
         pedidosDao.delete(pedido);
     }
 
-/** 
- * @param fecha
- * @return List<Pedido>
- */
+    /**
+     * @param fecha
+     * @return List<Pedido>
+     */
 
     public List<Pedido> findByFecha(Date fecha) {
         return pedidosDao.findByfechaPedido(fecha);
     }
 
-/** 
- * @param idPedido
- * @param idUsuario
- * @return Pedido
- */
+    /**
+     * @param idPedido
+     * @param idUsuario
+     * @return Pedido
+     */
 
     public Pedido cancelarPedido(Long idPedido, Long idUsuario) {
         Pedido pedido = pedidosDao.findById(idPedido).get();
@@ -143,11 +151,11 @@ public class PedidosService implements IPedidosService {
 
     }
 
-/** 
- * @param idPedido
- * @param idUsuario
- * @return Pedido
- */
+    /**
+     * @param idPedido
+     * @param idUsuario
+     * @return Pedido
+     */
 
     public Pedido prepararPedido(Long idPedido, Long idUsuario) {
         Pedido pedido = pedidosDao.findById(idPedido).get();
@@ -158,11 +166,11 @@ public class PedidosService implements IPedidosService {
 
     }
 
-/** 
- * @param idPedido
- * @param idUsuario
- * @return Pedido
- */
+    /**
+     * @param idPedido
+     * @param idUsuario
+     * @return Pedido
+     */
 
     public Pedido controlarPedido(Long idPedido, Long idUsuario) {
         Pedido pedido = pedidosDao.findById(idPedido).get();
@@ -173,12 +181,12 @@ public class PedidosService implements IPedidosService {
 
     }
 
-/** 
- * @param idPedido
- * @param idUsuario
- * @param idUsuarioDistribuidor
- * @return Pedido
- */
+    /**
+     * @param idPedido
+     * @param idUsuario
+     * @param idUsuarioDistribuidor
+     * @return Pedido
+     */
 
     public Pedido despacharPedido(Long idPedido, Long idUsuario, Long idUsuarioDistribuidor) {
         logger.info("despacharPedido" + idPedido.toString() + idUsuario.toString() + idUsuarioDistribuidor.toString());
@@ -191,11 +199,11 @@ public class PedidosService implements IPedidosService {
 
     }
 
-/** 
- * @param idPedido
- * @param idUsuario
- * @return Pedido
- */
+    /**
+     * @param idPedido
+     * @param idUsuario
+     * @return Pedido
+     */
 
     public Pedido entregarPedido(Long idPedido, Long idUsuario) {
 
@@ -235,12 +243,12 @@ public class PedidosService implements IPedidosService {
 
     }
 
-/** 
- * @param pedido
- * @param idUsuario
- * @param tipoEstadoPedido
- * @return Pedido
- */
+    /**
+     * @param pedido
+     * @param idUsuario
+     * @param tipoEstadoPedido
+     * @return Pedido
+     */
 
     public Pedido cambiarEstadoPedido(Pedido pedido, Long idUsuario, TipoEstadoPedido tipoEstadoPedido) {
 
@@ -253,21 +261,21 @@ public class PedidosService implements IPedidosService {
         return pedidosDao.save(pedido);
     }
 
-/** 
- * @param fechaPedidoStart
- * @param fechaPedidoEnd
- * @return List<Pedido>
- */
+    /**
+     * @param fechaPedidoStart
+     * @param fechaPedidoEnd
+     * @return List<Pedido>
+     */
 
     public List<Pedido> findByFehaPedidoIsBetween(Date fechaPedidoStart, Date fechaPedidoEnd) {
         return pedidosDao.findByFechaPedidoIsBetween(fechaPedidoStart, fechaPedidoEnd);
     }
 
-/** 
- * @param idPedido
- * @param idUsuario
- * @return Pedido
- */
+    /**
+     * @param idPedido
+     * @param idUsuario
+     * @return Pedido
+     */
 
     public Pedido devolverPedido(Long idPedido, Long idUsuario) {
         Pedido pedido = pedidosDao.findById(idPedido).get();
@@ -290,10 +298,10 @@ public class PedidosService implements IPedidosService {
         return cambiarEstadoPedido(pedido, idUsuario, TipoEstadoPedido.DEVUELTO);
     }
 
-/** 
- * @param year
- * @return List<ReporteProductos>
- */
+    /**
+     * @param year
+     * @return List<ReporteProductos>
+     */
 
     public List<ReporteProductos> reporteProductosVendidosAnual(int year) {
         Calendar calendar = Calendar.getInstance();
@@ -306,11 +314,11 @@ public class PedidosService implements IPedidosService {
         return reporteProductos;
     }
 
-/** 
- * @param year
- * @param idProducto
- * @return List<ReporteProductos>
- */
+    /**
+     * @param year
+     * @param idProducto
+     * @return List<ReporteProductos>
+     */
 
     public List<ReporteProductos> reporteProductoVendidoAnual(int year, long idProducto) {
         Calendar calendar = Calendar.getInstance();
@@ -322,4 +330,9 @@ public class PedidosService implements IPedidosService {
                 .sumProductosVendidosByMonthBetweenFechasByTipoProducto(startDate, endDate, idProducto);
         return reporteProductos;
     }
+
+
+
+    
+
 }

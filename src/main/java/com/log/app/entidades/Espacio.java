@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -42,8 +43,10 @@ public class Espacio implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEsp;
+	@Column(nullable = false)
+
 	private String nomEspacio;
-	@ManyToMany(fetch = FetchType.EAGER)	
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "espacios_productos", joinColumns = @JoinColumn(name = "id_tipo_producto"), inverseJoinColumns = @JoinColumn(name = "id_espacio"))
 	private List<TipoProducto> productos;
 	@ManyToOne()

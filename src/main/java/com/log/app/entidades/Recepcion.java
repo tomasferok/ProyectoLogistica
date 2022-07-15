@@ -36,14 +36,16 @@ public class Recepcion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRecepcion;
-    @Column(name = "fecha_recepcion")
+    @Column(name = "fecha_recepcion", nullable = false)
     private Date fechaRecepcion;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Proveedor provedor;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_recepcion")
     private List<RecepcionProducto> productos;
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn( nullable = false)
     private List<EstadoRecepcion> estadoRecepcion;
 
 }

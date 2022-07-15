@@ -1,5 +1,6 @@
 package com.log.app.daos;
 
+import com.log.app.data.ReporteCategorias;
 import com.log.app.data.ReporteProductos;
 import com.log.app.entidades.Pedido;
 import com.log.app.entidades.TipoEstadoPedido;
@@ -52,18 +53,13 @@ public interface IPedidoDao extends CrudRepository<Pedido, Long> {
         @Query(value = "select year(pedidos.fecha_pedido) as year, month(pedidos.fecha_pedido) as mes, " +
                         " sum(cantidad) as cantidad from pedidos_producto " +
                         "inner join pedidos on pedidos_producto.id_pedido = pedidos.id_pedido " +
-                        "inner join tipo_productos on tipo_productos.id_tipo_prod = pedidos_producto.id_tipo_producto "+
+                        "inner join tipo_productos on tipo_productos.id_tipo_prod = pedidos_producto.id_tipo_producto "
+                        +
                         "where  (pedidos.fecha_pedido BETWEEN ?1 AND ?2) and pedidos_producto.id_tipo_producto = ?3 " +
                         "GROUP BY month(pedidos.fecha_pedido)"
-                        + "order by year(pedidos.fecha_pedido), month(pedidos.fecha_pedido)",
-                        nativeQuery = true)
+                        + "order by year(pedidos.fecha_pedido), month(pedidos.fecha_pedido)", nativeQuery = true)
         List<ReporteProductos> sumProductosVendidosByMonthBetweenFechasByTipoProducto(Date fechaPedidoStart,
                         Date fechaPedidoEnd, long idTipoProducto);
 
-
-        // @Modifying
-        // @Transactional
-
-// List<ReporteProductos> sumProductosPorCategoriaByMonth (Date fechaPedidoStart, Date fechaPedidoEnd);
-
+     
 }

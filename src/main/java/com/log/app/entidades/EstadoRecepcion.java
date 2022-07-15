@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -32,21 +33,15 @@ public class EstadoRecepcion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstadoRecepcion;
-    
-    // @ManyToOne
-    // @JsonIgnore
-    // private Recepcion recepcion;
-
     @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(nullable = false)
     private Usuario usuario;
-
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TipoEstadoRecepcion tipoEstado;
-
-
-    @Column(name = "fecha_estado")
+    @Column(name = "fecha_estado", nullable = false)
     private Date fecha;
-
+    
     
 
 }

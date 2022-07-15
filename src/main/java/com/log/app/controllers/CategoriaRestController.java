@@ -1,6 +1,8 @@
 package com.log.app.controllers;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -102,5 +104,18 @@ public class CategoriaRestController {
 	@DeleteMapping("/categoria/{idCat}")
 	public void delete(@PathVariable Long idCat) {
 		categoriaService.delete(idCat);
+	}
+
+
+
+	/**
+	 * @param year
+	 * @return List<ReporteCategorias>
+	 */
+	@GetMapping("/categoria/reporte/{year}/")
+	@ResponseStatus(HttpStatus.OK)
+	public Map<Categoria, Map<Date, Double>> reporteAnualCategoria(@PathVariable("year") Integer year) {
+
+		return categoriaService.reporteVentasPorCategoria(year);
 	}
 }

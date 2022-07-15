@@ -35,12 +35,9 @@ public class PedidoProducto implements Serializable {
 
     @ManyToOne()
     @JoinColumn(nullable = false, name = "id_tipo_producto")
-
     private TipoProducto producto;
-
-    @Column(name = "cantidad")
+    @Column(name = "cantidad", nullable = false)
     Double cantidad;
-
     @ManyToOne()
     @JsonIgnore
     @JoinColumn( name = "id_pedido")

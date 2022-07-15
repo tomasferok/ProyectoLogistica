@@ -1,9 +1,12 @@
 package com.log.app.controllers;
 
+import com.log.app.data.ReporteCategorias;
 import com.log.app.data.ReporteProductos;
+import com.log.app.entidades.Categoria;
 import com.log.app.entidades.Pedido;
 import com.log.app.services.Impl.PedidosService;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -145,6 +148,15 @@ public class PedidosRestController {
     }
 
     
+
+    // @GetMapping("/pedidos/categorias/reporte/")
+    // @ResponseStatus(HttpStatus.OK)
+    // public List<ReporteCategorias> reporteAnualCategoria2() {
+
+    //     return pedidosService.prueba(2022);
+
+    // }
+    
     /** 
      * @param year
      * @return List<ReporteProductos>
@@ -167,7 +179,6 @@ public class PedidosRestController {
         return pedidosService.reporteProductoVendidoAnual(year, idProducto);
     }
 
-    
     /** 
      * @param id
      */

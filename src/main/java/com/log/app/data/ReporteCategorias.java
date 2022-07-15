@@ -17,13 +17,14 @@ import lombok.Setter;
  * @since 1.0
  */
 public interface ReporteCategorias {
-    int getYear();
+    Integer getYear();
 
-    int getMes();
+    Integer getMes();
 
-    // String getNombre();
+    String getNombreCat();
+
+    Long getIdCat();
 
     // int getIdTipoProd();
-
     double getCantidad();
 }

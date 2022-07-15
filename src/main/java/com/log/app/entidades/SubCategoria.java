@@ -2,6 +2,7 @@ package com.log.app.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +33,8 @@ public class SubCategoria implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idSubCat;
-	
+	@Column(nullable = false, unique = true)
+
 	private String nombre;
 
 }

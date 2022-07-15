@@ -2,6 +2,7 @@ package com.log.app.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,9 +29,17 @@ public class Empresa implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEmpresa;
+	@Column(nullable = false, unique = true)
+
 	private String nomEmpresa;
+	@Column(nullable = false)
+
 	private String contacto;
+	@Column(nullable = false, unique = true)
+
 	private int documento;
+		@Column(nullable = false)
+
 	private String email;
 	
 	

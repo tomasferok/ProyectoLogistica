@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -40,10 +41,12 @@ public class Pasillo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPasillo;
+	@Column(nullable = false)
+
 	private String nomPasillo;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_deposito")
+	@JoinColumn(name = "id_deposito", nullable = false)
 	@JsonIgnore
 	private Deposito deposito;
 	

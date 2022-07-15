@@ -35,7 +35,7 @@ public class RecepcionProducto {
 
     private TipoProducto producto;
 
-    @Column(name = "cantidad")
+    @Column(name = "cantidad", nullable = false)
     Double cantidad;
 
     @JoinColumn( name = "id_recepcion")
