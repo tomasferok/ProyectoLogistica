@@ -112,7 +112,7 @@ public class CategoriaRestController {
 	 * @param year
 	 * @return List<ReporteCategorias>
 	 */
-	@GetMapping("/categoria/reporte/{year}/")
+	@GetMapping("/categoria/reporte/{year}")
 	@ResponseStatus(HttpStatus.OK)
 	public Map<Categoria, Map<Date, Double>> reporteAnualCategoria(@PathVariable("year") Integer year) {
 

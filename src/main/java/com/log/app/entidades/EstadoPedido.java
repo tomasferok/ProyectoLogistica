@@ -54,10 +54,8 @@ public class EstadoPedido implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private TipoEstadoPedido tipoEstadoPedido;
-
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_pedido")
 	@JsonIgnore
 	Pedido pedido;
-
 }

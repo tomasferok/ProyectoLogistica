@@ -33,7 +33,7 @@ pipeline {
 
         stage('Deliver') {
             steps {
-                sh 'mvn -DskipTests package appengine:deploy -P cloud-gcp'
+                sh 'mvn -DskipTests package appengine:deploy -P gcp'
             }
         }
     }

@@ -1,7 +1,13 @@
-runtime: java11
-instance_class: b8
-manual_scaling: 
-  instances: 1
+runtime: java
+env: flex
+resources:
+  cpu: 2
+  memory_gb: 2.3
+  disk_size_gb: 10
+  volumes:
+  - name: backenddisk
+    volume_type: tmpfs
+    size_gb: 0.5
 
 
 handlers:

@@ -3,4 +3,4 @@
 
 
 
-COMANDO PARA DESPLIEGUE EN APP ENGINE DE GCP: mvn -DskipTests package appengine:deploy -P cloud-gcp
+COMANDO PARA DESPLIEGUE EN APP ENGINE DE GCP: mvn -DskipTests package appengine:deploy -P gcp

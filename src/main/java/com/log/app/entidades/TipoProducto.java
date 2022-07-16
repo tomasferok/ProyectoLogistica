@@ -44,7 +44,6 @@ public class TipoProducto implements Serializable {
 	@Column(nullable = false, unique = true)
 	private int codigoDeBarras;
 	@Column(nullable = false, unique = true)
-
 	private String nombre;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "categoria_id")
@@ -53,25 +52,19 @@ public class TipoProducto implements Serializable {
 	@JoinColumn(name = "subCategoria_id")
 	private SubCategoria subCat;
 	@Column(nullable = false)
-
 	private String descripcion;
 	@Column(nullable = false)
-
 	private double precio;
 	@Column(nullable = false)
-
 	private double precioDeVenta;
 	@Column(nullable = false)
-
 	private double neto;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_prov")
 	private Proveedor provedor;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-
 	private MetodoPicking metodoPicking;
-
 	private String imageUrl;
 
 }

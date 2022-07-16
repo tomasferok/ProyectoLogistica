@@ -45,7 +45,7 @@ public class Recepcion {
     @JoinColumn(name = "id_recepcion")
     private List<RecepcionProducto> productos;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn( nullable = false)
+    @JoinColumn(name = "id_recepcion")
     private List<EstadoRecepcion> estadoRecepcion;
 
 }

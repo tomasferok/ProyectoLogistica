@@ -87,7 +87,6 @@ public class UsuarioRestController {
         System.out.println("loginRequest: " + loginRequest.getEmail() + " " + loginRequest.getPassword());
         AuthenticationResponse response = userService.authenticateUsuario(loginRequest.getEmail(),
                 loginRequest.getPassword());
-
         return new ResponseEntity<>(response,
                 HttpStatus.OK);
 
