@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 import com.log.app.daos.IProductoDao;
 import com.log.app.daos.IRecepcionDao;
-import com.log.app.data.ReporteProductos;
+import com.log.app.data.ReporteProductosInterface;
 import com.log.app.entidades.EstadoRecepcion;
 import com.log.app.entidades.Producto;
 import com.log.app.entidades.Recepcion;
@@ -163,13 +163,13 @@ public class RecepcionService implements IRecepcionService {
      * @param year
      * @return List<ReporteProductos>
      */
-    public List<ReporteProductos> reporteProductosPedidosAnual(int year) {
+    public List<ReporteProductosInterface> reporteProductosPedidosAnual(int year) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(year, 01, 01);
+        calendar.set(year, 0, 01);
         Date startDate = calendar.getTime();
-        calendar.set(year, 12, 31);
+        calendar.set(year, 11, 31);
         Date endDate = calendar.getTime();
-        List<ReporteProductos> reporteProductos = recepcionDao.sumProductosSolicitadosByMonthBetweenFechas(startDate,
+        List<ReporteProductosInterface> reporteProductos = recepcionDao.sumProductosSolicitadosByMonthBetweenFechas(startDate,
                 endDate);
         return reporteProductos;
     }
@@ -180,13 +180,13 @@ public class RecepcionService implements IRecepcionService {
      * @param idProducto
      * @return List<ReporteProductos>
      */
-    public List<ReporteProductos> reporteProductoPedidoAnual(int year, long idProducto) {
+    public List<ReporteProductosInterface> reporteProductoPedidoAnual(int year, long idProducto) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(year, 01, 01);
+        calendar.set(year, 0, 01);
         Date startDate = calendar.getTime();
-        calendar.set(year, 12, 31);
+        calendar.set(year, 11, 31);
         Date endDate = calendar.getTime();
-        List<ReporteProductos> reporteProductos = recepcionDao.sumProductosSolicitadosByMonthBetweenFechasByProducto(
+        List<ReporteProductosInterface> reporteProductos = recepcionDao.sumProductosSolicitadosByMonthBetweenFechasByProducto(
                 startDate,
                 endDate, idProducto);
         return reporteProductos;

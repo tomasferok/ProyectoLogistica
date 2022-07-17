@@ -2,7 +2,7 @@ package com.log.app.services.Interfaces;
 
 import java.util.List;
 
-import com.log.app.data.ReporteProductos;
+import com.log.app.data.ReporteProductosInterface;
 import com.log.app.entidades.Pedido;
 
 public interface IPedidosService {
@@ -10,7 +10,7 @@ public interface IPedidosService {
 
     public List<Pedido> findAll();
 
-    List<ReporteProductos> reporteProductoVendidoAnual(int year, long idProducto);
+    List<ReporteProductosInterface> reporteProductoVendidoAnual(int year, long idProducto);
 
     
     

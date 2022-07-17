@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.websocket.server.PathParam;
 
-import com.log.app.data.ReporteProductos;
+import com.log.app.data.ReporteProductosInterface;
 import com.log.app.entidades.Recepcion;
 import com.log.app.entidades.RecepcionProducto;
 import com.log.app.entidades.TipoEstadoRecepcion;
@@ -126,7 +126,7 @@ public class RecepcionRestController {
      */
     @GetMapping("/recepcion/reporte/{year}")
     @ResponseStatus(HttpStatus.OK)
-    public List<ReporteProductos> reporteAnual(@PathVariable("year") Integer year) {
+    public List<ReporteProductosInterface> reporteAnual(@PathVariable("year") Integer year) {
         return recepcionService.reporteProductosPedidosAnual(year);
     }
 
@@ -137,7 +137,7 @@ public class RecepcionRestController {
      */
     @GetMapping("/recepcion/reporte/{year}/")
     @ResponseStatus(HttpStatus.OK)
-    public List<ReporteProductos> reporteAnual(@PathVariable("year") Integer year,
+    public List<ReporteProductosInterface> reporteAnual(@PathVariable("year") Integer year,
             @RequestParam(name = "idProducto") Long idProducto) {
         return recepcionService.reporteProductoPedidoAnual(year, idProducto);
     }

@@ -17,7 +17,7 @@ import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.BucketInfo;
 import com.google.cloud.storage.Storage;
 import com.log.app.daos.ITipoProductoDao;
-import com.log.app.data.ReporteProductos;
+import com.log.app.data.ReporteProductosInterface;
 import com.log.app.entidades.Producto;
 import com.log.app.entidades.TipoProducto;
 import com.log.app.helpers.ReporteProductosMasVendidos;

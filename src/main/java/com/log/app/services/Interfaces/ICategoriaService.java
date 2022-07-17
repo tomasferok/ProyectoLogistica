@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.log.app.data.ReporteProducto;
 import com.log.app.entidades.Categoria;
 
 
@@ -18,5 +19,10 @@ public interface ICategoriaService {
 	
 	public void delete(Long idCat);
 
-	Map<Categoria, Map<Date, Double>> reporteVentasPorCategoria(Integer year);
+	List<Map<Object, Object>> reporteVentasPorCategoria(Integer year);
+
+	public List<ReporteProducto> reporteCategoriaVentasAnual(Integer year, Long idCat);
+
+	public List<ReporteProducto> reporteCategoriaComprasAnual(Integer year, Long idCat);
+
 }

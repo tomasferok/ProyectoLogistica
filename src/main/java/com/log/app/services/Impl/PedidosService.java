@@ -7,7 +7,7 @@ import com.log.app.daos.IPedidoDao;
 import com.log.app.daos.IProductoDao;
 import com.log.app.daos.IUsuarioDao;
 import com.log.app.data.ReporteCategorias;
-import com.log.app.data.ReporteProductos;
+import com.log.app.data.ReporteProductosInterface;
 import com.log.app.entidades.*;
 import com.log.app.services.Interfaces.IPedidosService;
 
@@ -303,13 +303,13 @@ public class PedidosService implements IPedidosService {
      * @return List<ReporteProductos>
      */
 
-    public List<ReporteProductos> reporteProductosVendidosAnual(int year) {
+    public List<ReporteProductosInterface> reporteProductosVendidosAnual(int year) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(year, 01, 01);
+        calendar.set(year, 0, 01);
         Date startDate = calendar.getTime();
         calendar.set(year, 12, 31);
         Date endDate = calendar.getTime();
-        List<ReporteProductos> reporteProductos = pedidosDao
+        List<ReporteProductosInterface> reporteProductos = pedidosDao
                 .sumProductosVendidosByMonthBetweenFechas(startDate, endDate);
         return reporteProductos;
     }
@@ -320,13 +320,13 @@ public class PedidosService implements IPedidosService {
      * @return List<ReporteProductos>
      */
 
-    public List<ReporteProductos> reporteProductoVendidoAnual(int year, long idProducto) {
+    public List<ReporteProductosInterface> reporteProductoVendidoAnual(int year, long idProducto) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, 01, 01);
         Date startDate = calendar.getTime();
         calendar.set(year, 12, 31);
         Date endDate = calendar.getTime();
-        List<ReporteProductos> reporteProductos = pedidosDao
+        List<ReporteProductosInterface> reporteProductos = pedidosDao
                 .sumProductosVendidosByMonthBetweenFechasByTipoProducto(startDate, endDate, idProducto);
         return reporteProductos;
     }

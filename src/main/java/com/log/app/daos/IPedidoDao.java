@@ -1,7 +1,7 @@
 package com.log.app.daos;
 
 import com.log.app.data.ReporteCategorias;
-import com.log.app.data.ReporteProductos;
+import com.log.app.data.ReporteProductosInterface;
 import com.log.app.entidades.Pedido;
 import com.log.app.entidades.TipoEstadoPedido;
 import com.log.app.entidades.TipoProducto;
@@ -44,7 +44,7 @@ public interface IPedidoDao extends CrudRepository<Pedido, Long> {
                         "where  (pedidos.fecha_pedido BETWEEN ?1 AND ?2) " +
                         "GROUP BY month(pedidos.fecha_pedido), year(pedidos.fecha_pedido) "
                         + "order by year(pedidos.fecha_pedido), month(pedidos.fecha_pedido)", nativeQuery = true)
-        List<ReporteProductos> sumProductosVendidosByMonthBetweenFechas(Date fechaPedidoStart,
+        List<ReporteProductosInterface> sumProductosVendidosByMonthBetweenFechas(Date fechaPedidoStart,
                         Date fechaPedidoEnd);
 
         @Modifying
@@ -58,7 +58,7 @@ public interface IPedidoDao extends CrudRepository<Pedido, Long> {
                         "where  (pedidos.fecha_pedido BETWEEN ?1 AND ?2) and pedidos_producto.id_tipo_producto = ?3 " +
                         "GROUP BY month(pedidos.fecha_pedido)"
                         + "order by year(pedidos.fecha_pedido), month(pedidos.fecha_pedido)", nativeQuery = true)
-        List<ReporteProductos> sumProductosVendidosByMonthBetweenFechasByTipoProducto(Date fechaPedidoStart,
+        List<ReporteProductosInterface> sumProductosVendidosByMonthBetweenFechasByTipoProducto(Date fechaPedidoStart,
                         Date fechaPedidoEnd, long idTipoProducto);
 
      

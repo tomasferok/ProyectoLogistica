@@ -31,7 +31,7 @@ public class RecepcionProducto {
     private Long idRecepcionProducto;
 
     @ManyToOne()
-    @JoinColumn(nullable = false, name = "id_tipo_producto")
+    @JoinColumn(name = "id_tipo_producto")
 
     private TipoProducto producto;
 

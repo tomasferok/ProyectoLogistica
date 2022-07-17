@@ -16,14 +16,17 @@ import lombok.Setter;
  * @version 1.0
  * @since 1.0
  */
-public interface ReporteProductos {
-    int getYear();
+public interface ReporteProductosInterface {
+    Integer getYear();
 
-    int getMes();
+    Integer getMes();
 
     // String getNombre();
 
     // int getIdTipoProd();
 
-    double getCantidad();
+    Double getCantidad();
+
+
+    
 }

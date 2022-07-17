@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.log.app.constants.Constants;
+import com.log.app.data.ReporteProducto;
 import com.log.app.entidades.Categoria;
 import com.log.app.services.Interfaces.ICategoriaService;
 
@@ -114,8 +115,34 @@ public class CategoriaRestController {
 	 */
 	@GetMapping("/categoria/reporte/{year}")
 	@ResponseStatus(HttpStatus.OK)
-	public Map<Categoria, Map<Date, Double>> reporteAnualCategoria(@PathVariable("year") Integer year) {
+	public List<Map<Object, Object>> reporteAnualCategoria(@PathVariable("year") Integer year) {
 
 		return categoriaService.reporteVentasPorCategoria(year);
+	}
+
+
+	/**
+	 * @param year
+	 * @return List<ReporteProducto>
+	 */
+	@GetMapping("/categoria/reporte/ventas/{categoria}/{year}")
+	@ResponseStatus(HttpStatus.OK)
+	public List<ReporteProducto> reporteAnualUnicaCategoria(@PathVariable("year") Integer year,
+			@PathVariable("categoria") Long idCat) {
+
+		return categoriaService.reporteCategoriaVentasAnual(year, idCat);
+	
+	
+	}
+	/**
+	 * @param year
+	 * @return List<ReporteProducto>
+	 */
+	@GetMapping("/categoria/reporte/compras/{categoria}/{year}")
+	@ResponseStatus(HttpStatus.OK)
+	public List<ReporteProducto> reporteAnualUnicaCategoriaCompras(@PathVariable("year") Integer year,
+			@PathVariable("categoria") Long idCat) {
+
+		return categoriaService.reporteCategoriaComprasAnual(year, idCat);
 	}
 }

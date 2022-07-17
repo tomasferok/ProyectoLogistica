@@ -1,7 +1,7 @@
 package com.log.app.controllers;
 
 import com.log.app.data.ReporteCategorias;
-import com.log.app.data.ReporteProductos;
+import com.log.app.data.ReporteProductosInterface;
 import com.log.app.entidades.Categoria;
 import com.log.app.entidades.Pedido;
 import com.log.app.services.Impl.PedidosService;
@@ -163,7 +163,7 @@ public class PedidosRestController {
      */
     @GetMapping("/pedidos/reporte/{year}")
     @ResponseStatus(HttpStatus.OK)
-    public List<ReporteProductos> reporteAnual(@PathVariable("year") Integer year) {
+    public List<ReporteProductosInterface> reporteAnual(@PathVariable("year") Integer year) {
         return pedidosService.reporteProductosVendidosAnual(year);
     }
 
@@ -175,7 +175,7 @@ public class PedidosRestController {
      */
     @GetMapping("/pedidos/reporte/{year}/")
     @ResponseStatus(HttpStatus.OK)
-    public List<ReporteProductos> reporteAnualProducto(@PathVariable("year") Integer year, @RequestParam(name = "idProducto") Long idProducto) {
+    public List<ReporteProductosInterface> reporteAnualProducto(@PathVariable("year") Integer year, @RequestParam(name = "idProducto") Long idProducto) {
         return pedidosService.reporteProductoVendidoAnual(year, idProducto);
     }
 
