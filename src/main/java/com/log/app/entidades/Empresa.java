@@ -30,16 +30,12 @@ public class Empresa implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEmpresa;
 	@Column(nullable = false, unique = true)
-
 	private String nomEmpresa;
-	@Column(nullable = false)
-
+	@Column(nullable = false,  unique = true)
 	private String contacto;
 	@Column(nullable = false, unique = true)
-
 	private int documento;
-		@Column(nullable = false)
-
+	@Column(nullable = false,  unique = true)
 	private String email;
 	
 	

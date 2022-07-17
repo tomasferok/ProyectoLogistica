@@ -31,7 +31,7 @@ public class Cliente implements Serializable {
 	@Column(nullable = false, unique = true)
 
 	private String nombre;
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 
 	private String razonSocial;
 	@Column(nullable = false, unique = true)
@@ -42,10 +42,10 @@ public class Cliente implements Serializable {
 	@Column(nullable = false)
 
 	private String ciudad;
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 
 	private String email;
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 
 	private String telefono;
 

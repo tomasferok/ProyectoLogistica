@@ -33,14 +33,14 @@ public class Proveedor implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idProv;
+	
 	@Column(nullable = false, unique = true)
-
 	private String nombreProv;
+
 	@Column(nullable = false)
-
 	private String contacto;
-	@Column(nullable = false, unique = true)
 
+	@Column(nullable = false, unique = true)
 	private String email;
 
 	public Proveedor() {

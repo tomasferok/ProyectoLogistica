@@ -275,7 +275,7 @@ public class GeneratorEtiquetas {
      */
     public void addPedidoData(final PDDocument document, final PDPage page, final Pedido pedido, PDPageContentStream cs)
             throws IOException {
-        final double costoTotal = pedido.getProductos().stream().mapToDouble(x -> x.getProducto().getPrecio()).sum();
+        final double costoTotal = pedido.getProductos().stream().mapToDouble(x -> x.getProducto().getPrecioDeVenta()).sum();
         // Add Company Name and details
         cs.newLineAtOffset(50, 800);
         cs.setFont(PDType1Font.HELVETICA, 20);
@@ -339,7 +339,7 @@ public class GeneratorEtiquetas {
             row.createCell(5, Integer.toString(i + 1));
             row.createCell(25, d.get(i).getProducto().getNombre());
             row.createCell(15, Double.toString(d.get(i).getCantidad()));
-            row.createCell(15, Double.toString(d.get(i).getProducto().getPrecio()));
+            row.createCell(15, Double.toString(d.get(i).getProducto().getPrecioDeVenta()));
             row.createCell(15, Integer.toString(d.get(i).getProducto().getCodigoDeBarras()));
         }
 
