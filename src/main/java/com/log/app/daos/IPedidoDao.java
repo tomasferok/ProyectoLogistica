@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import com.log.app.entidades.Usuario;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -26,6 +27,8 @@ public interface IPedidoDao extends CrudRepository<Pedido, Long> {
         List<Pedido> findAll();
 
         long countByFechaPedidoIsBetween(Date fechaPedidoStart, Date fechaPedidoEnd);
+
+        List<Pedido> findByDistribuidor_UsuarioAndDuracionFinalNull(Usuario usuario);
 
         @Query(value = "select sum(cantidad) from pedidos_producto "
                         +

@@ -216,6 +216,7 @@ public class PedidosService implements IPedidosService {
 
         Pedido pedido = pedidosDao.findById(idPedido).get();
         Date fecha = new Date();
+        
         // Duration duration = Duration.between(fecha.getTime(),
         // pedido.getFechaPedido().getTime());
         long diffInMillies = Math.abs(fecha.getTime() - pedido.getFechaPedido().getTime());
@@ -329,6 +330,13 @@ public class PedidosService implements IPedidosService {
         List<ReporteProductosInterface> reporteProductos = pedidosDao
                 .sumProductosVendidosByMonthBetweenFechasByTipoProducto(startDate, endDate, idProducto);
         return reporteProductos;
+    }
+
+
+    @Override
+    public List<Pedido> findByDistribuidor_UsuarioAndDuracionFinalNull(Long id) {
+        
+        return pedidosDao.findByDistribuidor_UsuarioAndDuracionFinalNull(usuarioDao.findById(id).get());
     }
 
 

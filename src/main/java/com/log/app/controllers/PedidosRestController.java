@@ -75,6 +75,12 @@ public class PedidosRestController {
         return pedidosService.findById(id);
     }
 
+    @GetMapping("/pedidos/distribuidor/{idUsuario}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Pedido> getPedidosDistribuidor(@PathVariable Long idUsuario) {
+        return pedidosService.findByDistribuidor_UsuarioAndDuracionFinalNull(idUsuario);
+    }
+
     
     /** 
      * @param idPedido
@@ -186,4 +192,6 @@ public class PedidosRestController {
     public void deletePedido(@RequestBody Pedido pedido) {
         pedidosService.delete(pedido);
     }
+
+    
 }

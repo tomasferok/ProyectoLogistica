@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.log.app.data.ReporteProductosInterface;
 import com.log.app.entidades.Pedido;
+import com.log.app.entidades.Usuario;
 
 public interface IPedidosService {
     public Pedido save(Pedido pedido);
@@ -12,6 +13,6 @@ public interface IPedidosService {
 
     List<ReporteProductosInterface> reporteProductoVendidoAnual(int year, long idProducto);
 
-    
+    List<Pedido> findByDistribuidor_UsuarioAndDuracionFinalNull(Long id);
     
 }
