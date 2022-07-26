@@ -287,7 +287,7 @@ public class PedidosService implements IPedidosService {
             // producto.getCantidad());
 
             Producto prod = productoDao.findByTipoProducto_idTipoProd(producto.getProducto().getIdTipoProd());
-            prod.setCantidadReservada(prod.getCantidadReservada() + producto.getCantidad());
+            prod.setCantidadDisponible(prod.getCantidadDisponible() + producto.getCantidad());
             productoDao.save(prod);
         });
 
