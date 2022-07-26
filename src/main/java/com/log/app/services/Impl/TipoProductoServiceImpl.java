@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.cloud.storage.Blob;
@@ -60,6 +61,8 @@ public class TipoProductoServiceImpl implements ITipoProductoService {
 	 */
 	@Override
 	public TipoProducto save(TipoProducto tipoProd) {
+		
+		tipoProd.setNombre(tipoProd.getNombre().toUpperCase());
 		TipoProducto productoCreado = tipoProductoDao.save(tipoProd);
 		Producto stock = new Producto();
 		stock.setTipoProducto(productoCreado);
@@ -98,9 +101,12 @@ public class TipoProductoServiceImpl implements ITipoProductoService {
 	/**
 	 * @param idTipoProd
 	 */
+	@Transactional
 	@Override
 	public void delete(Long idTipoProd) {
-		tipoProductoDao.deleteById(idTipoProd);
+
+		productoService.deleteByTipoProducto(idTipoProd);
+		// tipoProductoDao.deleteById(idTipoProd);
 
 	}
 
@@ -139,20 +145,6 @@ public class TipoProductoServiceImpl implements ITipoProductoService {
 		Date endDate = calendar.getTime();
 
 		return tipoProductoDao.productosMasVendidos(startDate, endDate);
-	}
-
-	@Override
-
-	public String prueba() {
-		String value = "Hello, World!";
-		byte[] bytes = value.getBytes();
-		Bucket bucket = storage.get("clawtechpics");
-		Blob blob = bucket.create("clawtechpics", bytes);
-		blob.getSelfLink();
-		Blob blob1 = bucket.get("clawtechpics");
-		String s = new String(blob1.getContent());
-
-		return blob.getSelfLink();
 	}
 
 	public String saveImage(Optional<MultipartFile> file, String tipoProductoNombre) {

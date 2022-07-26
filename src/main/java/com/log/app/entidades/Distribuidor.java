@@ -39,7 +39,7 @@ public class Distribuidor implements Serializable {
 	private String vehiculo;
 	@Column(nullable = false)
 	private String matricula;
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 32)
 	private String chofer;
 
 	@OneToOne(cascade = CascadeType.MERGE)

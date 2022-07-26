@@ -40,6 +40,8 @@ public class ProveedorServiceImpl implements IProveedorService {
 	 */
 	@Override
 	public Proveedor save(Proveedor proveedor) {
+		proveedor.setEmail(proveedor.getEmail().toLowerCase());
+	    proveedor.setNombreProv(proveedor.getNombreProv().toUpperCase());
 		return proveedorDao.save(proveedor);
 
 	}

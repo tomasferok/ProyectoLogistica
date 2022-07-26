@@ -28,13 +28,13 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCliente;
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 32)
 
 	private String nombre;
 	@Column(nullable = false)
 
 	private String razonSocial;
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 32)
 
 	private String documento;
 	@Column(nullable = false)
@@ -45,7 +45,7 @@ public class Cliente implements Serializable {
 	@Column(nullable = false)
 
 	private String email;
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 32)
 
 	private String telefono;
 

@@ -43,7 +43,7 @@ public class SubCategoriaServiceImpl implements ISubCategoriaService {
 	@Override
 	@Transactional
 	public SubCategoria save(SubCategoria subCat) {
-		
+		subCat.setNombre(subCat.getNombre().toUpperCase());
 		return subCategoDao.save(subCat);
 	}
 

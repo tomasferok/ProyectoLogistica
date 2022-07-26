@@ -28,5 +28,4 @@ public interface ITipoProductoService {
 	List<ReporteProductosMasVendidos>  productosMasVendidos(int year);
 void update(TipoProducto tipoProd) ;
 
-public String prueba();
 }

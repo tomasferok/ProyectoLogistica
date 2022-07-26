@@ -71,7 +71,7 @@ public class UserService implements UserDetailsService {
         }
 
         Usuario user = new Usuario();
-        user.setEmail(email);
+        user.setEmail(email.toLowerCase());
         user.setPassword(passwordEncoder.encode(password));
         user.setNombre(nombre);
         user.setApellido(apellido);

@@ -48,12 +48,8 @@ public class CategoriaServiceImpl implements ICategoriaService {
 	@Override
 	@Transactional
 	public Categoria save(Categoria categoria) {
-		return categoriaDao.
-		/**
-		 * @param idCat
-		 * @return Categoria
-		 */
-				save(categoria);
+		categoria.setNombre(categoria.getNombre().toUpperCase());
+		return categoriaDao.save(categoria);
 
 	}
 

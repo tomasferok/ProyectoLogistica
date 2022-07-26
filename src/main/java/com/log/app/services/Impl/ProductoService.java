@@ -199,4 +199,13 @@ public class ProductoService implements IProductoService {
         return null;
     }
 
+
+    @Override
+    public void deleteByTipoProducto(Long idTipoProd) {
+        // TODO Auto-generated method stub
+        productoDao.deleteByTipoProducto_IdTipoProd(idTipoProd);
+    }
+
+    
+
 }

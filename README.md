@@ -1,88 +1,94 @@
-# ProyectoLogistica
-
-<p align="center">
-  <a href="https://example.com/">
-    <img src="https://via.placeholder.com/72" alt="Logo" width=72 height=72>
-  </a>
-
-  <h3 align="center">Logo</h3>
-
-  <p align="center">
-    Short description
-    <br>
-    <a href="https://reponame/issues/new?template=bug.md">Report bug</a>
-    ·
-    <a href="https://reponame/issues/new?template=feature.md&labels=feature">Request feature</a>
-  </p>
-</p>
-
-## Table of contents
-
-- [ProyectoLogistica](#proyectologistica)
-  - [Table of contents](#table-of-contents)
-  - [Quick start](#quick-start)
-  - [Status](#status)
-  - [What's included](#whats-included)
-  - [Bugs and feature requests](#bugs-and-feature-requests)
-  - [Contributing](#contributing)
-  - [Creators](#creators)
-  - [Thanks](#thanks)
-  - [Copyright and license](#copyright-and-license)
-
-## Quick start
-
-Some text
-
-- Instruction 1
-- Instruction 2
-- Instruction 3
-
-## Status
-
-Here goes all the budgets
-
-## What's included
-
-Some text
-
-```text
-folder1/
-└── folder2/
-    ├── folder3/
-    │   ├── file1
-    │   └── file2
-    └── folder4/
-        ├── file3
-        └── file4
+ 
+# iLOG - Clawtech
+ 
+iLOG es un proyecto académico creado para la gestión logística de pequeñas y medianas empresas. Es parte del proyecto de fin de curso de la carrera Licenciatura en Tecnologías de la Información de UTEC
+ 
+El mismo está dividido en cuatro repositorio dentro de github:
+ 
+* [Backend Desarrollado en Spring Boot](https://github.com/tomasferok/ProyectoLogistica)
+* [Front End Desarrollado en React](https://github.com/ClawTech-UTEC/react-frontend)
+* [Aplicacion Movil desarrolada en Flutter](https://github.com/ClawTech-UTEC/LogisticaMobileApp)
+* [Modelo Machine Learning para facturacion](https://github.com/ClawTech-UTEC/ModeloMl-Facturacion.ipynb)
+## Authors
+ 
+- [@TomasFernandez](https://www.github.com/octokatherine)
+- [@GuillermoRodriguez](https://github.com/guillermo-rodriguez-dev)
+- [@AndresGutierrez](https://github.com/andresgutitor)
+ 
+ 
+ 
+ 
+## Deployment
+ 
+Tanto el backend como el front end están desarrollados para correr en la nube de google cloud, usando el servicio app engine, con sql cloud como base de datos, y cloud storage como servicio de almacenamiento. Ambos contienen archivos Jenkinsfile con pipelines instructivos para su despliegue mediante la herramienta Jenkins.
+ 
+### Backend - Spring Boot
+ 
+Para desplegar el backend en app engine deberás modificar el archivo aplication-gcp.properties con los datos de tu base de datos
+ 
+En caso de querer desplegar manualmente deberás correr el siguiente comando
+ 
+ 
+```bash
+  mvn -DskipTests package appengine:deploy -P gcp
 ```
+ 
+Para su despligue local deberas modificar el archivo aplication-dev.properties con los datos de tu base de datos, instalar google cloud sdk en la computadora, autenticarte en la misma, y luego correr el siguiente comando:
+ 
+```bash
+  mvn spring-boot:run
+```
+ 
+### Frontend - React
+ 
+Para desplegar el frontend en app engine manualmente debes modificar el archivo constants con la dirección de tu api de backend y luego correr el siguiente comando:
+ 
+```bash
+  gcloud app deploy
+```
+ 
+Para su despliegue local deberás modificar el archivo constants con la dirección de tu backend y luego correr el siguiente comando:
+ 
+```bash
+  npm run start
+```
+ 
+ 
+### Mobile - Flutter
+ 
+La aplicación móvil usa el api de google maps por lo que deberás crear un archivo .env con dicha variable siguiendo las instrucciones del archivo .env.example dentro de la carpeta lib, y luego agregar tu api en los archivos android manifest e info.pilis.
+ 
+Para crear el archivo apk de android deberás correr el siguiente comando
+ 
+```bash
+  flutter build apk
+```
+ 
+Para crear la versión IOS deberás usar la herramienta xcode
+## Features
+ 
+- Gestión y visualización de stock
+- Proceso de pedidos
+- Proceso de recepciones
+- Ruta de última milla
+- Etiquetas con códigos de barra
+- Creación de remitos
+- Reportes
+ 
+ 
+## License
+ 
+[MIT](https://choosealicense.com/licenses/mit/)
+ 
+ 
+![Logo](https://storage.googleapis.com/clawtechpics/logo.png)
+ 
+ 
+## Roadmap
+Los futuros pasos para continuar el desarrollo del sistema incluyen:
+- Mejorar la gestión de permisos dentro de la aplicación
+ 
+- Integración con otros sistemas como ODOO
+ 
+ 
 
-## Bugs and feature requests
-
-Have a bug or a feature request? Please first read the [issue guidelines](https://reponame/blob/master/CONTRIBUTING.md) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://reponame/issues/new).
-
-## Contributing
-
-Please read through our [contributing guidelines](https://reponame/blob/master/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
-
-Moreover, all HTML and CSS should conform to the [Code Guide](https://github.com/mdo/code-guide), maintained by [Main author](https://github.com/usernamemainauthor).
-
-Editor preferences are available in the [editor config](https://reponame/blob/master/.editorconfig) for easy use in common text editors. Read more and download plugins at <https://editorconfig.org/>.
-
-## Creators
-
-**Creator 1**
-
-- <https://github.com/usernamecreator1>
-
-## Thanks
-
-Some Text
-
-## Copyright and license
-
-Code and documentation copyright 2011-2018 the authors. Code released under the [MIT License](https://reponame/blob/master/LICENSE).
-
-Enjoy :metal:
-
-
-COMANDO PARA DESPLIEGUE EN APP ENGINE DE GCP: mvn -DskipTests package appengine:deploy -P gcp

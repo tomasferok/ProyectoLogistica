@@ -39,4 +39,6 @@ public interface IProductoService {
 
 
     public List<Producto> findByCodigoDeBarras(int codigo);
+
+    void deleteByTipoProducto(Long idTipoProd);
 }

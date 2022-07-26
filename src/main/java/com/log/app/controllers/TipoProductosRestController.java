@@ -59,18 +59,16 @@ public class TipoProductosRestController {
      */
     @PostMapping(path = "/tipoProductos")
     public TipoProducto saveTipoProducto(
-            @RequestBody() TipoProducto tipoProducto
-        ) {
+            @RequestBody() TipoProducto tipoProducto) {
         return tipoProductosService.save(tipoProducto);
     }
 
     @PostMapping("tipoProductos/image/{tipoProductoNombre}")
     public String saveTipoProducto(
-            @RequestParam("image") Optional<MultipartFile>file, @PathVariable("tipoProductoNombre") String tipoProductoNombre) {
-        
-       
-        
-                return tipoProductosService.saveImage(file, tipoProductoNombre);
+            @RequestParam("image") Optional<MultipartFile> file,
+            @PathVariable("tipoProductoNombre") String tipoProductoNombre) {
+
+        return tipoProductosService.saveImage(file, tipoProductoNombre);
 
     }
 
@@ -159,12 +157,6 @@ public class TipoProductosRestController {
     @DeleteMapping("/tipoProductos/{id}")
     public void eliminarTipoProducto(@PathVariable("id") Long id) {
         tipoProductosService.delete(id);
-    }
-
-    @GetMapping("/tipoProductos/prueba")
-    public String prueba() {
-
-        return tipoProductosService.prueba();
     }
 
 }

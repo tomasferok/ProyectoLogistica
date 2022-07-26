@@ -38,7 +38,6 @@ public class Producto implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "tipoProd_id", nullable = false)
-
 	private TipoProducto tipoProducto;
 
 	@Column(name = "cantidad_disponible", nullable = false)

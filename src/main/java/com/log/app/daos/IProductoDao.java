@@ -18,5 +18,7 @@ public interface IProductoDao extends JpaRepository<Producto, Long> {
 
     List<Producto> findByTipoProducto_CodigoDeBarras(int codigoDeBarras);
 
+    void deleteByTipoProducto_IdTipoProd(Long idTipoProd);
+
 
 }
