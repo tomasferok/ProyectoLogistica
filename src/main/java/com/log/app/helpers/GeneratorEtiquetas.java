@@ -439,9 +439,8 @@ public class GeneratorEtiquetas {
             for (final TipoProducto producto : listaProductos) {
                 // addText(document, page, x, y, 200, 50, false,
                 // "Codigos de barra producto: " + producto.getNombre());
-                Long codigoDeBarras = Integer.valueOf(producto.getCodigoDeBarras()).longValue();
                 final java.awt.image.BufferedImage image = generateEAN13BarcodeImage(
-                        codigoDeBarras.toString());
+                        producto.getCodigoDeBarras());
                 addImageToPdf(document, x, y, width, height, true,
                         image, contentStream);
 
