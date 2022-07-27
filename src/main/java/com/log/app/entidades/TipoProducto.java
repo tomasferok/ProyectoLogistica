@@ -42,7 +42,7 @@ public class TipoProducto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idTipoProd;
 	@Column(nullable = false, unique = true, length = 32)
-	private int codigoDeBarras;
+	private String codigoDeBarras;
 	@Column(nullable = false, unique = true, length = 32)
 	private String nombre;
 	@ManyToOne(cascade = CascadeType.MERGE)

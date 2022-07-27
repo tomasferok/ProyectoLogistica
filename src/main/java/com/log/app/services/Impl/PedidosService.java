@@ -280,7 +280,7 @@ public class PedidosService implements IPedidosService {
 
     public Pedido devolverPedido(Long idPedido, Long idUsuario) {
         Pedido pedido = pedidosDao.findById(idPedido).get();
-        Date fecha = new Date();
+   
 
         pedido.getProductos().forEach(producto -> {
             // venta.getListaProducto().put(producto.getProducto().getNombre(),

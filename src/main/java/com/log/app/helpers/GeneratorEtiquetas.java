@@ -215,7 +215,7 @@ public class GeneratorEtiquetas {
             row.createCell(25, d.get(i).getProducto().getNombre());
             row.createCell(15, Double.toString(d.get(i).getCantidad()));
             row.createCell(15, Double.toString(d.get(i).getProducto().getPrecio()));
-            row.createCell(15, Integer.toString(d.get(i).getProducto().getCodigoDeBarras()));
+            row.createCell(15, d.get(i).getProducto().getCodigoDeBarras());
         }
 
         table.draw();
@@ -340,7 +340,7 @@ public class GeneratorEtiquetas {
             row.createCell(25, d.get(i).getProducto().getNombre());
             row.createCell(15, Double.toString(d.get(i).getCantidad()));
             row.createCell(15, Double.toString(d.get(i).getProducto().getPrecioDeVenta()));
-            row.createCell(15, Integer.toString(d.get(i).getProducto().getCodigoDeBarras()));
+            row.createCell(15, d.get(i).getProducto().getCodigoDeBarras());
         }
 
         table.draw();

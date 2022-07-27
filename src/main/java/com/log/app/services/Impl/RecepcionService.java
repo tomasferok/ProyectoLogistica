@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import com.log.app.daos.IProductoDao;
 import com.log.app.daos.IRecepcionDao;
 import com.log.app.data.ReporteProductosInterface;
@@ -78,6 +80,7 @@ public class RecepcionService implements IRecepcionService {
      * @return Recepcion
      * @throws RecepcionConDiferenciasExeption
      */
+    @Transactional
     public Recepcion recibirRecepcion(
             ControlarRecepcionRequest controlarRecepcionRequest) throws RecepcionConDiferenciasExeption {
         TipoEstadoRecepcion tipoEstadoRecepcion = TipoEstadoRecepcion.RECIBIDO;
@@ -88,7 +91,6 @@ public class RecepcionService implements IRecepcionService {
         List<Double> cantidadesEsperadas = new ArrayList<>();
         recepcion.getProductos().forEach(x -> {
             cantidadesEsperadas.add(x.getCantidad());
-
         });
 
         boolean existenDiferencias = !cantidadesEsperadas.containsAll(

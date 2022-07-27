@@ -45,7 +45,7 @@ public class ProductoServiceTest {
         producto.setCantidadReservada(10);
         tipoProducto.setIdTipoProd(1l);
         tipoProducto.setNombre("TipoProducto");
-        tipoProducto.setCodigoDeBarras(0000);
+        tipoProducto.setCodigoDeBarras("0000");
         tipoProducto.setPrecio(10.0);
 
 

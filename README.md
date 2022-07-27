@@ -81,7 +81,6 @@ Para crear la versión IOS deberás usar la herramienta xcode
 [MIT](https://choosealicense.com/licenses/mit/)
  
  
-![Logo](https://storage.googleapis.com/clawtechpics/logo.png)
  
  
 ## Roadmap
